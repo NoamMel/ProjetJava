@@ -13,8 +13,8 @@ import java.util.ArrayList;
  */
 public class Professeur {
     
-    /** Attributs */
-    private ArrayList<Enseignement> enseignements; 
+//    /** Attributs */
+//    private ArrayList<Enseignement> enseignements; 
     
     /** Constructeur par defaut */
     public Professeur()
@@ -22,11 +22,11 @@ public class Professeur {
         
     }
     
-    /** Constructeur surchargé
-     * @param enseignements */
-    public Professeur(ArrayList<Enseignement> enseignements)
-    {
-        this.enseignements = new ArrayList();
-        this.enseignements = enseignements;
-    }
+//    /** Constructeur surchargé
+//     * @param enseignements */
+//    public Professeur(ArrayList<Enseignement> enseignements)
+//    {
+//        this.enseignements = new ArrayList();
+//        this.enseignements = enseignements;
+//    }
 }
