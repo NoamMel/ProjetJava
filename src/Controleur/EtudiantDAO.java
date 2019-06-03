@@ -6,6 +6,9 @@
 package Controleur;
 import Model.*;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import jdbcv2018.*;
 import java.sql.*;
 /**
@@ -60,10 +63,9 @@ public class EtudiantDAO extends DAO<Etudiant>
         }
   }
    
-
-  @Override
-  public void update(Etudiant e) 
-  {
+//  @Override
+//  public void update(Etudiant e) 
+//  {
 //    // Update dans la BDD
 //    try {
 //            conn.getStmt().execute("UPDATE FROM Personne WHERE ID_Personne = '"+e.getID()+"'");
@@ -72,7 +74,5 @@ public class EtudiantDAO extends DAO<Etudiant>
 //        {
 //          ex.printStackTrace();
 //        }
-
-  }
-
+//  }
 }

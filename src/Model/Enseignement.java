@@ -12,7 +12,6 @@ package Model;
 public class Enseignement {
     
     /** Attributs */
-    private int id;
     private String discipline;
     private Classe classe;
     private Professeur professeur;  
@@ -27,16 +26,10 @@ public class Enseignement {
      * @param discipline
      * @param classe
      * @param professeur */
-    public Enseignement(String discipline, Classe classe, Professeur professeur, int id)
+    public Enseignement(String discipline, Classe classe, Professeur professeur)
     {
         this.discipline = discipline;
         this.classe= classe;
         this.professeur = professeur;
-        this.id = id;
-    }
-    
-    public int getID()
-    {
-        return id;
     }
 }
