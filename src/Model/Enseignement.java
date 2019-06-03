@@ -19,7 +19,7 @@ public class Enseignement {
     /** Constructeur par défaut*/
     public Enseignement()
     {
-        
+    
     }
     
     /** Constructeur surchargé

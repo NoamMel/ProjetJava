@@ -11,7 +11,7 @@ import java.util.ArrayList;
  *
  * @author Emma
  */
-public class Professeur {
+public class Professeur extends Personne {
     
 //    /** Attributs */
 //    private ArrayList<Enseignement> enseignements; 
@@ -19,9 +19,14 @@ public class Professeur {
     /** Constructeur par defaut */
     public Professeur()
     {
-        
+        super();
     }
     
+    /** Constructeur par defaut */
+    public Professeur(String Nom, String Prenom, int id)
+    {
+        super(Nom, Prenom, id);
+    }
 //    /** Constructeur surchargé
 //     * @param enseignements */
 //    public Professeur(ArrayList<Enseignement> enseignements)

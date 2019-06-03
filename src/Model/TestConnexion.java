@@ -8,6 +8,7 @@ package Model;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import jdbcv2018.*;
+import Controleur.*;
 
 /**
  *
@@ -19,16 +20,21 @@ public class TestConnexion{
         Connexion conn = new Connexion("ECE","root","root");
         conn.ajouterTable("Personne");
         
-        ArrayList<String> req = new ArrayList<>();
-        req = conn.remplirChampsTable("Personne");
-        for(int i = 0; i<req.size();i++){
-            System.out.println(req.get(i));
-        }
+//        ArrayList<String> req = new ArrayList<>();
+//        req = conn.remplirChampsTable("Personne");
+//        for(int i = 0; i<req.size();i++){
+//            System.out.println(req.get(i));
+//        }
         
-        req = conn.remplirChampsRequete("SELECT * FROM Personne WHERE Type = 'Etudiant'");
-        for(int i = 0; i<req.size();i++){
-            System.out.println(req.get(i));
-        }    
+//        req = conn.remplirChampsRequete("SELECT * FROM Personne WHERE Type = 'Etudiant'");
+//        for(int i = 0; i<req.size();i++){
+//            System.out.println(req.get(i));
+//        }  
+//        
+        DAO etudiantDAO = new EtudiantDAO(conn);
+        //etudiantDAO.create();
+        Personne p = new Etudiant("Asterix", "Obelix", 18);
+        etudiantDAO.delete(p);
     }
     
 }
