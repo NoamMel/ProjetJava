@@ -3,7 +3,11 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : localhost:8889
+<<<<<<< HEAD
 -- Généré le :  lun. 03 juin 2019 à 12:59
+=======
+-- Généré le :  lun. 03 juin 2019 à 17:05
+>>>>>>> Emma
 -- Version du serveur :  5.7.25
 -- Version de PHP :  7.3.1
 
@@ -17,6 +21,7 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
+<<<<<<< HEAD
 -- Structure de la table `AnneeScolaire`
 --
 
@@ -36,6 +41,8 @@ INSERT INTO `AnneeScolaire` (`ID_AnneeScolaire`) VALUES
 -- --------------------------------------------------------
 
 --
+=======
+>>>>>>> Emma
 -- Structure de la table `Bulletin`
 --
 
@@ -63,19 +70,32 @@ INSERT INTO `Bulletin` (`ID_Bulletin`, `Appreciation`, `ID_Trimestre`, `ID_Inscr
 CREATE TABLE `Classe` (
   `ID_Classe` int(11) NOT NULL,
   `Nom` varchar(25) NOT NULL,
+<<<<<<< HEAD
   `ID_Niveau` int(11) NOT NULL,
   `ID_AnneeScolaire` int(11) NOT NULL
+=======
+  `Niveau` varchar(25) NOT NULL,
+  `AnneeScolaire` int(11) NOT NULL
+>>>>>>> Emma
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Déchargement des données de la table `Classe`
 --
 
+<<<<<<< HEAD
 INSERT INTO `Classe` (`ID_Classe`, `Nom`, `ID_Niveau`, `ID_AnneeScolaire`) VALUES
 (1, 'TD1', 1, 3),
 (2, 'TD2', 1, 3),
 (3, 'TD1', 2, 3),
 (4, 'TD1', 3, 2);
+=======
+INSERT INTO `Classe` (`ID_Classe`, `Nom`, `Niveau`, `AnneeScolaire`) VALUES
+(1, 'TD1', 'ING2', 2018),
+(2, 'TD2', 'ING2', 2018),
+(3, 'TD1', 'ING3', 2018),
+(4, 'TD1', 'ING2', 2019);
+>>>>>>> Emma
 
 -- --------------------------------------------------------
 
@@ -183,6 +203,7 @@ INSERT INTO `Inscription` (`ID_Inscription`, `ID_Personne`, `ID_Classe`) VALUES
 -- --------------------------------------------------------
 
 --
+<<<<<<< HEAD
 -- Structure de la table `Niveau`
 --
 
@@ -203,6 +224,8 @@ INSERT INTO `Niveau` (`ID_Niveau`, `Nom`) VALUES
 -- --------------------------------------------------------
 
 --
+=======
+>>>>>>> Emma
 -- Structure de la table `Personne`
 --
 
@@ -244,30 +267,45 @@ CREATE TABLE `Trimestre` (
   `Numero` int(11) NOT NULL,
   `Debut` date NOT NULL,
   `Fin` date NOT NULL,
+<<<<<<< HEAD
   `ID_AnneeScolaire` int(11) NOT NULL
+=======
+  `AnneeScolaire` int(11) NOT NULL
+>>>>>>> Emma
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Déchargement des données de la table `Trimestre`
 --
 
+<<<<<<< HEAD
 INSERT INTO `Trimestre` (`ID_Trimestre`, `Numero`, `Debut`, `Fin`, `ID_AnneeScolaire`) VALUES
 (1, 1, '2018-09-01', '2019-11-30', 3),
 (2, 2, '2019-12-01', '2020-02-29', 3),
 (3, 3, '2019-03-01', '2019-05-31', 3),
 (4, 1, '2018-09-01', '2019-11-30', 2);
+=======
+INSERT INTO `Trimestre` (`ID_Trimestre`, `Numero`, `Debut`, `Fin`, `AnneeScolaire`) VALUES
+(1, 1, '2018-09-01', '2018-11-30', 2018),
+(2, 2, '2019-12-01', '2020-02-29', 2019),
+(3, 3, '2019-03-01', '2019-05-31', 2018),
+(4, 1, '2018-09-01', '2019-11-30', 2018);
+>>>>>>> Emma
 
 --
 -- Index pour les tables déchargées
 --
 
 --
+<<<<<<< HEAD
 -- Index pour la table `AnneeScolaire`
 --
 ALTER TABLE `AnneeScolaire`
   ADD PRIMARY KEY (`ID_AnneeScolaire`);
 
 --
+=======
+>>>>>>> Emma
 -- Index pour la table `Bulletin`
 --
 ALTER TABLE `Bulletin`
@@ -279,9 +317,13 @@ ALTER TABLE `Bulletin`
 -- Index pour la table `Classe`
 --
 ALTER TABLE `Classe`
+<<<<<<< HEAD
   ADD PRIMARY KEY (`ID_Classe`),
   ADD KEY `ID_Niveau` (`ID_Niveau`),
   ADD KEY `ID_AnneeScolaire` (`ID_AnneeScolaire`);
+=======
+  ADD PRIMARY KEY (`ID_Classe`);
+>>>>>>> Emma
 
 --
 -- Index pour la table `DetailBulletin`
@@ -323,12 +365,15 @@ ALTER TABLE `Inscription`
   ADD KEY `ID_Personne` (`ID_Personne`);
 
 --
+<<<<<<< HEAD
 -- Index pour la table `Niveau`
 --
 ALTER TABLE `Niveau`
   ADD PRIMARY KEY (`ID_Niveau`);
 
 --
+=======
+>>>>>>> Emma
 -- Index pour la table `Personne`
 --
 ALTER TABLE `Personne`
@@ -338,20 +383,27 @@ ALTER TABLE `Personne`
 -- Index pour la table `Trimestre`
 --
 ALTER TABLE `Trimestre`
+<<<<<<< HEAD
   ADD PRIMARY KEY (`ID_Trimestre`),
   ADD KEY `ID_AnneeScolaire` (`ID_AnneeScolaire`);
+=======
+  ADD PRIMARY KEY (`ID_Trimestre`);
+>>>>>>> Emma
 
 --
 -- AUTO_INCREMENT pour les tables déchargées
 --
 
 --
+<<<<<<< HEAD
 -- AUTO_INCREMENT pour la table `AnneeScolaire`
 --
 ALTER TABLE `AnneeScolaire`
   MODIFY `ID_AnneeScolaire` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
+=======
+>>>>>>> Emma
 -- AUTO_INCREMENT pour la table `Bulletin`
 --
 ALTER TABLE `Bulletin`
@@ -394,12 +446,15 @@ ALTER TABLE `Inscription`
   MODIFY `ID_Inscription` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
+<<<<<<< HEAD
 -- AUTO_INCREMENT pour la table `Niveau`
 --
 ALTER TABLE `Niveau`
   MODIFY `ID_Niveau` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
+=======
+>>>>>>> Emma
 -- AUTO_INCREMENT pour la table `Personne`
 --
 ALTER TABLE `Personne`
@@ -423,6 +478,7 @@ ALTER TABLE `Bulletin`
   ADD CONSTRAINT `ID_Trimestre_Bulletin` FOREIGN KEY (`ID_Trimestre`) REFERENCES `Trimestre` (`ID_Trimestre`);
 
 --
+<<<<<<< HEAD
 -- Contraintes pour la table `Classe`
 --
 ALTER TABLE `Classe`
@@ -430,6 +486,8 @@ ALTER TABLE `Classe`
   ADD CONSTRAINT `ID_Niveau_Classe` FOREIGN KEY (`ID_Niveau`) REFERENCES `Niveau` (`ID_Niveau`);
 
 --
+=======
+>>>>>>> Emma
 -- Contraintes pour la table `DetailBulletin`
 --
 ALTER TABLE `DetailBulletin`
@@ -456,9 +514,12 @@ ALTER TABLE `Evaluation`
 ALTER TABLE `Inscription`
   ADD CONSTRAINT `ID_Classe_Inscription` FOREIGN KEY (`ID_Classe`) REFERENCES `Classe` (`ID_Classe`),
   ADD CONSTRAINT `ID_Personne_Inscription` FOREIGN KEY (`ID_Personne`) REFERENCES `Personne` (`ID_Personne`);
+<<<<<<< HEAD
 
 --
 -- Contraintes pour la table `Trimestre`
 --
 ALTER TABLE `Trimestre`
   ADD CONSTRAINT `ID_AnneeScolaire_Trimestre` FOREIGN KEY (`ID_AnneeScolaire`) REFERENCES `AnneeScolaire` (`ID_AnneeScolaire`);
+=======
+>>>>>>> Emma
