@@ -14,6 +14,7 @@ public class Personne {
     /** Attributs */
     private String nom;
     private String prenom;  
+    private int id;
     
     /** Constructeur par defaut */
     public Personne()
@@ -22,11 +23,17 @@ public class Personne {
     }
     
     /** Constructeur surchargé
-     * @param nom
-     * @param prenom */
-    public Personne(String nom, String prenom)
+    * @param nom
+    * @param prenom */
+    public Personne(String nom, String prenom, int id)
     {
         this.nom = nom;
         this.prenom = prenom;
+        this.id = id;
+    }
+    
+    public int getID()
+    {
+        return id;
     }
 }

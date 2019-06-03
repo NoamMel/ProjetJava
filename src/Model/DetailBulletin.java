@@ -12,6 +12,7 @@ package Model;
 public class DetailBulletin {
     
     /** Attributs */
+    int id;
     private String appreciation;
     private Enseignement enseignement;
     
@@ -24,9 +25,15 @@ public class DetailBulletin {
     /** Constructeur surchargé
      * @param appreciation
      * @param enseignement */
-    public DetailBulletin(String appreciation, Enseignement enseignement)
+    public DetailBulletin(String appreciation, Enseignement enseignement, int id)
     {
         this.appreciation = appreciation;
         this.enseignement = enseignement;
+        this.id = id;
+    }
+    
+    public int getID()
+    {
+        return id;
     }
 }

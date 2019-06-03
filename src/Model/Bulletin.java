@@ -14,6 +14,7 @@ import java.util.ArrayList;
 public class Bulletin {
     
     /** Attributs */
+    private int id;
     private String appreciation;
     private ArrayList<DetailBulletin> detailBulletins;
     private Trimestre trimestre;
@@ -28,11 +29,17 @@ public class Bulletin {
      * @param appreciation
      * @param detailBulletins
      * @param trimestre */
-    public Bulletin(String appreciation, ArrayList<DetailBulletin> detailBulletins, Trimestre trimestre)
+    public Bulletin(String appreciation, ArrayList<DetailBulletin> detailBulletins, Trimestre trimestre, int id)
     {
         this.detailBulletins = new ArrayList();
         this.detailBulletins = detailBulletins;
         this.appreciation = appreciation;
         this.trimestre = trimestre;
+        this.id = id;
     }  
+    
+    public int getID()
+    {
+        return id;
+    }
 }

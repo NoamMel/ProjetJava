@@ -19,14 +19,16 @@ public class Etudiant extends Personne{
     /** Constructeur par défaut */
     public Etudiant()
     {
-        
+        super();
     }
+    
+    
     
     /** Constructeur surchargé
      * @param bulletins */
-    public Etudiant(ArrayList<Bulletin> bulletins)
+    public Etudiant(String Nom, String Prenom, int id)
     {
+        super(Nom, Prenom, id);
         this.bulletins = new ArrayList();
-        this.bulletins = bulletins;
     }
 }
