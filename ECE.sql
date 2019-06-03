@@ -4,9 +4,13 @@
 --
 -- Hôte : localhost:8889
 <<<<<<< HEAD
+<<<<<<< HEAD
 -- Généré le :  lun. 03 juin 2019 à 12:59
 =======
 -- Généré le :  lun. 03 juin 2019 à 17:05
+>>>>>>> Emma
+=======
+-- Généré le :  lun. 03 juin 2019 à 17:52
 >>>>>>> Emma
 -- Version du serveur :  5.7.25
 -- Version de PHP :  7.3.1
