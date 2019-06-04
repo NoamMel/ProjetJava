@@ -38,6 +38,9 @@ public class TestConnexion{
 
            RecupBDD recup = new RecupBDD(conn);
            recup.recupEtudiants();
+           recup.recupProfesseurs();
+           recup.recupNiveaux();
+           recup.recupClasses();
     }
     
 }

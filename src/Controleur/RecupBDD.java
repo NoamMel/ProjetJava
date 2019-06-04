@@ -27,9 +27,24 @@ public class RecupBDD {
         this.conn = conn;
     }
     
-    /*public void recupNiveaux(){
-        //
-    }*/
+    public void recupNiveaux() throws SQLException{
+        ArrayList<String> niveaux = new ArrayList();
+        String requete = "SELECT DISTINCT Niveau FROM Classe";
+        niveaux = conn.remplirNiveaux(requete);
+        stock.setNiveaux(niveaux); 
+        
+    }
+    
+    public void recupClasses() throws SQLException{
+        ArrayList<Classe> classes = new ArrayList();
+        String requete = "SELECT * FROM Classe";
+        classes = conn.remplirClasse(requete);
+        stock.setClasses(classes);
+        
+        /*for(int i =0; i<classes.size(); i++){
+            System.out.println(classes.get(i).getID()+" "+classes.get(i).getNom()+" "+classes.get(i).getNiveau()+" "+classes.get(i).getAnneeScolaire());
+        }*/
+    }
     
     /*public void recupPersonnes() throws SQLException{
         //Appeler les méthodes pour etudiants et profs
@@ -44,17 +59,16 @@ public class RecupBDD {
         ArrayList<Etudiant> etudiants = new ArrayList();
         String requete = "SELECT * FROM Personne WHERE Type='Etudiant'";
         etudiants = conn.remplirEtudiant(requete);
-        stock.setEtudiants(etudiants);
-        /*for(int i=0; i<etudiants.size(); i++){
-            System.out.println(etudiants.get(i).getID()+" "+etudiants.get(i).getNom()+" "+etudiants.get(i).getPrenom());
-        }*/
-        
+        stock.setEtudiants(etudiants);    
+
     }
     
-    /*public void recupProfesseurs() throws SQLException{
+    public void recupProfesseurs() throws SQLException{
         ArrayList<Professeur> professeurs = new ArrayList();
-        String requete = "personne WHERE Type='Enseignant'";
-        professeurs = conn.remplirPersonne(requete);
-    }*/
+        String requete = "SELECT * FROM personne WHERE Type='Enseignant'";
+        professeurs = conn.remplirProfesseur(requete);
+        stock.setProfesseurs(professeurs);
+    }
+    
     
 }
