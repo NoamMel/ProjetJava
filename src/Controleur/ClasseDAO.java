@@ -46,8 +46,8 @@ public class ClasseDAO extends DAO<Classe>
           }
 
       // Creation d'un etudiant
-      Personne e = new Etudiant(Nom,Prenom,id);
-      System.out.println(e.getID());
+      //Personne e = new Etudiant(Nom,Prenom,id);
+      //System.out.println(e.getID());
     }
 
     @Override
