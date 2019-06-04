@@ -18,6 +18,7 @@ public class Trimestre {
     private int numero;
     private Date debut;
     private Date fin;
+    private int anneeScolaire;
     
     /** Constructeur par defaut */
     public Trimestre()
@@ -29,11 +30,12 @@ public class Trimestre {
      * @param numero
      * @param debut
      * @param fin */
-    public Trimestre(int numero, Date debut, Date fin, int id)
+    public Trimestre(int numero, Date debut, Date fin, int anneeScolaire, int id)
     {
         this.numero = numero;
         this.debut = debut;
         this.fin = fin;
+        this.anneeScolaire=anneeScolaire;
         this.id =id;
     }
     

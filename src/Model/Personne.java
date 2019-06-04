@@ -36,4 +36,12 @@ public class Personne {
     {
         return id;
     }
+    
+    public String getNom(){
+        return nom;
+    }
+    
+    public String getPrenom(){
+        return prenom;
+    }
 }
