@@ -45,22 +45,23 @@ public class ClasseDAO extends DAO<Classe>
             ex.printStackTrace();
           }
 
-      // Creation d'un etudiant
-      //Personne e = new Etudiant(Nom,Prenom,id);
-      //System.out.println(e.getID());
+
+//      // Creation d'un etudiant
+      Classe c = new Classe(nom,niveau,anneeScolaire,id);
+
     }
 
     @Override
     public void delete(Classe c) 
     {
-      // Supression dans la BDD
-      try {
-              conn.getStmt().execute("DELETE FROM Personne WHERE ID_Personne = '"+e.getID()+"'");
-          } 
-      catch (SQLException ex) 
-          {
-            ex.printStackTrace();
-          }
+//      // Supression dans la BDD
+//      try {
+//              conn.getStmt().execute("DELETE FROM Personne WHERE ID_Personne = '"+e.getID()+"'");
+//          } 
+//      catch (SQLException ex) 
+//          {
+//            ex.printStackTrace();
+//          }
     }
 
     @Override

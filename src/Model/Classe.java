@@ -16,6 +16,7 @@ public class Classe {
     
     /** Attributs */
     private int id;
+    private String nom;
     private String niveau;
     private int anneeScolaire;
     private ArrayList<Etudiant> etudiants;
@@ -28,11 +29,10 @@ public class Classe {
     }
 
         /** Constructeur surchargé
-     * @param niveau
-     * @param etudiants
-     * @param enseignements */
-    public Classe(String niveau, int anneeScolaire, int id)
+     * @param niveau*/
+    public Classe(String nom, String niveau, int anneeScolaire, int id)
     {
+        this.nom = nom;
         this.etudiants = new ArrayList();
         this.niveau = niveau;
         this.anneeScolaire = anneeScolaire;
