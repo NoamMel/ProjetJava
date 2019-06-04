@@ -14,10 +14,10 @@ import java.sql.*;
  * @author Emma
  */
 
-public class EtudiantDAO extends DAO<Etudiant> 
+public class ProfesseurDAO extends DAO<Professeur> 
 {
   
-    public EtudiantDAO(Connexion conn) 
+    public ProfesseurDAO(Connexion conn) 
     {
       super(conn);
     }
@@ -28,7 +28,7 @@ public class EtudiantDAO extends DAO<Etudiant>
     int id = 0;
     String Nom = "Ast";
     String Prenom = "Obe";
-    String requete = "INSERT INTO Personne (Nom, Prenom, Type) VALUES ('"+Nom+"','"+Prenom+"','Etudiant')";
+    String requete = "INSERT INTO Personne (Nom, Prenom, Type) VALUES ('"+Nom+"','"+Prenom+"','Enseignant')";
     // Ajout dans la BDD
     try {
             PreparedStatement pstmt = conn.getConn().prepareStatement(requete, Statement.RETURN_GENERATED_KEYS);
@@ -48,11 +48,11 @@ public class EtudiantDAO extends DAO<Etudiant>
   }
 
   @Override
-  public void delete(Etudiant e) 
+  public void delete(Professeur p) 
   {
     // Supression dans la BDD
     try {
-            conn.getStmt().execute("DELETE FROM Personne WHERE ID_Personne = '"+e.getID()+"'");
+            conn.getStmt().execute("DELETE FROM Personne WHERE ID_Personne = '"+p.getID()+"'");
         } 
     catch (SQLException ex) 
         {
@@ -61,7 +61,7 @@ public class EtudiantDAO extends DAO<Etudiant>
   }
    
   @Override
-  public void update(Etudiant e) 
+  public void update(Professeur p) 
   {
 //    // Update dans la BDD
 //    try {
