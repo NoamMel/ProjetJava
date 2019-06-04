@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : localhost:8889
--- Généré le :  lun. 03 juin 2019 à 17:52
+-- Généré le :  mar. 04 juin 2019 à 12:11
 -- Version du serveur :  5.7.25
 -- Version de PHP :  7.3.1
 
@@ -11,7 +11,7 @@ SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
 
 --
--- Base de données :  `ECE`
+-- Base de données :  `Test`
 --
 
 -- --------------------------------------------------------
@@ -203,8 +203,8 @@ INSERT INTO `Personne` (`ID_Personne`, `Nom`, `Prenom`, `Type`) VALUES
 CREATE TABLE `Trimestre` (
   `ID_Trimestre` int(11) NOT NULL,
   `Numero` int(11) NOT NULL,
-  `Debut` date NOT NULL,
-  `Fin` date NOT NULL,
+  `Debut` int(11) NOT NULL,
+  `Fin` int(11) NOT NULL,
   `AnneeScolaire` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -213,10 +213,10 @@ CREATE TABLE `Trimestre` (
 --
 
 INSERT INTO `Trimestre` (`ID_Trimestre`, `Numero`, `Debut`, `Fin`, `AnneeScolaire`) VALUES
-(1, 1, '2018-09-01', '2018-11-30', 2018),
-(2, 2, '2019-12-01', '2020-02-29', 2019),
-(3, 3, '2019-03-01', '2019-05-31', 2018),
-(4, 1, '2018-09-01', '2019-11-30', 2018);
+(1, 1, 20180901, 20181130, 2018),
+(2, 2, 20191201, 20200229, 2019),
+(3, 3, 20190301, 20190531, 2018),
+(4, 1, 20180901, 20191130, 2018);
 
 --
 -- Index pour les tables déchargées
