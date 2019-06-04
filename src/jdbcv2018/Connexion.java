@@ -216,10 +216,10 @@ public class Connexion {
             Etudiant etudiant = null;
 
             // Concatener les champs de la ligne separes par ,
-            for (int i = 1; i < nbColonne; i++) {
+            for (int i = 2; i < nbColonne; i++) {
                 //champs = champs + "," + rset.getString(i + 1);
-                nom = rset.getString(i+1);
-                prenom = rset.getString(i+1);
+                nom = rset.getString(i-1);
+                prenom = rset.getString(i);
                 etudiant = new Etudiant(nom,prenom,id);
                 
             }

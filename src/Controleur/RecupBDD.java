@@ -45,6 +45,9 @@ public class RecupBDD {
         String requete = "SELECT * FROM Personne WHERE Type='Etudiant'";
         etudiants = conn.remplirEtudiant(requete);
         stock.setEtudiants(etudiants);
+        /*for(int i=0; i<etudiants.size(); i++){
+            System.out.println(etudiants.get(i).getID()+" "+etudiants.get(i).getNom()+" "+etudiants.get(i).getPrenom());
+        }*/
         
     }
     
