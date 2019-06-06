@@ -14,9 +14,11 @@ import java.util.ArrayList;
 public class Bulletin {
     
     /** Attributs */
+    private int id;
     private String appreciation;
     private ArrayList<DetailBulletin> detailBulletins;
     private Trimestre trimestre;
+    private Inscription inscription;
     
     /** Constructeur par défaut */
     public Bulletin()
@@ -26,13 +28,20 @@ public class Bulletin {
     
     /** Constructeur surchargé
      * @param appreciation
-     * @param detailBulletins
-     * @param trimestre */
-    public Bulletin(String appreciation, ArrayList<DetailBulletin> detailBulletins, Trimestre trimestre)
+     * @param trimestre
+     * @param inscription
+     * @param id */
+    public Bulletin(String appreciation, Trimestre trimestre, Inscription inscription, int id)
     {
         this.detailBulletins = new ArrayList();
-        this.detailBulletins = detailBulletins;
         this.appreciation = appreciation;
         this.trimestre = trimestre;
+        this.inscription = inscription;
+        this.id = id;
     }  
+    
+    public int getID()
+    {
+        return id;
+    }
 }

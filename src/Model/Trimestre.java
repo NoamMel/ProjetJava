@@ -14,9 +14,11 @@ import java.util.Date;
 public class Trimestre {
     
     /** Attributs */
-    public int numero;
-    public Date debut;
-    public Date fin;
+    private int id;
+    private int numero;
+    private int debut;
+    private int fin;
+    private int anneeScolaire;
     
     /** Constructeur par defaut */
     public Trimestre()
@@ -28,8 +30,19 @@ public class Trimestre {
      * @param numero
      * @param debut
      * @param fin */
-    public Trimestre(int numero, Date debut, Date fin)
+
+    public Trimestre(int numero, int debut, int fin, int anneeScolaire, int id)
     {
-        
+        this.anneeScolaire = anneeScolaire;
+        this.numero = numero;
+        this.debut = debut;
+        this.fin = fin;
+        this.anneeScolaire=anneeScolaire;
+        this.id =id;
+    }
+    
+    public int getID()
+    {
+        return id;
     }
 }

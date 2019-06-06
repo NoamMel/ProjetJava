@@ -11,22 +11,27 @@ import java.util.ArrayList;
  *
  * @author Emma
  */
-public class Professeur {
+public class Professeur extends Personne {
     
-    /** Attributs */
-    private ArrayList<Enseignement> enseignements; 
+//    /** Attributs */
+//    private ArrayList<Enseignement> enseignements; 
     
     /** Constructeur par defaut */
     public Professeur()
     {
-        
+        super();
     }
     
-    /** Constructeur surchargé
-     * @param enseignements */
-    public Professeur(ArrayList<Enseignement> enseignements)
+    /** Constructeur par defaut */
+    public Professeur(String Nom, String Prenom, int id)
     {
-        this.enseignements = new ArrayList();
-        this.enseignements = enseignements;
+        super(Nom, Prenom, id);
     }
+//    /** Constructeur surchargé
+//     * @param enseignements */
+//    public Professeur(ArrayList<Enseignement> enseignements)
+//    {
+//        this.enseignements = new ArrayList();
+//        this.enseignements = enseignements;
+//    }
 }

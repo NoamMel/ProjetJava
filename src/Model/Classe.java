@@ -5,6 +5,7 @@
  */
 package Model;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 /**
@@ -14,9 +15,12 @@ import java.util.HashMap;
 public class Classe {
     
     /** Attributs */
+    private int id;
+    private String nom;
     private String niveau;
-    private HashMap<String, Etudiant> etudiants;
-    private HashMap<String, Enseignement> enseignements;
+    private int anneeScolaire;
+    private ArrayList<Etudiant> etudiants;
+    //private HashMap<String, Enseignement> enseignements;
     
     /** Constructeur par défaut */
     public Classe()
@@ -24,15 +28,48 @@ public class Classe {
         
     }
 
-    /** Constructeur surchargé
-     * @param niveau
-     * @param etudiants
-     * @param enseignements */
-    public Classe(String niveau, HashMap<String, Etudiant> etudiants, HashMap<String, Enseignement> enseignements)
+        /** Constructeur surchargé
+     * @param niveau*/
+    public Classe(String nom, String niveau, int anneeScolaire, int id)
     {
-        this.etudiants = new HashMap();
-        this.enseignements = new HashMap();
-        this.etudiants = etudiants;
-        this.enseignements = enseignements;
+        this.nom = nom;
+        this.etudiants = new ArrayList();
+        this.niveau = niveau;
+        this.anneeScolaire = anneeScolaire;
+        this.id = id;
     }
+    
+    public void setEtudiants(ArrayList<Etudiant> etudiants)
+    {
+        this.etudiants = etudiants;
+    }
+    
+    public int getID()
+    {
+        return id;
+    }
+    
+    public String getNom(){
+        return nom;
+    }
+    
+    public String getNiveau(){
+        return niveau;
+    }
+    
+    public int getAnneeScolaire(){
+        return anneeScolaire;
+    }
+    
+//    /** Constructeur surchargé
+//     * @param niveau
+//     * @param etudiants
+//     * @param enseignements */
+//    public Classe(String niveau, HashMap<String, Etudiant> etudiants, HashMap<String, Enseignement> enseignements)
+//    {
+//        this.etudiants = new HashMap();
+//        this.enseignements = new HashMap();
+//        this.etudiants = etudiants;
+//        this.enseignements = enseignements;
+//    }
 }
