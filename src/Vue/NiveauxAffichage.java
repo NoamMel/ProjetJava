@@ -1,4 +1,10 @@
 /* s'ouvre mais ne ferme pas la page precedente */
+package Vue;
+
+import java.sql.SQLException;
+import java.util.ArrayList;
+import jdbcv2018.*;
+
 import java.awt.event.*;
 import javax.swing.*;
 import java.io.IOException;
@@ -7,7 +13,7 @@ import java.io.File;
 import java.awt.*;
 
 
-public class Niveaux extends JFrame /*implements MouseListener*/{
+public class NiveauxAffichage extends JFrame /*implements MouseListener*/{
   private JLabel jLabel1 = new JLabel();
   private JButton jButton1 = new JButton();
   private JButton button = new JButton();
@@ -16,7 +22,7 @@ public class Niveaux extends JFrame /*implements MouseListener*/{
 
 
   @SuppressWarnings("unchecked")
-  public Niveaux(){
+  public NiveauxAffichage(){
     this.setTitle("Campus - Recherche d'informations");
     this.setSize(800, 600);
     this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -58,6 +64,16 @@ public class Niveaux extends JFrame /*implements MouseListener*/{
         });
         jScrollPane1.setViewportView(jList1);
 
+//        Connexion conn = new Connexion("ece","root","");
+//            conn.ajouterTable("Niveau");
+//            ArrayList<String> req = new ArrayList<>();
+//            req = conn.remplirChampsTable("Niveau");
+//            req = conn.remplirChampsRequete("SELECT Nom FROM Niveau");
+//            String[] strings = {"","","","","","","","","","","","","","","","","",""};
+//            for(int i = 0; i<req.size(); i++){
+//                strings[i] = req.get(i);
+//            }
+            
         jList2.setModel(new javax.swing.AbstractListModel<String>() {
             String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
             public int getSize() { return strings.length; }
@@ -85,8 +101,8 @@ public class Niveaux extends JFrame /*implements MouseListener*/{
                 .addComponent(button, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 120, Short.MAX_VALUE))
             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-            .addGap(261, 261, 261))
+            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 500, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGap(100, 100, 100))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -100,7 +116,7 @@ public class Niveaux extends JFrame /*implements MouseListener*/{
                 .addGap(121, 121, 121)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 187, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 187, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 76, Short.MAX_VALUE)
                 .addComponent(button, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(65, 65, 65)));

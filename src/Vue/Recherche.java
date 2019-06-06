@@ -4,6 +4,8 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 import java.io.File;
 import java.awt.*;
+import java.sql.SQLException;
+import Vue.*;
 
 
 public class Recherche extends JFrame /*implements MouseListener*/{
@@ -13,6 +15,7 @@ public class Recherche extends JFrame /*implements MouseListener*/{
   private JButton button = new JButton();
   private JList jList1 = new JList<>();
   private JList jList2 = new JList<>();
+
 
 
   @SuppressWarnings("unchecked")
@@ -107,14 +110,15 @@ public class Recherche extends JFrame /*implements MouseListener*/{
  }
 
     // @Override
-    class BoutoncListener implements ActionListener{
+    class BoutoncListener implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         if (e.getActionCommand().equals("Rechercher")) {
             int index = jList1.getSelectedIndex();
             System.out.println("Index Selected: " + index);
             String s = jList1.getSelectedValue().toString();
             System.out.println("Value Selected: " + s);
-            if(s == "Niveaux"){setVisible(false); new Niveaux();}
+            if(s == "Niveaux"){
+                setVisible(false); new NiveauxAffichage();}
         }
     }
   }

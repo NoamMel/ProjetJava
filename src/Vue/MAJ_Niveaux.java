@@ -19,6 +19,7 @@ public class MAJ_Niveaux extends JFrame /*implements MouseListener*/{
 
 
 
+
   @SuppressWarnings("unchecked")
   public MAJ_Niveaux(){
     this.setTitle("Campus - Espace modifications");
