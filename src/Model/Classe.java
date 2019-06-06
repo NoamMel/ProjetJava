@@ -48,6 +48,19 @@ public class Classe {
     {
         return id;
     }
+    
+    public String getNom(){
+        return nom;
+    }
+    
+    public String getNiveau(){
+        return niveau;
+    }
+    
+    public int getAnneeScolaire(){
+        return anneeScolaire;
+    }
+    
 //    /** Constructeur surchargé
 //     * @param niveau
 //     * @param etudiants

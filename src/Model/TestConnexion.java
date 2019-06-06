@@ -17,8 +17,8 @@ import Controleur.*;
 public class TestConnexion{
     
     public static void main(String args[]) throws SQLException, ClassNotFoundException{
-        Connexion conn = new Connexion("ECE","root","root");
-        conn.ajouterTable("Personne");
+        Connexion conn = new Connexion("ECE","root","");
+        //conn.ajouterTable("Personne");
         
 //        ArrayList<String> req = new ArrayList<>();
 //        req = conn.remplirChampsTable("Personne");
@@ -31,10 +31,16 @@ public class TestConnexion{
 //            System.out.println(req.get(i));
 //        }  
 //        
-        DAO etudiantDAO = new EtudiantDAO(conn);
-        //etudiantDAO.create();
-        Personne p = new Etudiant("Asterix", "Obelix", 18);
-        etudiantDAO.delete(p);
+//        DAO etudiantDAO = new EtudiantDAO(conn);
+//        //etudiantDAO.create();
+//        Personne p = new Etudiant("Asterix", "Obelix", 18);
+//        etudiantDAO.delete(p);
+
+           RecupBDD recup = new RecupBDD(conn);
+           recup.recupEtudiants();
+           recup.recupProfesseurs();
+           recup.recupNiveaux();
+           recup.recupClasses();
     }
     
 }

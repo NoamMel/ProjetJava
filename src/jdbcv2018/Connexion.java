@@ -8,6 +8,7 @@ package jdbcv2018;
  * 
  * Librairies importées
  */
+import Model.*;
 import java.sql.*;
 import java.util.ArrayList;
 
@@ -54,7 +55,7 @@ public class Connexion {
         Class.forName("com.mysql.jdbc.Driver");
 
         // url de connexion "jdbc:mysql://localhost:3305/usernameECE"
-        String urlDatabase = "jdbc:mysql://localhost:8889/" + nameDatabase;
+        String urlDatabase = "jdbc:mysql://localhost/" + nameDatabase;
 
         //création d'une connexion JDBC à la base 
         conn = DriverManager.getConnection(urlDatabase, loginDatabase, passwordDatabase);
@@ -188,5 +189,150 @@ public class Connexion {
     public Connection getConn()
     {
         return conn;
+    }
+    
+    
+    
+    public ArrayList remplirEtudiant(String requete) throws SQLException {
+        // récupération de l'ordre de la requete
+        rset = stmt.executeQuery(requete);
+
+        // récupération du résultat de l'ordre
+        rsetMeta = rset.getMetaData();
+
+        // calcul du nombre de colonnes du resultat
+        int nbColonne = rsetMeta.getColumnCount();
+
+        // creation d'une ArrayList de Etudiants
+        ArrayList<Etudiant> liste;
+        liste = new ArrayList();
+
+        // tant qu'il reste une ligne 
+        while (rset.next()) {
+            
+            int id = rset.getInt(1); // ajouter premier champ
+            String nom;
+            String prenom;
+            Etudiant etudiant = null;
+
+            // Concatener les champs de la ligne separes par ,
+            for (int i = 2; i < nbColonne; i++) {
+                //champs = champs + "," + rset.getString(i + 1);
+                nom = rset.getString(i-1);
+                prenom = rset.getString(i);
+                etudiant = new Etudiant(nom,prenom,id);
+                
+            }
+
+            // ajouter les champs de la ligne dans l'ArrayList
+            liste.add(etudiant);
+        }
+
+        // Retourner l'ArrayList
+        return liste;
+    }
+    
+    public ArrayList remplirProfesseur(String requete) throws SQLException {
+        // récupération de l'ordre de la requete
+        rset = stmt.executeQuery(requete);
+
+        // récupération du résultat de l'ordre
+        rsetMeta = rset.getMetaData();
+
+        // calcul du nombre de colonnes du resultat
+        int nbColonne = rsetMeta.getColumnCount();
+
+        // creation d'une ArrayList de Professeur
+        ArrayList<Professeur> liste;
+        liste = new ArrayList();
+
+        // tant qu'il reste une ligne 
+        while (rset.next()) {
+            
+            int id = rset.getInt(1); // ajouter premier champ
+            String nom;
+            String prenom;
+            Professeur professeur = null;
+
+            // Concatener les champs de la ligne separes par ,
+            for (int i = 2; i < nbColonne; i++) {
+                //champs = champs + "," + rset.getString(i + 1);
+                nom = rset.getString(i-1);
+                prenom = rset.getString(i);
+                professeur = new Professeur(nom,prenom,id);
+                
+            }
+
+            // ajouter les champs de la ligne dans l'ArrayList
+            liste.add(professeur);
+        }
+
+        // Retourner l'ArrayList
+        return liste;
+    }
+    
+    
+    public ArrayList remplirNiveaux(String requete) throws SQLException {
+        // récupération de l'ordre de la requete
+        rset = stmt.executeQuery(requete);
+
+        // récupération du résultat de l'ordre
+        rsetMeta = rset.getMetaData();
+
+        // calcul du nombre de colonnes du resultat
+        int nbColonne = rsetMeta.getColumnCount();
+
+        // creation d'une ArrayList de String
+        ArrayList<String> liste;
+        liste = new ArrayList();
+
+        // tant qu'il reste une ligne 
+        while (rset.next()) {
+            
+            String niveaux = rset.getString(1);
+
+            // ajouter les champs de la ligne dans l'ArrayList
+            liste.add(niveaux);
+        }
+
+        // Retourner l'ArrayList
+        return liste;
+    }
+    
+    public ArrayList remplirClasse(String requete) throws SQLException {
+        // récupération de l'ordre de la requete
+        rset = stmt.executeQuery(requete);
+
+        // récupération du résultat de l'ordre
+        rsetMeta = rset.getMetaData();
+
+        // calcul du nombre de colonnes du resultat
+        int nbColonne = rsetMeta.getColumnCount();
+
+        // creation d'une ArrayList de Classe
+        ArrayList<Classe> liste;
+        liste = new ArrayList();
+
+        // tant qu'il reste une ligne 
+        while (rset.next()) {
+            
+            int id; 
+            String nom;
+            String niveau;
+            int annee;
+            Classe classe = null;
+
+            id = rset.getInt(1);
+            nom = rset.getString(2);
+            niveau = rset.getString(3);
+            annee = rset.getInt(4);
+            classe = new Classe(nom,niveau,annee, id);
+
+            // ajouter les champs de la ligne dans l'ArrayList
+            liste.add(classe);
+        }
+
+        // Retourner l'ArrayList
+        return liste;
     }
 }

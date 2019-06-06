@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : localhost:8889
--- Généré le :  lun. 03 juin 2019 à 17:52
+-- Généré le :  mar. 04 juin 2019 à 12:31
 -- Version du serveur :  5.7.25
 -- Version de PHP :  7.3.1
 
@@ -74,36 +74,13 @@ CREATE TABLE `DetailBulletin` (
 -- --------------------------------------------------------
 
 --
--- Structure de la table `Discipline`
---
-
-CREATE TABLE `Discipline` (
-  `ID_Discipline` int(11) NOT NULL,
-  `Nom` varchar(25) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
---
--- Déchargement des données de la table `Discipline`
---
-
-INSERT INTO `Discipline` (`ID_Discipline`, `Nom`) VALUES
-(1, 'Java'),
-(2, 'Anglais'),
-(3, 'Probas'),
-(4, 'Thermo'),
-(5, 'C++'),
-(6, 'Semi-conducteur');
-
--- --------------------------------------------------------
-
---
 -- Structure de la table `Enseignement`
 --
 
 CREATE TABLE `Enseignement` (
   `ID_Enseignement` int(11) NOT NULL,
+  `Discipline` varchar(25) NOT NULL,
   `ID_Classe` int(11) NOT NULL,
-  `ID_Discipline` int(11) NOT NULL,
   `ID_Personne` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -111,15 +88,15 @@ CREATE TABLE `Enseignement` (
 -- Déchargement des données de la table `Enseignement`
 --
 
-INSERT INTO `Enseignement` (`ID_Enseignement`, `ID_Classe`, `ID_Discipline`, `ID_Personne`) VALUES
-(1, 1, 2, 4),
-(2, 2, 2, 4),
-(3, 2, 3, 5),
-(4, 2, 6, 6),
-(5, 1, 1, 7),
-(6, 3, 2, 4),
-(7, 4, 3, 5),
-(8, 3, 4, 14);
+INSERT INTO `Enseignement` (`ID_Enseignement`, `Discipline`, `ID_Classe`, `ID_Personne`) VALUES
+(1, 'Anglais', 1, 4),
+(2, 'Anglais', 2, 4),
+(3, 'Probas', 2, 5),
+(4, 'Electronique', 2, 6),
+(5, 'Java', 1, 7),
+(6, 'Anglais', 3, 4),
+(7, 'Probas', 4, 5),
+(8, 'Thermo', 3, 14);
 
 -- --------------------------------------------------------
 
@@ -203,8 +180,8 @@ INSERT INTO `Personne` (`ID_Personne`, `Nom`, `Prenom`, `Type`) VALUES
 CREATE TABLE `Trimestre` (
   `ID_Trimestre` int(11) NOT NULL,
   `Numero` int(11) NOT NULL,
-  `Debut` date NOT NULL,
-  `Fin` date NOT NULL,
+  `Debut` int(11) NOT NULL,
+  `Fin` int(11) NOT NULL,
   `AnneeScolaire` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -213,10 +190,10 @@ CREATE TABLE `Trimestre` (
 --
 
 INSERT INTO `Trimestre` (`ID_Trimestre`, `Numero`, `Debut`, `Fin`, `AnneeScolaire`) VALUES
-(1, 1, '2018-09-01', '2018-11-30', 2018),
-(2, 2, '2019-12-01', '2020-02-29', 2019),
-(3, 3, '2019-03-01', '2019-05-31', 2018),
-(4, 1, '2018-09-01', '2019-11-30', 2018);
+(1, 1, 20180901, 20181130, 2018),
+(2, 2, 20191201, 20200229, 2019),
+(3, 3, 20190301, 20190531, 2018),
+(4, 1, 20180901, 20191130, 2018);
 
 --
 -- Index pour les tables déchargées
@@ -245,18 +222,11 @@ ALTER TABLE `DetailBulletin`
   ADD KEY `ID_Bulletin` (`ID_Bulletin`) USING BTREE;
 
 --
--- Index pour la table `Discipline`
---
-ALTER TABLE `Discipline`
-  ADD PRIMARY KEY (`ID_Discipline`);
-
---
 -- Index pour la table `Enseignement`
 --
 ALTER TABLE `Enseignement`
   ADD PRIMARY KEY (`ID_Enseignement`),
   ADD KEY `ID_Classe` (`ID_Classe`) USING BTREE,
-  ADD KEY `ID_Discipline` (`ID_Discipline`) USING BTREE,
   ADD KEY `ID_Personne` (`ID_Personne`) USING BTREE;
 
 --
@@ -308,12 +278,6 @@ ALTER TABLE `Classe`
 --
 ALTER TABLE `DetailBulletin`
   MODIFY `ID_DetailBulletin` int(11) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT pour la table `Discipline`
---
-ALTER TABLE `Discipline`
-  MODIFY `ID_Discipline` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT pour la table `Enseignement`
@@ -368,7 +332,6 @@ ALTER TABLE `DetailBulletin`
 --
 ALTER TABLE `Enseignement`
   ADD CONSTRAINT `ID_Classe_Enseignement` FOREIGN KEY (`ID_Classe`) REFERENCES `Classe` (`ID_Classe`),
-  ADD CONSTRAINT `ID_Discipline_Enseignement` FOREIGN KEY (`ID_Discipline`) REFERENCES `Discipline` (`ID_Discipline`),
   ADD CONSTRAINT `ID_Personne_Enseignement` FOREIGN KEY (`ID_Personne`) REFERENCES `Personne` (`ID_Personne`);
 
 --
