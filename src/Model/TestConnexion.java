@@ -9,6 +9,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import jdbcv2018.*;
 import Controleur.*;
+import java.util.Date;
 
 /**
  *
@@ -31,16 +32,13 @@ public class TestConnexion{
 //            System.out.println(req.get(i));
 //        }  
 //        
-//        DAO etudiantDAO = new EtudiantDAO(conn);
-//        //etudiantDAO.create();
-//        Personne p = new Etudiant("Asterix", "Obelix", 18);
-//        etudiantDAO.delete(p);
 
-           RecupBDD recup = new RecupBDD(conn);
-           recup.recupEtudiants();
-           recup.recupProfesseurs();
-           recup.recupNiveaux();
-           recup.recupClasses();
+        DAO inscriptionDAO = new InscriptionDAO(conn);
+        Etudiant e = new Etudiant("Palfi","Emma",3);
+        Classe c = new Classe("TD10","ING3",2019,4);
+        //inscriptionDAO.create(e,c);
+        Inscription i = new Inscription(e,c,17);
+        inscriptionDAO.delete(i);
     }
     
 }
