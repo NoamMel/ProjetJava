@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 package Controleur;
-import java.sql.Connection;
+import Model.*;
 import jdbcv2018.*;
 
 /**
@@ -24,10 +24,13 @@ public abstract class DAO<T>
    
   /**
   * Méthode de création
-  * @param obj
-  * @return boolean 
   */
-  public abstract void create();
+  public abstract void create(String nom, String prenom);
+  public abstract void create(String nom, String niveau, int anneeScolaire);
+  public abstract void create(int numero, int debut, int fin, int anneeScolaire);
+  public abstract void create(Etudiant etudiant, Classe classe);
+  public abstract void create(String appreciation, Trimestre t, Inscription i);
+  public abstract void create(String appreciation, Enseignement e, Bulletin b);
 
   /**
   * Méthode pour effacer

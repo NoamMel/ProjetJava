@@ -15,21 +15,26 @@ import java.util.Date;
  * @author Emma
  */
 
-public class ProfesseurDAO extends DAO<Professeur> 
+public class TrimestreDAO extends DAO<Trimestre> 
 {
   
-    public ProfesseurDAO(Connexion conn) 
+    public TrimestreDAO(Connexion conn) 
     {
       super(conn);
     }
 
-    /** Méthode pour Classe*/
+    /** Méthode create pour un etudiant et un professeu
+     * @param nom
+     * @param prenom*/
+    @Override
+    public void create(String nom, String prenom){}
+    
+    /** Méthode pour Class
+     * @param nom
+     * @param anneeScolaire
+     * @param niveau*/
     @Override
     public void create(String nom, String niveau, int anneeScolaire){}
-    
-    /** Méthode create pour un trimestre*/
-    @Override
-    public void create(int numero, int debut, int fin, int anneeScolaire){}
     
     /** Méthode pour Isncription
      * @param e
@@ -43,7 +48,7 @@ public class ProfesseurDAO extends DAO<Professeur>
      * @param i*/
     @Override
     public void create(String appreciation, Trimestre t, Inscription i){}
-
+    
     /** Méthode pour DetailBulletin
      * @param appreciation
      * @param e
@@ -53,10 +58,12 @@ public class ProfesseurDAO extends DAO<Professeur>
     public void create(String appreciation, Enseignement e, Bulletin b){}
     
     @Override
-    public void create(String nom, String prenom) 
+    public void create(int numero, int debut, int fin, int anneeScolaire) 
     {
       int id = 0;
-      String requete = "INSERT INTO Personne (Nom, Prenom, Type) VALUES ('"+nom+"','"+prenom+"','Enseignant')";
+
+      String requete = "INSERT INTO Trimestre (Numero, Debut, Fin, AnneeScolaire) VALUES ('"+numero+"','"+debut+"','"+fin+"','"+anneeScolaire+"')";
+
       // Ajout dans la BDD
       try {
               PreparedStatement pstmt = conn.getConn().prepareStatement(requete, Statement.RETURN_GENERATED_KEYS);
@@ -70,16 +77,16 @@ public class ProfesseurDAO extends DAO<Professeur>
             ex.printStackTrace();
           }
 
-      // Creation d'un etudiant
-      Personne e = new Etudiant(nom,prenom,id);
+      // Creation d'une classe
+      Trimestre t = new Trimestre(numero,debut,fin,anneeScolaire,id);
     }
 
     @Override
-    public void delete(Professeur p) 
+    public void delete(Trimestre t) 
     {
       // Supression dans la BDD
       try {
-              conn.getStmt().execute("DELETE FROM Personne WHERE ID_Personne = '"+p.getID()+"'");
+              conn.getStmt().execute("DELETE FROM Trimestre WHERE ID_Trimestre = '"+t.getID()+"'");
           } 
       catch (SQLException ex) 
           {
@@ -88,7 +95,7 @@ public class ProfesseurDAO extends DAO<Professeur>
     }
 
     @Override
-    public void update(Professeur p) 
+    public void update(Trimestre t) 
     {
   //    // Update dans la BDD
   //    try {
