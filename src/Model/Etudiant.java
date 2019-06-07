@@ -22,23 +22,13 @@ public class Etudiant extends Personne{
         super();
     }
     
+    
+    
     /** Constructeur surchargé
-     * @param Nom
-     * @param Prenom
-     * @param id
-     */
+     * @param bulletins */
     public Etudiant(String Nom, String Prenom, int id)
     {
         super(Nom, Prenom, id);
         this.bulletins = new ArrayList();
-    }
-    
-    /** Getter qui permet de récupérer la liste de bulletins d'un etudiant
-     * 
-     * @return 
-     */
-    public ArrayList<Bulletin> getBulletins()
-    {
-        return bulletins;
     }
 }
