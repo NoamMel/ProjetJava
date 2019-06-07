@@ -40,8 +40,17 @@ public class Bulletin {
         this.id = id;
     }  
     
+    /** Getter qui permet de récupérer l'id du Bulletin
+     * 
+     * @return 
+     */
     public int getID()
     {
         return id;
+    }
+    
+    public ArrayList<DetailBulletin> getDetailBulletins()
+    {
+        return detailBulletins;
     }
 }

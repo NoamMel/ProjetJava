@@ -15,6 +15,7 @@ public class Evaluation {
     private int id;
     private int note;
     private String appreciation;
+    private DetailBulletin detailBulletin;
     
     /** Constructeur par defaut */
     public Evaluation()
@@ -24,14 +25,21 @@ public class Evaluation {
     
     /** Constructeur surchargé
      * @param note
-     * @param appreciation */
-    public Evaluation(int note, String appreciation, int id)
+     * @param appreciation
+     * @param detailBulletin
+     * @param id */
+    public Evaluation(int note, String appreciation, DetailBulletin detailBulletin, int id)
     {
         this.note = note;
         this.appreciation = appreciation;
+        this.detailBulletin = detailBulletin;
         this.id = id;
     }
     
+    /** Getter qui permet de récupérer l'id de l'évaluation
+     * 
+     * @return 
+     */
     public int getID()
     {
         return id;

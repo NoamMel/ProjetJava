@@ -8,7 +8,7 @@ import Model.*;
 import java.sql.SQLException;
 import jdbcv2018.*;
 import java.sql.*;
-import java.util.Date;
+import java.util.ArrayList;
 /**
  * Source : https://coderanch.com/t/307373/databases/ID-INSERT-statement?fbclid=IwAR0cQA4Um8o9BLzXEe4nOTWy6Rim2DEbkWOrA9zdLxZcJ9o-BaefVM_hlvk
  * http://www.mysqltutorial.org/mysql-jdbc-insert/?fbclid=IwAR3SXqe3ACcS28iq9irutRPJvLRw3Mj9BYTFAtfMlQCD_42f04KwsA-k-A8
@@ -26,7 +26,8 @@ public class EtudiantDAO extends DAO<Etudiant>
     /** Méthode pour Class
      * @param nom
      * @param niveau
-     * @param anneeScolaire*/
+     * @param anneeScolaire
+     */
     @Override
     public void create(String nom, String niveau, int anneeScolaire){}
     
@@ -34,20 +35,23 @@ public class EtudiantDAO extends DAO<Etudiant>
      * @param numero
      * @param debut
      * @param fin
-     * @param anneeScolaire*/
+     * @param anneeScolaire
+     */
     @Override
     public void create(int numero, int debut, int fin, int anneeScolaire){}
     
     /** Méthode pour Isncription
      * @param e
-     * @param c*/
+     * @param c
+     */
     @Override
     public void create(Etudiant e, Classe c){}
     
     /** Méthode pour Bulletin
      * @param appreciation
      * @param t
-     * @param i*/
+     * @param i
+     */
     @Override
     public void create(String appreciation, Trimestre t, Inscription i){}
 
@@ -59,6 +63,27 @@ public class EtudiantDAO extends DAO<Etudiant>
     @Override
     public void create(String appreciation, Enseignement e, Bulletin b){}
     
+    /** Méthode pour Evaluation
+     * @param note
+     * @param appreciation
+     * @param d 
+     */
+    @Override
+    public void create(int note, String appreciation, DetailBulletin d){}
+    
+    /** Méthode pour Enseignement
+     * @param discipline
+     * @param c
+     * @param p 
+     */
+    @Override
+    public void create(String discipline, Classe c, Professeur p){}
+    
+    /** Méthode qui permet d'ajouter un professeur à la BDD
+     * 
+     * @param nom
+     * @param prenom 
+     */
     @Override
     public void create(String nom, String prenom) 
     {
@@ -82,12 +107,18 @@ public class EtudiantDAO extends DAO<Etudiant>
       System.out.println(e.getID());
     }
 
+    /** Méthode qui permet de supprimer une personne dans la BDD
+     * 
+     * @param e 
+     */
     @Override
     public void delete(Etudiant e) 
     {
       // Supression dans la BDD
       try {
-              conn.getStmt().execute("DELETE FROM Personne WHERE ID_Personne = '"+e.getID()+"'");
+//          conn.getStmt().execute("SELECT ID_Inscription FROM Inscription WHERE ID_Personne = '"+e.getID()+"'");
+//          int idInscription = 
+            conn.getStmt().execute("DELETE FROM Personne WHERE ID_Personne = '"+e.getID()+"'");
           } 
       catch (SQLException ex) 
           {
@@ -95,16 +126,19 @@ public class EtudiantDAO extends DAO<Etudiant>
           }
     }
 
+    /** Méthode update pour Evaluation
+     * 
+     * @param e
+     * @param note 
+     */
     @Override
-    public void update(Etudiant e) 
-    {
-    //    // Update dans la BDD
-    //    try {
-    //            conn.getStmt().execute("UPDATE FROM Personne WHERE ID_Personne = '"+e.getID()+"'");
-    //        } 
-    //    catch (SQLException ex) 
-    //        {
-    //          ex.printStackTrace();
-    //        }
-    }
+    public void update(Evaluation e, int note){}
+    
+    /** Méthode updtade pour Bulletin et DetailBulletin
+     * 
+     * @param e
+     * @param appreciation 
+     */
+    @Override
+    public void update(Etudiant e, String appreciation){}
 }

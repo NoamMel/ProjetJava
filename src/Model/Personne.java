@@ -32,8 +32,28 @@ public class Personne {
         this.id = id;
     }
     
+    /** Getter qui permet de récupérer l'id d'une personne
+     * 
+     * @return 
+     */
     public int getID()
     {
         return id;
+    }
+    
+    /** Getter qui permet de récupérer le nom d'une personne
+     * 
+     * @return 
+     */
+    public String getNom(){
+        return nom;
+    }
+    
+    /** Getter qui permet de récupérer le prenom d'une personne
+     * 
+     * @return 
+     */
+    public String getPrenom(){
+        return prenom;
     }
 }
