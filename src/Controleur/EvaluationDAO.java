@@ -14,28 +14,36 @@ import java.sql.*;
  * @author Emma
  */
 
-public class TrimestreDAO extends DAO<Trimestre> 
+public class EvaluationDAO extends DAO<Evaluation> 
 {
   
-    public TrimestreDAO(Connexion conn) 
+    public EvaluationDAO(Connexion conn) 
     {
       super(conn);
     }
 
-    /** Méthode create pour un etudiant et un professeu
+    /** Méthode create pour un etudiant et un professeur
      * @param nom
      * @param prenom*/
     @Override
     public void create(String nom, String prenom){}
     
-    /** Méthode pour Class
+    /** Méthode pour Classe
      * @param nom
      * @param anneeScolaire
      * @param niveau*/
     @Override
     public void create(String nom, String niveau, int anneeScolaire){}
     
-    /** Méthode pour Isncription
+    /** Méthode pour Trimestre
+     * @param numero
+     * @param debut
+     * @param fin
+     * @param anneeScolaire */
+    @Override
+    public void create(int numero, int debut, int fin, int anneeScolaire){}
+    
+    /** Méthode pour Inscription
      * @param e
      * @param c*/
     @Override
@@ -51,17 +59,9 @@ public class TrimestreDAO extends DAO<Trimestre>
     /** Méthode pour DetailBulletin
      * @param appreciation
      * @param e
-     * @param b
-     */
+     * @param b */
     @Override
-    public void create(String appreciation, Enseignement e, Bulletin b){}
-    
-    /** Méthode pour Evaluation
-     * @param note
-     * @param appreciation
-     * @param d */
-    @Override
-    public void create(int note, String appreciation, DetailBulletin d){}
+    public void create(String appreciation, Enseignement e, Bulletin b) {}
     
     /** Méthode pour Enseignement
      * @param discipline
@@ -70,19 +70,16 @@ public class TrimestreDAO extends DAO<Trimestre>
     @Override
     public void create(String discipline, Classe c, Professeur p){}
     
-    /** Méthode qui permet d'ajouter un trimestre à la BDD
-     * 
-     * @param numero
-     * @param debut
-     * @param fin
-     * @param anneeScolaire 
-     */
+    /** Méthode qui permet d'ajouter une évaluation à la BDD
+     * @param note
+     * @param appreciation
+     * @param d */
     @Override
-    public void create(int numero, int debut, int fin, int anneeScolaire) 
+    public void create(int note, String appreciation, DetailBulletin d) 
     {
       int id = 0;
 
-      String requete = "INSERT INTO Trimestre (Numero, Debut, Fin, AnneeScolaire) VALUES ('"+numero+"','"+debut+"','"+fin+"','"+anneeScolaire+"')";
+      String requete = "INSERT INTO Evaluation (Note, Appreciation, ID_DetailBulletin) VALUES ('"+note+"','"+appreciation+"','"+d.getID()+"')";
 
       // Ajout dans la BDD
       try {
@@ -98,39 +95,49 @@ public class TrimestreDAO extends DAO<Trimestre>
           }
 
       // Creation d'une classe
-      Trimestre t = new Trimestre(numero,debut,fin,anneeScolaire,id);
+      Evaluation e = new Evaluation(note, appreciation, d, id);
     }
 
-    /** Méthode qui permet de supprimer un trimestre dans la BDD
+    /** Méthode qui permet de supprimer une evaluation dans la BDD
      * 
-     * @param t 
-     */
+     * @param e 
+    */
     @Override
-    public void delete(Trimestre t) 
+    public void delete(Evaluation e) 
     {
       // Supression dans la BDD
       try {
-              conn.getStmt().execute("DELETE FROM Trimestre WHERE ID_Trimestre = '"+t.getID()+"'");
+              conn.getStmt().execute("DELETE FROM Evaluation WHERE ID_Evaluation = '"+e.getID()+"'");
           } 
       catch (SQLException ex) 
           {
             ex.printStackTrace();
           }
     }
-
-    /** Méthode update de Evaluation
+    
+    /** Méthode update pour Bulletin et DetailBulletin
+     * 
+     * @param e
+     * @param appreciation 
+     */
+    @Override
+    public void update(Evaluation e, String appreciation){}
+    
+    /** Méthode updtade pour Evaluation
      * 
      * @param e
      * @param note 
      */
     @Override
-    public void update(Evaluation e, int note){}
-    
-    /** Méthode update de Bulletin et DetailBulletin
-     * 
-     * @param t
-     * @param appreciation 
-     */
-    @Override
-    public void update(Trimestre t, String appreciation){}
+    public void update(Evaluation e, int note) 
+    {
+      // Update dans la BDD
+      try {
+              conn.getStmt().execute("UPDATE Evaluation SET Note = '"+note+"' WHERE ID_Evaluation = '"+e.getID()+"'");
+          } 
+      catch (SQLException ex) 
+          {
+            ex.printStackTrace();
+          }
+    }
 }

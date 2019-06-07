@@ -27,7 +27,8 @@ public class DetailBulletin {
      * @param appreciation
      * @param enseignement
      * @param bulletin
-     * @param id */
+     * @param id 
+     */
     public DetailBulletin(String appreciation, Enseignement enseignement, Bulletin bulletin, int id)
     {
         this.appreciation = appreciation;
@@ -36,6 +37,10 @@ public class DetailBulletin {
         this.id = id;
     }
     
+    /** Getter qui permet de récupérer l'id du DetailBulletin
+     * 
+     * @return 
+     */
     public int getID()
     {
         return id;

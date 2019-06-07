@@ -13,6 +13,7 @@ import java.util.ArrayList;
  */
 public class Stockage {
     
+    /** Attributs */
     ArrayList<String> niveaux;
     ArrayList<Personne> personnes;
     ArrayList<Etudiant> etudiants;
@@ -25,6 +26,9 @@ public class Stockage {
         this.niveaux = niveaux;
     } */   
     
+    /** Constructeur surchargé 
+     * 
+     */
     public Stockage(){
         niveaux = new ArrayList();
         personnes = new ArrayList();
@@ -32,10 +36,18 @@ public class Stockage {
         professeurs = new ArrayList();
     }
     
+    /** Setter qui permet de modifier la liste de classe du stockage
+     * 
+     * @return 
+     */
     public void setClasses(ArrayList<Classe> classes){
         this.classes =classes;
     }
     
+    /** Setter qui permet de modifier la liste de niveaux du stockage
+     * 
+     * @return 
+     */
     public void setNiveaux(ArrayList<String> niveaux){
         this.niveaux = niveaux;
     }
@@ -44,14 +56,19 @@ public class Stockage {
         this.personnes = personnes;
     }*/
     
+    /** Setter qui permet de modifier la liste d'étudiants du stockage
+     * 
+     * @return 
+     */
     public void setEtudiants(ArrayList<Etudiant> etudiants){
         this.etudiants = etudiants;
     }
     
+    /** Setter qui permet de modifier la liste de professeur du stockage
+     * 
+     * @return 
+     */
     public void setProfesseurs(ArrayList<Professeur> professeurs){
         this.professeurs = professeurs;
-    }
-    
-    
-    
+    }  
 }

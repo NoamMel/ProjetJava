@@ -9,10 +9,6 @@ import jdbcv2018.*;
 import Model.*;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import java.sql.*;
-
 /**
  *
  * @author margo
@@ -22,7 +18,8 @@ public class RecupBDD {
     private Stockage stock;
     private Connexion conn = null;
     
-    public RecupBDD(Connexion conn){
+    public RecupBDD(Connexion conn)
+    {
         stock = new Stockage();
         this.conn = conn;
     }
@@ -55,20 +52,24 @@ public class RecupBDD {
         
     }*/
     
-    public void recupEtudiants() throws SQLException{
+    public void recupEtudiants() throws SQLException
+    {
         ArrayList<Etudiant> etudiants = new ArrayList();
         String requete = "SELECT * FROM Personne WHERE Type='Etudiant'";
         etudiants = conn.remplirEtudiant(requete);
         stock.setEtudiants(etudiants);    
-
     }
     
-    public void recupProfesseurs() throws SQLException{
+    public void recupProfesseurs() throws SQLException
+    {
         ArrayList<Professeur> professeurs = new ArrayList();
         String requete = "SELECT * FROM personne WHERE Type='Enseignant'";
         professeurs = conn.remplirProfesseur(requete);
         stock.setProfesseurs(professeurs);
     }
     
-    
+    public Stockage getStock()
+    {
+        return stock;
+    }
 }
