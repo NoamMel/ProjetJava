@@ -1,9 +1,14 @@
+package Vue;
+
 import java.awt.event.*;
 import javax.swing.*;
 import java.io.IOException;
 import javax.imageio.ImageIO;
 import java.io.File;
 import java.awt.*;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 
 public class MiseAJour extends JFrame /*implements MouseListener*/{
@@ -114,7 +119,14 @@ public class MiseAJour extends JFrame /*implements MouseListener*/{
             System.out.println("Index Selected: " + index);
             String s = jList1.getSelectedValue().toString();
             System.out.println("Value Selected: " + s);
-            if(s == "Niveaux"){setVisible(false); new MAJ_Niveaux();}
+            if(s == "Niveaux"){setVisible(false); try {
+                new MAJ_Niveaux();
+                } catch (SQLException ex) {
+                    Logger.getLogger(MiseAJour.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (ClassNotFoundException ex) {
+                    Logger.getLogger(MiseAJour.class.getName()).log(Level.SEVERE, null, ex);
+                }
+}
         }
     }
   }

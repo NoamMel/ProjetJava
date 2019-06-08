@@ -1,3 +1,5 @@
+package Vue;
+
 import java.awt.event.*;
 import javax.swing.*;
 import java.io.IOException;

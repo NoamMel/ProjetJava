@@ -1,10 +1,18 @@
-/* s'ouvre mais ne ferme pas la page precedente */
+package Vue;
+
+import Controleur.RecupBDD;
 import java.awt.event.*;
 import javax.swing.*;
 import java.io.IOException;
 import javax.imageio.ImageIO;
 import java.io.File;
 import java.awt.*;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.table.DefaultTableModel;
+import jdbcv2018.Connexion;
 
 
 public class MAJ_Niveaux extends JFrame /*implements MouseListener*/{
@@ -16,11 +24,14 @@ public class MAJ_Niveaux extends JFrame /*implements MouseListener*/{
   private JButton jButton3 = new javax.swing.JButton();
   private JButton jButton4 = new javax.swing.JButton();
   private JButton jButton5 = new javax.swing.JButton();
+  private JTable jTable1 = new JTable();
+  private DefaultTableModel model = new DefaultTableModel();
+  JScrollPane scroll;
 
 
 
   @SuppressWarnings("unchecked")
-  public MAJ_Niveaux(){
+  public MAJ_Niveaux() throws SQLException, ClassNotFoundException{
     this.setTitle("Campus - Espace modifications");
     this.setSize(800, 600);
     this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -66,13 +77,24 @@ public class MAJ_Niveaux extends JFrame /*implements MouseListener*/{
         });
         jScrollPane1.setViewportView(jList1);
 
-        jList2.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        jList2.setModel(new javax.swing.AbstractListModel<String>() {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
-            public int getSize() { return strings.length; }
-            public String getElementAt(int i) { return strings[i]; }
-        });
-        jScrollPane2.setViewportView(jList2);
+        Connexion conn = new Connexion("ece","root","");
+        
+        RecupBDD recup = new RecupBDD(conn);
+        recup.recupNiveaux();
+        ArrayList<String> data = recup.getStockage().getListeNiveaux();
+
+       
+        Object col[] = {"Niveaux"};
+        DefaultTableModel tableModel = new DefaultTableModel(col, 1);
+        model.setColumnIdentifiers(col); 
+        jTable1.setModel(model);
+        scroll = new JScrollPane(jTable1);
+        
+        
+        for (int i = 0; i < (data.size() ); i++) {
+          model.addRow(new Object[] { String.valueOf(data.get(i))});
+                  System.out.print(data.get(i));
+        }
 
         button.setText("Modifier");
 
@@ -108,8 +130,8 @@ public class MAJ_Niveaux extends JFrame /*implements MouseListener*/{
                         .addContainerGap(108, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(241, 241, 241))))
+                        .addComponent(scroll, javax.swing.GroupLayout.PREFERRED_SIZE, 400, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(100, 100, 100))))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -140,7 +162,7 @@ public class MAJ_Niveaux extends JFrame /*implements MouseListener*/{
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 23, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 187, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(scroll, javax.swing.GroupLayout.PREFERRED_SIZE, 187, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -193,8 +215,14 @@ class BoutonAddListener implements ActionListener{
 public void actionPerformed(ActionEvent e) {
   jButton3.setEnabled(true);
   setVisible(false);
-  // ajouter l'element dans la BDD
-  new MAJ_Niveaux();
+    try {
+        // ajouter l'element dans la BDD
+        new MAJ_Niveaux();
+    } catch (SQLException ex) {
+        Logger.getLogger(MAJ_Niveaux.class.getName()).log(Level.SEVERE, null, ex);
+    } catch (ClassNotFoundException ex) {
+        Logger.getLogger(MAJ_Niveaux.class.getName()).log(Level.SEVERE, null, ex);
+    }
 }
 }
 
@@ -203,8 +231,14 @@ class BoutonRemoveListener implements ActionListener{
 public void actionPerformed(ActionEvent e) {
   jButton4.setEnabled(true);
   setVisible(false);
-  // retirer l'element dans la BDD
-  new MAJ_Niveaux();
+    try {
+        // retirer l'element dans la BDD
+        new MAJ_Niveaux();
+    } catch (SQLException ex) {
+        Logger.getLogger(MAJ_Niveaux.class.getName()).log(Level.SEVERE, null, ex);
+    } catch (ClassNotFoundException ex) {
+        Logger.getLogger(MAJ_Niveaux.class.getName()).log(Level.SEVERE, null, ex);
+    }
 }
 }
 
@@ -213,9 +247,15 @@ class BoutonRefreshListener implements ActionListener{
 public void actionPerformed(ActionEvent e) {
   jButton5.setEnabled(true);
   setVisible(false);
-  // rafraichir/modifier l'element dans la BDD
-  // peut-etre afficher les valeurs en jtextfield dans un for
-  new MAJ_Niveaux();
+    try {
+        // rafraichir/modifier l'element dans la BDD
+        // peut-etre afficher les valeurs en jtextfield dans un for
+        new MAJ_Niveaux();
+    } catch (SQLException ex) {
+        Logger.getLogger(MAJ_Niveaux.class.getName()).log(Level.SEVERE, null, ex);
+    } catch (ClassNotFoundException ex) {
+        Logger.getLogger(MAJ_Niveaux.class.getName()).log(Level.SEVERE, null, ex);
+    }
 }
 }
 

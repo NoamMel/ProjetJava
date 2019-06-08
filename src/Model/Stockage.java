@@ -20,11 +20,15 @@ public class Stockage {
     ArrayList<Classe> classes;
     ArrayList<Inscription> inscriptions;
     ArrayList<Bulletin> bulletins;
+<<<<<<< HEAD
     ArrayList<Trimestre> trimestres;
     ArrayList<Enseignement> enseignements;
     ArrayList<DetailBulletin> details;
     ArrayList<Evaluation> evaluations;
     ArrayList<String> disciplines;
+=======
+    
+>>>>>>> Noam
     
     /*public Stockage(ArrayList<String> niveauxMettre tous les ArrayList){
         this.niveaux = new ArrayList();
@@ -36,6 +40,7 @@ public class Stockage {
         //personnes = new ArrayList();
         etudiants = new ArrayList();
         professeurs = new ArrayList();
+<<<<<<< HEAD
         classes = new ArrayList();  
         bulletins = new ArrayList();
         trimestres = new ArrayList();
@@ -43,6 +48,9 @@ public class Stockage {
         details = new ArrayList();
         enseignements = new ArrayList();
         disciplines = new ArrayList();
+=======
+        classes = new ArrayList();
+>>>>>>> Noam
     }
     
     public void setClasses(ArrayList<Classe> classes){
@@ -69,6 +77,7 @@ public class Stockage {
         this.inscriptions = inscriptions;
     }
     
+<<<<<<< HEAD
     public void setBulletins(ArrayList<Bulletin> bulletins){
         this.bulletins=bulletins;
     }
@@ -94,6 +103,8 @@ public class Stockage {
     }
 
     
+=======
+>>>>>>> Noam
     public Etudiant getEtudiant(int id){
         Etudiant e = new Etudiant();
         for(int i = 0; i<etudiants.size(); i++){
@@ -104,6 +115,7 @@ public class Stockage {
         return e;
     }
     
+<<<<<<< HEAD
     public Professeur getProfesseur(int id){
         Professeur p = new Professeur();
         for(int i = 0; i<professeurs.size(); i++){
@@ -115,6 +127,8 @@ public class Stockage {
 
     }
     
+=======
+>>>>>>> Noam
     public Classe getClasse(int id){
         Classe c = new Classe();
         for(int i = 0; i<classes.size(); i++){
@@ -125,6 +139,7 @@ public class Stockage {
         return c;
     }
     
+<<<<<<< HEAD
     public Trimestre getTrimestre(int id){
         Trimestre t = new Trimestre();
         for(int i = 0; i<trimestres.size(); i++){
@@ -219,4 +234,29 @@ public class Stockage {
         return disciplines;
     }
       
+=======
+    public ArrayList<Etudiant> getListeEtudiants(){
+        return etudiants;
+    }
+    
+    public ArrayList<Professeur> getListeProfesseurs(){
+        return professeurs;
+    }
+
+    public ArrayList<String> getListeNiveaux(){
+        return niveaux;
+    }
+
+    public ArrayList<Classe> getListeClasses(){
+        return classes;
+    }
+
+    public ArrayList<Inscription> getListeInscriptions(){
+        return inscriptions;
+    }  
+    
+    public ArrayList<Bulletin> getListeBulletins(){
+        return bulletins;
+    }
+>>>>>>> Noam
 }

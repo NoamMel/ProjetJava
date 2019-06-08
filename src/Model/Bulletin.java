@@ -48,6 +48,7 @@ public class Bulletin {
     public String getAppreciation(){
         return appreciation;
     }
+<<<<<<< HEAD
     
     public Trimestre getTrimestre(){
         return trimestre;
@@ -56,5 +57,7 @@ public class Bulletin {
     public Inscription getInscription(){
         return inscription;
     }
+=======
+>>>>>>> Noam
 
 }

@@ -92,6 +92,7 @@ public class RecupBDD {
             System.out.println(inscriptions.get(i).getID()+" "+inscriptions.get(i).getEtudiant().getNom()+" "+inscriptions.get(i).getClasse().getNom());
         }*/
     }
+<<<<<<< HEAD
     
     public void recupTrimestres() throws SQLException{
         ArrayList<Trimestre> trimestres = new ArrayList();
@@ -251,5 +252,11 @@ public class RecupBDD {
     public Stockage getStock(){
         return stock;
     }
+=======
+>>>>>>> Noam
     
+    public Stockage getStockage()
+    {
+        return stock;
+    }
 }

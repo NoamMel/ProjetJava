@@ -3,12 +3,18 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
+<<<<<<< HEAD
             <file>file:/C:/Users/margo/Documents/NetBeansProjects/Projet_Java/src/Model/Inscription.java</file>
             <file>file:/C:/Users/margo/Documents/NetBeansProjects/Projet_Java/src/Controleur/RecupBDD.java</file>
             <file>file:/C:/Users/margo/Documents/NetBeansProjects/Projet_Java/src/Model/Trimestre.java</file>
             <file>file:/C:/Users/margo/Documents/NetBeansProjects/Projet_Java/src/jdbcv2018/Connexion.java</file>
             <file>file:/C:/Users/margo/Documents/NetBeansProjects/Projet_Java/src/Model/TestConnexion.java</file>
             <file>file:/C:/Users/margo/Documents/NetBeansProjects/Projet_Java/src/Model/Stockage.java</file>
+=======
+            <file>file:/C:/Users/noam/workspace/ece/JAVA/ProjetJava/src/jdbcv2018/Connexion.java</file>
+            <file>file:/C:/Users/noam/workspace/ece/JAVA/ProjetJava/src/Model/Etudiant.java</file>
+            <file>file:/C:/Users/noam/workspace/ece/JAVA/ProjetJava/src/Model/Stockage.java</file>
+>>>>>>> Noam
         </group>
     </open-files>
 </project-private>
