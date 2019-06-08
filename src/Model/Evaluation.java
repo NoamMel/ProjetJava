@@ -44,4 +44,16 @@ public class Evaluation {
     {
         return id;
     }
+    
+    public int getNote(){
+        return note;
+    }
+    
+    public String getAppreciation(){
+        return appreciation;
+    }
+    
+    public DetailBulletin getDetailBulletin(){
+        return detailBulletin;
+    }
 }

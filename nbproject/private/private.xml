@@ -3,22 +3,12 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/Users/Emma/Documents/NetBeansProjects/ProjetJava/src/Model/Trimestre.java</file>
-            <file>file:/Users/Emma/Documents/NetBeansProjects/ProjetJava/src/Model/Evaluation.java</file>
-            <file>file:/Users/Emma/Documents/NetBeansProjects/ProjetJava/src/Model/Etudiant.java</file>
-            <file>file:/Users/Emma/Documents/NetBeansProjects/ProjetJava/src/Model/Classe.java</file>
-            <file>file:/Users/Emma/Documents/NetBeansProjects/ProjetJava/src/Model/Personne.java</file>
-            <file>file:/Users/Emma/Documents/NetBeansProjects/ProjetJava/src/jdbcv2018/Connexion.java</file>
-            <file>file:/Users/Emma/Documents/NetBeansProjects/ProjetJava/src/Model/Bulletin.java</file>
-            <file>file:/Users/Emma/Documents/NetBeansProjects/ProjetJava/src/Model/Enseignement.java</file>
-            <file>file:/Users/Emma/Documents/NetBeansProjects/ProjetJava/src/Model/DetailBulletin.java</file>
-            <file>file:/Users/Emma/Documents/NetBeansProjects/ProjetJava/src/Controleur/ClasseDAO.java</file>
-            <file>file:/Users/Emma/Documents/NetBeansProjects/ProjetJava/src/Model/Professeur.java</file>
-            <file>file:/Users/Emma/Documents/NetBeansProjects/ProjetJava/src/Model/TestConnexion.java</file>
-            <file>file:/Users/Emma/Documents/NetBeansProjects/ProjetJava/src/Controleur/EtudiantDAO.java</file>
-            <file>file:/Users/Emma/Documents/NetBeansProjects/ProjetJava/src/Controleur/DAO.java</file>
-            <file>file:/Users/Emma/Documents/NetBeansProjects/ProjetJava/src/Controleur/Main.java</file>
-            <file>file:/Users/Emma/Documents/NetBeansProjects/ProjetJava/src/Controleur/ProfesseurDAO.java</file>
+            <file>file:/C:/Users/margo/Documents/NetBeansProjects/Projet_Java/src/Model/Inscription.java</file>
+            <file>file:/C:/Users/margo/Documents/NetBeansProjects/Projet_Java/src/Controleur/RecupBDD.java</file>
+            <file>file:/C:/Users/margo/Documents/NetBeansProjects/Projet_Java/src/Model/Trimestre.java</file>
+            <file>file:/C:/Users/margo/Documents/NetBeansProjects/Projet_Java/src/jdbcv2018/Connexion.java</file>
+            <file>file:/C:/Users/margo/Documents/NetBeansProjects/Projet_Java/src/Model/TestConnexion.java</file>
+            <file>file:/C:/Users/margo/Documents/NetBeansProjects/Projet_Java/src/Model/Stockage.java</file>
         </group>
     </open-files>
 </project-private>

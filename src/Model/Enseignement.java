@@ -26,8 +26,7 @@ public class Enseignement {
     /** Constructeur surchargé
      * @param discipline
      * @param classe
-     * @param professeur
-     * @param id */
+     * @param professeur */
     public Enseignement(String discipline, Classe classe, Professeur professeur, int id)
     {
         this.discipline = discipline;
@@ -36,12 +35,20 @@ public class Enseignement {
         this.id = id;
     }
     
-    /** Getter qui permet de récupérer l'id de l'enseignement
-     * 
-     * @return 
-     */
     public int getID()
     {
         return id;
+    }
+    
+    public String getDiscipline(){
+        return discipline;
+    }
+    
+    public Classe getClasse(){
+        return classe;
+    }
+    
+    public Professeur getProfesseur(){
+        return professeur;
     }
 }

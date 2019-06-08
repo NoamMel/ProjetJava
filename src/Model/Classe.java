@@ -20,6 +20,7 @@ public class Classe {
     private String niveau;
     private int anneeScolaire;
     private ArrayList<Etudiant> etudiants;
+    //private HashMap<String, Enseignement> enseignements;
     
     /** Constructeur par défaut */
     public Classe()
@@ -27,8 +28,8 @@ public class Classe {
         
     }
 
-    /** Constructeur surchargé
-     * @param niveau */
+        /** Constructeur surchargé
+     * @param niveau*/
     public Classe(String nom, String niveau, int anneeScolaire, int id)
     {
         this.nom = nom;
@@ -38,45 +39,37 @@ public class Classe {
         this.id = id;
     }
     
-    /** Setter qui permet de modifier la liste d'étudiants de la classe
-     * 
-     * @param etudiants
-     */
     public void setEtudiants(ArrayList<Etudiant> etudiants)
     {
         this.etudiants = etudiants;
     }
     
-    /** Getter qui permet de récupérer l'id de la classe
-     * 
-     * @return 
-     */
     public int getID()
     {
         return id;
     }
     
-    /** Getter qui permet de récupérer le nom de la classe
-     * 
-     * @return 
-     */
     public String getNom(){
         return nom;
     }
-
-    /** Getter qui permet de récupérer le niveau de la classe
-     * 
-     * @return 
-     */
+    
     public String getNiveau(){
         return niveau;
     }
     
-    /** Getter qui permet de récupérer l'annee scolaire de la classe
-     * 
-     * @return 
-     */
     public int getAnneeScolaire(){
         return anneeScolaire;
     }
+    
+//    /** Constructeur surchargé
+//     * @param niveau
+//     * @param etudiants
+//     * @param enseignements */
+//    public Classe(String niveau, HashMap<String, Etudiant> etudiants, HashMap<String, Enseignement> enseignements)
+//    {
+//        this.etudiants = new HashMap();
+//        this.enseignements = new HashMap();
+//        this.etudiants = etudiants;
+//        this.enseignements = enseignements;
+//    }
 }
