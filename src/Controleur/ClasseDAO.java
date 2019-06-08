@@ -8,6 +8,7 @@ import Model.*;
 import java.sql.SQLException;
 import jdbcv2018.*;
 import java.sql.*;
+import java.util.ArrayList;
 /**
  * Source : https://coderanch.com/t/307373/databases/ID-INSERT-statement?fbclid=IwAR0cQA4Um8o9BLzXEe4nOTWy6Rim2DEbkWOrA9zdLxZcJ9o-BaefVM_hlvk
  * http://www.mysqltutorial.org/mysql-jdbc-insert/?fbclid=IwAR3SXqe3ACcS28iq9irutRPJvLRw3Mj9BYTFAtfMlQCD_42f04KwsA-k-A8
@@ -94,8 +95,10 @@ public class ClasseDAO extends DAO<Classe>
             ex.printStackTrace();
           }
 
-      // Creation d'une classe
-      Classe c = new Classe(nom,niveau,anneeScolaire,id);
+        // MAJ des données 
+        RecupBDD recup = new RecupBDD(conn);
+        try{recup.updateArray();}
+        catch(SQLException sql){}
     }
 
     /** Méthode qui permet de supprimer une classe dans la BDD
@@ -105,38 +108,48 @@ public class ClasseDAO extends DAO<Classe>
     public void delete(Classe c) 
     {
       RecupBDD recup = new RecupBDD(conn);
-      recup.recupEnseignement();
-      ArrayList<Enseignement> data1 = recup.getStockage().getListeEnseignement();
-
-      recup.recupInscription();
-      ArrayList<Inscription> data2 = recup.getStockage().getListeInscription();
+      try{recup.updateArray();}
+      catch(SQLException sql){}
+      ArrayList<Enseignement> data1 = recup.getStock().getListeEnseignements();
+      ArrayList<Inscription> data2 = recup.getStock().getListeInscriptions();
       
       try {
-            for(int i=0; i<data.size(); i++)
+            if(!data1.isEmpty())
             {
-              // Supprimer les DetailBulletin qui ont l'id du bulletin en clef étrangère
-              if(data.get(i).getClasse().getID() == c.getID())
-              {
-                DAO enseignementDAO = new EnseignementDAO(conn);
-                enseignementDAO.delete(data.get(i));
-              }   
+                for(int i=0; i<data1.size(); i++)
+                {
+                  // Supprimer les DetailBulletin qui ont l'id du bulletin en clef étrangère
+                  if(data1.get(i).getClasse().getID() == c.getID())
+                  {
+                    DAO enseignementDAO = new EnseignementDAO(conn);
+                    enseignementDAO.delete(data1.get(i));
+                  }   
+                }
             }
             
-            for(int i=0; i<data.size(); i++)
+            if(!data2.isEmpty())
             {
-              // Supprimer les DetailBulletin qui ont l'id du bulletin en clef étrangère
-              if(data.get(i).getClasse().getID() == c.getID())
-              {
-                DAO inscriptionDAO = new InscriptionDAO(conn);
-                inscriptionDAO.delete(data.get(i));
-              }   
+                for(int i=0; i<data2.size(); i++)
+                {
+                  // Supprimer les DetailBulletin qui ont l'id du bulletin en clef étrangère
+                  if(data2.get(i).getClasse().getID() == c.getID())
+                  {
+                    DAO inscriptionDAO = new InscriptionDAO(conn);
+                    inscriptionDAO.delete(data2.get(i));
+                  }   
+                }
             }
-              conn.getStmt().execute("DELETE FROM Classe WHERE ID_Classe = '"+c.getID()+"'");
+            
+            conn.getStmt().execute("DELETE FROM Classe WHERE ID_Classe = '"+c.getID()+"'");
           } 
       catch (SQLException ex) 
           {
             ex.printStackTrace();
           }
+      
+      // MAJ des données 
+      try{recup.updateArray();}
+      catch(SQLException sql){}
     }
 
     /** Méthode update pour Evaluation

@@ -8,6 +8,7 @@ import Model.*;
 import java.sql.SQLException;
 import jdbcv2018.*;
 import java.sql.*;
+import java.util.ArrayList;
 /**
  * Source : https://coderanch.com/t/307373/databases/ID-INSERT-statement?fbclid=IwAR0cQA4Um8o9BLzXEe4nOTWy6Rim2DEbkWOrA9zdLxZcJ9o-BaefVM_hlvk
  * http://www.mysqltutorial.org/mysql-jdbc-insert/?fbclid=IwAR3SXqe3ACcS28iq9irutRPJvLRw3Mj9BYTFAtfMlQCD_42f04KwsA-k-A8
@@ -83,33 +84,44 @@ public class ProfesseurDAO extends DAO<Professeur>
             ex.printStackTrace();
           }
 
-      // Creation d'un etudiant
-      Personne e = new Etudiant(nom,prenom,id);
+        // MAJ des données 
+        RecupBDD recup = new RecupBDD(conn);
+        try{recup.updateArray();}
+        catch(SQLException sql){}
     }
 
     @Override
     public void delete(Professeur p) 
     {
       RecupBDD recup = new RecupBDD(conn);
-      recup.recupEnseignements();
-      ArrayList<Enseignement> data = recup.getStockage().getListeEnseignements();
+      try{recup.updateArray();}
+      catch(SQLException sql){}
+      ArrayList<Enseignement> data = recup.getStock().getListeEnseignements();
       
       try {
-            for(int i=0; i<data.size(); i++)
+            if(!data.isEmpty())
             {
-              // Supprimer les DetailBulletin qui ont l'id du bulletin en clef étrangère
-              if(data.get(i).getProfesseur().getID() == b.getID())
-              {
-                DAO enseignementDAO = new EnseignementDAO(conn);
-                enseignementDAO.delete(data.get(i));
-              }   
+                for(int i=0; i<data.size(); i++)
+                {
+                  // Supprimer les DetailBulletin qui ont l'id du bulletin en clef étrangère
+                  if(data.get(i).getProfesseur().getID() == p.getID())
+                  {
+                    DAO enseignementDAO = new EnseignementDAO(conn);
+                    enseignementDAO.delete(data.get(i));
+                  }   
+                }
             }
-              conn.getStmt().execute("DELETE FROM Personne WHERE ID_Personne = '"+p.getID()+"'");
+            
+            conn.getStmt().execute("DELETE FROM Personne WHERE ID_Personne = '"+p.getID()+"'");
           } 
       catch (SQLException ex) 
           {
             ex.printStackTrace();
           }
+      
+      // MAJ des données 
+      try{recup.updateArray();}
+      catch(SQLException sql){}
     }
 
     /** Méthode update de Evaluation

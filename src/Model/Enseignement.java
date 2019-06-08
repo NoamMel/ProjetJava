@@ -44,4 +44,16 @@ public class Enseignement {
     {
         return id;
     }
+    
+    public String getDiscipline(){
+        return discipline;
+    }
+    
+    public Classe getClasse(){
+        return classe;
+    }
+    
+    public Professeur getProfesseur(){
+        return professeur;
+    }
 }

@@ -53,4 +53,16 @@ public class Bulletin {
     {
         return detailBulletins;
     }
+    
+    public String getAppreciation(){
+        return appreciation;
+    }
+    
+    public Trimestre getTrimestre(){
+        return trimestre;
+    }
+    
+    public Inscription getInscription(){
+        return inscription;
+    }
 }
