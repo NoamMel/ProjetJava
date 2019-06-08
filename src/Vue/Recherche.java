@@ -121,42 +121,44 @@ public class Recherche extends JFrame /*implements MouseListener*/{
             System.out.println("Value Selected: " + s);
             if(s == "Niveaux"){setVisible(false); try {
                 new NiveauxAffichage();
-                } catch (SQLException ex) {
+                } catch (SQLException | ClassNotFoundException ex) {
                     Logger.getLogger(Recherche.class.getName()).log(Level.SEVERE, null, ex);
-                } catch (ClassNotFoundException ex2) {
-                    Logger.getLogger(Recherche.class.getName()).log(Level.SEVERE, null, ex2);
                 }
 }
             if(s == "Enseignants"){setVisible(false); try {
                 new ProfesseursAffichage();
-                } catch (SQLException ex) {
+                } catch (SQLException | ClassNotFoundException ex) {
                     Logger.getLogger(Recherche.class.getName()).log(Level.SEVERE, null, ex);
-                } catch (ClassNotFoundException ex2) {
-                    Logger.getLogger(Recherche.class.getName()).log(Level.SEVERE, null, ex2);
                 }
 }
             if(s == "Classes"){setVisible(false); try {
                 new ClassesAffichage();
-                } catch (SQLException ex) {
+                } catch (SQLException | ClassNotFoundException ex) {
                     Logger.getLogger(Recherche.class.getName()).log(Level.SEVERE, null, ex);
-                } catch (ClassNotFoundException ex2) {
-                    Logger.getLogger(Recherche.class.getName()).log(Level.SEVERE, null, ex2);
                 }
 }
             if(s == "Eleves"){setVisible(false); try {
                 new ElevesAffichage();
-                } catch (SQLException ex) {
+                } catch (SQLException | ClassNotFoundException ex) {
                     Logger.getLogger(Recherche.class.getName()).log(Level.SEVERE, null, ex);
-                } catch (ClassNotFoundException ex2) {
-                    Logger.getLogger(Recherche.class.getName()).log(Level.SEVERE, null, ex2);
                 }
 }
             if(s == "Bulletins"){setVisible(false); try {
                 new BulletinsAffichage();
-                } catch (SQLException ex) {
+                } catch (SQLException | ClassNotFoundException ex) {
                     Logger.getLogger(Recherche.class.getName()).log(Level.SEVERE, null, ex);
-                } catch (ClassNotFoundException ex2) {
-                    Logger.getLogger(Recherche.class.getName()).log(Level.SEVERE, null, ex2);
+                }
+}
+            if(s == "Disciplines"){setVisible(false); try {
+                new DisciplinesAffichage();
+                } catch (SQLException | ClassNotFoundException ex) {
+                    Logger.getLogger(Recherche.class.getName()).log(Level.SEVERE, null, ex);
+                }
+}
+            if(s == "Evaluations"){setVisible(false); try {
+                new EvaluationsAffichage();
+                } catch (SQLException | ClassNotFoundException ex) {
+                    Logger.getLogger(Recherche.class.getName()).log(Level.SEVERE, null, ex);
                 }
 }
         }

@@ -71,7 +71,7 @@ public class BulletinsAffichage extends JFrame /*implements MouseListener*/{
         Connexion conn = new Connexion("ece","root","");
         
         RecupBDD recup = new RecupBDD(conn);
-//        recup.recupBulletin();
+        recup.recupBulletins();
         ArrayList<Bulletin> data = recup.getStockage().getListeBulletins();
 
        

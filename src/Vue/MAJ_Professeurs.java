@@ -1,6 +1,12 @@
 package Vue;
 
+import Controleur.DAO;
+import Controleur.EtudiantDAO;
+import Controleur.ProfesseurDAO;
 import Controleur.RecupBDD;
+import Model.Etudiant;
+import Model.Professeur;
+import Model.Stockage;
 import java.awt.event.*;
 import javax.swing.*;
 import java.io.IOException;
@@ -11,11 +17,15 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
+import javax.swing.ListSelectionModel;
+
 import javax.swing.table.DefaultTableModel;
 import jdbcv2018.Connexion;
 
 
-public class MAJ_Niveaux extends JFrame /*implements MouseListener*/{
+public class MAJ_Professeurs extends JFrame /*implements MouseListener*/{
   private JLabel jLabel1 = new JLabel();
   private JButton jButton1 = new JButton();
   private JButton button = new JButton();
@@ -27,11 +37,16 @@ public class MAJ_Niveaux extends JFrame /*implements MouseListener*/{
   private JTable jTable1 = new JTable();
   private DefaultTableModel model = new DefaultTableModel();
   JScrollPane scroll;
+  String selectedData = null;
+  JTextField jTextField1 = new javax.swing.JTextField();
+  JTextField jTextField2 = new javax.swing.JTextField();
+
+
 
 
 
   @SuppressWarnings("unchecked")
-  public MAJ_Niveaux() throws SQLException, ClassNotFoundException{
+  public MAJ_Professeurs() throws SQLException, ClassNotFoundException{
     this.setTitle("Campus - Espace modifications");
     this.setSize(800, 600);
     this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -60,7 +75,6 @@ public class MAJ_Niveaux extends JFrame /*implements MouseListener*/{
         JSeparator jSeparator1 = new javax.swing.JSeparator();
         JScrollPane jScrollPane1 = new javax.swing.JScrollPane();
         JScrollPane jScrollPane2 = new javax.swing.JScrollPane();
-        JTextField jTextField1 = new javax.swing.JTextField();
 
 
 
@@ -80,26 +94,35 @@ public class MAJ_Niveaux extends JFrame /*implements MouseListener*/{
         Connexion conn = new Connexion("ece","root","");
         
         RecupBDD recup = new RecupBDD(conn);
-        recup.recupNiveaux();
-        ArrayList<String> data = recup.getStockage().getListeNiveaux();
+        recup.recupProfesseurs();
+        ArrayList<Professeur> data = recup.getStockage().getListeProfesseurs();
 
        
-        Object col[] = {"Niveaux"};
-        DefaultTableModel tableModel = new DefaultTableModel(col, 1);
+        Object col[] = {"ID", "Nom", "Prenom"};
+        DefaultTableModel tableModel = new DefaultTableModel(col, 3);
         model.setColumnIdentifiers(col); 
         jTable1.setModel(model);
         scroll = new JScrollPane(jTable1);
         
         
         for (int i = 0; i < (data.size() ); i++) {
-          model.addRow(new Object[] { String.valueOf(data.get(i))});
+          model.addRow(new Object[] { String.valueOf(data.get( i).getID()),
+              String.valueOf(data.get( i).getNom()),
+              String.valueOf(data.get( i ).getPrenom()) });
                   System.out.print(data.get(i));
         }
 
         button.setText("Modifier");
 
-        jTextField1.setText("Nouvel element");
+        jTextField1.setText("Nom");
         jTextField1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField1ActionPerformed(evt);
+            }
+        });
+        
+        jTextField2.setText("Prenom");
+        jTextField2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextField1ActionPerformed(evt);
             }
@@ -123,9 +146,11 @@ public class MAJ_Niveaux extends JFrame /*implements MouseListener*/{
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 120, Short.MAX_VALUE))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(230, 230, 230)
-                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 213, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
+                        .addGap(150, 150, 150)
+                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(10, 10, 10)
+                        .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(10, 10, 10)
                         .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addContainerGap(108, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
@@ -172,12 +197,30 @@ public class MAJ_Niveaux extends JFrame /*implements MouseListener*/{
                     .addComponent(button, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(65, 65, 65))
         );
 
         pack();
-    }
+        
+        
+        ListSelectionModel cellSelectionModel = jTable1.getSelectionModel();
+        cellSelectionModel.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+        cellSelectionModel.addListSelectionListener(new ListSelectionListener() {
+      public void valueChanged(ListSelectionEvent e) {
+
+        int selectedRow = jTable1.getSelectedRow();
+        int selectedColumns = jTable1.getSelectedColumn();
+        selectedData = (String) jTable1.getValueAt(selectedRow, selectedColumns);
+//        for (int i = 0; i < selectedRow.length; i++) {
+//          for (int j = 0; j < selectedColumns.length; j++) {
+//            selectedData = (int) jTable1.getValueAt(selectedRow[i], selectedColumns[j]);
+//          }
+//        }
+        System.out.println("Selected: " + selectedData);
+    }});
+  }
 
 
     private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {
@@ -215,32 +258,56 @@ class BoutonAddListener implements ActionListener{
 public void actionPerformed(ActionEvent e) {
   jButton3.setEnabled(true);
   setVisible(false);
+          System.out.println(jTextField1.getText());
+
     try {
         // ajouter l'element dans la BDD
-        new MAJ_Niveaux();
+        Connexion conn = null;
+          try {
+              conn = new Connexion("ece", "root", "");
+          } catch (SQLException | ClassNotFoundException ex) {
+              Logger.getLogger(MAJ_Professeurs.class.getName()).log(Level.SEVERE, null, ex);
+          }
+    DAO professeurDAO = new ProfesseurDAO(conn);
+    RecupBDD recup = new RecupBDD(conn);
+    professeurDAO.create(jTextField1.getText(), jTextField2.getText());
+        recup.updateArray();
+
+    
+        new MAJ_Professeurs();
     } catch (SQLException ex) {
-        Logger.getLogger(MAJ_Niveaux.class.getName()).log(Level.SEVERE, null, ex);
+        Logger.getLogger(MAJ_Professeurs.class.getName()).log(Level.SEVERE, null, ex);
     } catch (ClassNotFoundException ex) {
-        Logger.getLogger(MAJ_Niveaux.class.getName()).log(Level.SEVERE, null, ex);
+        Logger.getLogger(MAJ_Professeurs.class.getName()).log(Level.SEVERE, null, ex);
     }
 }
-}
+    }
 
 
 class BoutonRemoveListener implements ActionListener{
 public void actionPerformed(ActionEvent e) {
   jButton4.setEnabled(true);
-  setVisible(false);
+        setVisible(false);
     try {
         // retirer l'element dans la BDD
-        new MAJ_Niveaux();
-    } catch (SQLException ex) {
-        Logger.getLogger(MAJ_Niveaux.class.getName()).log(Level.SEVERE, null, ex);
-    } catch (ClassNotFoundException ex) {
-        Logger.getLogger(MAJ_Niveaux.class.getName()).log(Level.SEVERE, null, ex);
+        Connexion conn = null;
+          try {
+              conn = new Connexion("ece", "root", "");
+          } catch (SQLException | ClassNotFoundException ex) {
+              Logger.getLogger(MAJ_Professeurs.class.getName()).log(Level.SEVERE, null, ex);
+          }
+    DAO professeurDAO = new ProfesseurDAO(conn);
+    RecupBDD recup = new RecupBDD(conn);
+    recup.updateArray();
+    professeurDAO.delete(recup.getStockage().getProfesseur(Integer.parseInt(selectedData)));
+    
+        
+        new MAJ_Professeurs();
+    } catch (SQLException | ClassNotFoundException ex) {
+        Logger.getLogger(MAJ_Professeurs.class.getName()).log(Level.SEVERE, null, ex);
     }
-}
-}
+}}
+    
 
 
 class BoutonRefreshListener implements ActionListener{
@@ -249,14 +316,13 @@ public void actionPerformed(ActionEvent e) {
   setVisible(false);
     try {
         // rafraichir/modifier l'element dans la BDD
-        // peut-etre afficher les valeurs en jtextfield dans un for
-        new MAJ_Niveaux();
+        new MAJ_Professeurs();
     } catch (SQLException ex) {
-        Logger.getLogger(MAJ_Niveaux.class.getName()).log(Level.SEVERE, null, ex);
+        Logger.getLogger(MAJ_Professeurs.class.getName()).log(Level.SEVERE, null, ex);
     } catch (ClassNotFoundException ex) {
-        Logger.getLogger(MAJ_Niveaux.class.getName()).log(Level.SEVERE, null, ex);
+        Logger.getLogger(MAJ_Professeurs.class.getName()).log(Level.SEVERE, null, ex);
     }
 }
-}
+    }
 
 }

@@ -87,14 +87,7 @@ public class ProfesseursAffichage extends JFrame /*implements MouseListener*/{
               String.valueOf(data.get( i ).getPrenom()) });
                   System.out.print(data.get(i));
         }
-        System.out.println("----------------------------------");
-        for(int i=0; i<data.size(); i++){
-        System.out.println(data.get(i).getNom());
-        }
         
-        jList2 = new JList<>(data.toArray());
-        jScrollPane2.setViewportView(jList2);
-
         button.setText("Rechercher");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());

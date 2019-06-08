@@ -91,8 +91,8 @@ public class ElevesAffichage extends JFrame /*implements MouseListener*/{
               String.valueOf(data.get( i ).getPrenom()) });
                   System.out.print(data.get(i));
         }
-        
-        
+      
+    
         
         
         
@@ -103,14 +103,15 @@ public class ElevesAffichage extends JFrame /*implements MouseListener*/{
       public void valueChanged(ListSelectionEvent e) {
         String selectedData = null;
 
-        int[] selectedRow = jTable1.getSelectedRows();
-        int[] selectedColumns = jTable1.getSelectedColumns();
+        int selectedRow = jTable1.getSelectedRow();
+        int selectedColumns = jTable1.getSelectedColumn();
+        selectedData = (String) jTable1.getValueAt(selectedRow, selectedColumns);
 
-        for (int i = 0; i < selectedRow.length; i++) {
-          for (int j = 0; j < selectedColumns.length; j++) {
-            selectedData = (String) jTable1.getValueAt(selectedRow[i], selectedColumns[j]);
-          }
-        }
+//        for (int i = 0; i < selectedRow.length; i++) {
+//          for (int j = 0; j < selectedColumns.length; j++) {
+//            selectedData = (String) jTable1.getValueAt(selectedRow[i], selectedColumns[j]);
+//          }
+//        }
         System.out.println("Selected: " + selectedData);
       }
     }

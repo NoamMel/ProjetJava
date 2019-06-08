@@ -176,6 +176,16 @@ public class Stockage {
         return d;
     }
     
+    public Evaluation getEvaluation(int id){
+        Evaluation d = new Evaluation();
+        for(int i = 0; i<evaluations.size(); i++){
+            if(evaluations.get(i).getID()==id){
+                d = evaluations.get(i);
+            }
+        }
+        return d;
+    }
+    
     public ArrayList<Etudiant> getListeEtudiants(){
         return etudiants;
     }

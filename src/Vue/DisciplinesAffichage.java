@@ -71,20 +71,21 @@ public class DisciplinesAffichage extends JFrame /*implements MouseListener*/{
         Connexion conn = new Connexion("ece","root","");
         
         RecupBDD recup = new RecupBDD(conn);
-//        recup.recupBulletin();
-        ArrayList<Bulletin> data = recup.getStockage().getListeBulletins();
+        recup.recupEnseignements();
+        ArrayList<Enseignement> data = recup.getStockage().getListeEnseignements();
 
        
-        Object col[] = {"N° du Bulletin", "Appreciation"};
-        DefaultTableModel tableModel = new DefaultTableModel(col, 2);
+        Object col[] = {"Discipline", "Classe", "Professeur"};
+        DefaultTableModel tableModel = new DefaultTableModel(col, 3);
         model.setColumnIdentifiers(col); 
         jTable1.setModel(model);
         scroll = new JScrollPane(jTable1);
         
         
         for (int i = 0; i < (data.size() ); i++) {
-          model.addRow(new Object[] { String.valueOf(data.get( i).getID()),
-              String.valueOf(data.get( i ).getAppreciation()) });
+          model.addRow(new Object[] { String.valueOf(data.get( i).getDiscipline()),
+                String.valueOf(data.get( i).getClasse().getID()),
+                String.valueOf(data.get( i).getProfesseur().getID())});
                   System.out.print(data.get(i));
         }
         

@@ -17,7 +17,6 @@ public class MiseAJour extends JFrame /*implements MouseListener*/{
   private JButton jButton1 = new JButton();
   private JButton button = new JButton();
   private JList jList1 = new JList<>();
-  private JList jList2 = new JList<>();
 
 
   @SuppressWarnings("unchecked")
@@ -52,18 +51,12 @@ public class MiseAJour extends JFrame /*implements MouseListener*/{
 
         jList1.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jList1.setModel(new javax.swing.AbstractListModel<String>() {
-            String[] strings = { "Niveaux", "Disciplines", "Evaluations" };
+            String[] strings = { "Etudiants", "Professeurs", "Disciplines", "Evaluations", "Bulletins" };
             public int getSize() { return strings.length; }
             public String getElementAt(int i) { return strings[i]; }
         });
         jScrollPane1.setViewportView(jList1);
 
-        jList2.setModel(new javax.swing.AbstractListModel<String>() {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
-            public int getSize() { return strings.length; }
-            public String getElementAt(int i) { return strings[i]; }
-        });
-        jScrollPane2.setViewportView(jList2);
 
         button.setText("Modifier");
 
@@ -119,14 +112,24 @@ public class MiseAJour extends JFrame /*implements MouseListener*/{
             System.out.println("Index Selected: " + index);
             String s = jList1.getSelectedValue().toString();
             System.out.println("Value Selected: " + s);
-            if(s == "Niveaux"){setVisible(false); try {
-                new MAJ_Niveaux();
-                } catch (SQLException ex) {
-                    Logger.getLogger(MiseAJour.class.getName()).log(Level.SEVERE, null, ex);
-                } catch (ClassNotFoundException ex) {
+            if(s == "Etudiants"){setVisible(false); try {
+                new MAJ_Eleves();
+                } catch (SQLException | ClassNotFoundException ex) {
                     Logger.getLogger(MiseAJour.class.getName()).log(Level.SEVERE, null, ex);
                 }
 }
+            if(s == "Evaluations"){setVisible(false); try {
+                new MAJ_Evaluations();
+                } catch (SQLException | ClassNotFoundException ex) {
+                    Logger.getLogger(MiseAJour.class.getName()).log(Level.SEVERE, null, ex);
+                }
+}            
+            if(s == "Professeurs"){setVisible(false); try {
+                new MAJ_Professeurs();
+                } catch (SQLException | ClassNotFoundException ex) {
+                    Logger.getLogger(MiseAJour.class.getName()).log(Level.SEVERE, null, ex);
+                }
+}            
         }
     }
   }

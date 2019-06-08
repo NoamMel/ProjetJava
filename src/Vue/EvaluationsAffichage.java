@@ -71,30 +71,25 @@ public class EvaluationsAffichage extends JFrame /*implements MouseListener*/{
         Connexion conn = new Connexion("ece","root","");
         
         RecupBDD recup = new RecupBDD(conn);
-//        recup.recupEvaluations();
-        ArrayList<Professeur> data = recup.getStockage().getListeProfesseurs();
+        recup.recupEvaluations();
+        ArrayList<Evaluation> data = recup.getStockage().getListeEvaluations();
 
        
-        Object col[] = {"Nom", "Prenom"};
-        DefaultTableModel tableModel = new DefaultTableModel(col, 2);
+        Object col[] = {"ID Evaluation", "Note", "Appreciation", "ID DetailBulletin"};
+        DefaultTableModel tableModel = new DefaultTableModel(col, 4);
         model.setColumnIdentifiers(col); 
         jTable1.setModel(model);
         scroll = new JScrollPane(jTable1);
         
         
         for (int i = 0; i < (data.size() ); i++) {
-          model.addRow(new Object[] { String.valueOf(data.get( i).getNom()),
-              String.valueOf(data.get( i ).getPrenom()) });
+          model.addRow(new Object[] { String.valueOf(data.get( i).getID()),
+              String.valueOf(data.get( i ).getNote()), 
+              String.valueOf(data.get( i).getAppreciation()),
+              String.valueOf(data.get( i).getDetailBulletin()), });
                   System.out.print(data.get(i));
         }
-        System.out.println("----------------------------------");
-        for(int i=0; i<data.size(); i++){
-        System.out.println(data.get(i).getNom());
-        }
         
-        jList2 = new JList<>(data.toArray());
-        jScrollPane2.setViewportView(jList2);
-
         button.setText("Rechercher");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
