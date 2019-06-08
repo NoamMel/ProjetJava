@@ -18,7 +18,9 @@ import java.util.Date;
 public class TestConnexion{
     
     public static void main(String args[]) throws SQLException, ClassNotFoundException{
-        Connexion conn = new Connexion("ECE","root","root");
+
+        Connexion conn = new Connexion("ECE","root","");
+
         //conn.ajouterTable("Personne");
         
 //        ArrayList<String> req = new ArrayList<>();
@@ -53,6 +55,5 @@ public class TestConnexion{
 //        recup.recupEtudiants();
 //        ArrayList<Etudiant> data = recup.getStockage().getListeEtudiants();
         
-    }
-    
+    } 
 }

@@ -48,7 +48,7 @@ public class Personne {
     public String getNom(){
         return nom;
     }
-    
+
     /** Getter qui permet de récupérer le prenom d'une personne
      * 
      * @return 

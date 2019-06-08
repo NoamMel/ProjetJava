@@ -63,7 +63,7 @@ public class Classe {
     public String getNom(){
         return nom;
     }
-    
+
     /** Getter qui permet de récupérer le niveau de la classe
      * 
      * @return 

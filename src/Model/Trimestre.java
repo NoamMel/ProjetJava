@@ -37,7 +37,7 @@ public class Trimestre {
         this.numero = numero;
         this.debut = debut;
         this.fin = fin;
-        this.anneeScolaire=anneeScolaire;
+        this.anneeScolaire = anneeScolaire;
         this.id =id;
     }
     
