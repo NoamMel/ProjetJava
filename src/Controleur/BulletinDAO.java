@@ -9,6 +9,7 @@ import java.sql.SQLException;
 import jdbcv2018.*;
 import java.sql.*;
 import Model.*;
+import java.util.ArrayList;
 /**
  * Source : https://coderanch.com/t/307373/databases/ID-INSERT-statement?fbclid=IwAR0cQA4Um8o9BLzXEe4nOTWy6Rim2DEbkWOrA9zdLxZcJ9o-BaefVM_hlvk
  * http://www.mysqltutorial.org/mysql-jdbc-insert/?fbclid=IwAR3SXqe3ACcS28iq9irutRPJvLRw3Mj9BYTFAtfMlQCD_42f04KwsA-k-A8
@@ -96,6 +97,11 @@ public class BulletinDAO extends DAO<Bulletin>
           {
             ex.printStackTrace();
           }
+      
+      // MAJ des données 
+      RecupBDD recup = new RecupBDD(conn);
+      try{recup.updateArray();}
+      catch(SQLException sql){}
     }
 
     /** Méthode qui permet de supprimer un bulletin dans la BDD
@@ -105,28 +111,36 @@ public class BulletinDAO extends DAO<Bulletin>
     public void delete(Bulletin b) 
     {
       RecupBDD recup = new RecupBDD(conn);
-      recup.recupDetails();
-      ArrayList<DetailBulletin> data = recup.getStockage().getListeDetails();
+      try{recup.updateArray();}
+      catch(SQLException sql){}
+      ArrayList<DetailBulletin> data = recup.getStock().getListeDetails();
       
       try {
-            for(int i=0; i<data.size(); i++)
+            if(!data.isEmpty())
             {
-              // Supprimer les DetailBulletin qui ont l'id du bulletin en clef étrangère
-              if(data.get(i).getBulletin().getID() == b.getID())
-              {
-                DAO detailsDAO = new DetailBulletinDAO(conn);
-                detailsDAO.delete(data.get(i));
-              }   
+                for(int i=0; i<data.size(); i++)
+                {
+                  // Supprimer les DetailBulletin qui ont l'id du bulletin en clef étrangère
+                  if(data.get(i).getBulletin().getID() == b.getID())
+                  {
+                    DAO detailsDAO = new DetailBulletinDAO(conn);
+                    detailsDAO.delete(data.get(i));
+                  }   
+                }
             }
             
             // Supprimer le Bulletin
             conn.getStmt().execute("DELETE FROM Bulletin WHERE ID_Bulletin = '"+b.getID()+"'");
           } 
       
-      catch (SQLException ex) 
+        catch (SQLException ex) 
           {
             ex.printStackTrace();
-          }
+          }  
+      
+      // MAJ des données 
+      try{recup.updateArray();}
+      catch(SQLException sql){}
     }
 
     /** Méthode update pour Evaluation
@@ -151,5 +165,10 @@ public class BulletinDAO extends DAO<Bulletin>
             {
               ex.printStackTrace();
             }
+        
+        // MAJ des données 
+        RecupBDD recup = new RecupBDD(conn);
+        try{recup.updateArray();}
+        catch(SQLException sql){}
     }
 }

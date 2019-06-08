@@ -54,4 +54,13 @@ public class DetailBulletin {
     {
         return bulletin;
     }
+    
+    /** Getter qui permet de récupérer l'enseignement
+     * 
+     * @return 
+     */
+    public Enseignement getEnseignement()
+    {
+        return enseignement;
+    }
 }

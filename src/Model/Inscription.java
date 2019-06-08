@@ -42,4 +42,12 @@ public class Inscription {
     {
         return id;
     }   
+    
+    public Etudiant getEtudiant(){
+        return etudiant;
+    }
+    
+    public Classe getClasse(){
+        return classe;
+    }
 }

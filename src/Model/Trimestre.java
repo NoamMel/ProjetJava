@@ -49,4 +49,20 @@ public class Trimestre {
     {
         return id;
     }
+    
+    public int getNumero(){
+        return numero;
+    }
+    
+    public int getDebut(){
+        return debut;
+    }
+    
+    public int getFin(){
+        return fin;
+    }
+    
+    public int getAnneeScolaire(){
+        return anneeScolaire;
+    }
 }

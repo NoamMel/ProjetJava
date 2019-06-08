@@ -8,6 +8,7 @@ import Model.*;
 import java.sql.SQLException;
 import jdbcv2018.*;
 import java.sql.*;
+import java.util.ArrayList;
 /**
  * Source : https://coderanch.com/t/307373/databases/ID-INSERT-statement?fbclid=IwAR0cQA4Um8o9BLzXEe4nOTWy6Rim2DEbkWOrA9zdLxZcJ9o-BaefVM_hlvk
  * http://www.mysqltutorial.org/mysql-jdbc-insert/?fbclid=IwAR3SXqe3ACcS28iq9irutRPJvLRw3Mj9BYTFAtfMlQCD_42f04KwsA-k-A8
@@ -96,8 +97,10 @@ public class DetailBulletinDAO extends DAO<DetailBulletin>
             ex.printStackTrace();
           }
 
-      // Creation d'une classe
-      DetailBulletin d = new DetailBulletin(appreciation,e,b,id);
+        // MAJ des données 
+        RecupBDD recup = new RecupBDD(conn);
+        try{recup.updateArray();}
+        catch(SQLException sql){}
     }
 
     /** Méthode qui permet de supprimer un DetailBulletin dans la BDD
@@ -108,18 +111,22 @@ public class DetailBulletinDAO extends DAO<DetailBulletin>
     public void delete(DetailBulletin d) 
     {
       RecupBDD recup = new RecupBDD(conn);
-      recup.recupEvaluations();
-      ArrayList<Evaluation> data = recup.getStockage().getListeEvaluations();
+      try{recup.updateArray();}
+      catch(SQLException sql){}
+      ArrayList<Evaluation> data = recup.getStock().getListeEvaluations();
       
       try {
-            for(int i=0; i<data.size(); i++)
+            if(!data.isEmpty())
             {
-              // Supprimer les evaluations qui ont l'id du Detailbulletin en clef étrangère
-              if(data.get(i).getDetailBulletin().getID() == d.getID())
-              {
-                DAO evaluationDAO = new EvaluationDAO(conn);
-                evaluationDAO.delete(data.get(i));
-              }   
+                for(int i=0; i<data.size(); i++)
+                {
+                  // Supprimer les evaluations qui ont l'id du Detailbulletin en clef étrangère
+                  if(data.get(i).getDetailBulletin().getID() == d.getID())
+                  {
+                    DAO evaluationDAO = new EvaluationDAO(conn);
+                    evaluationDAO.delete(data.get(i));
+                  }   
+                }
             }
             
             conn.getStmt().execute("DELETE FROM DetailBulletin WHERE ID_DetailBulletin = '"+d.getID()+"'");
@@ -128,6 +135,10 @@ public class DetailBulletinDAO extends DAO<DetailBulletin>
           {
             ex.printStackTrace();
           }
+      
+      // MAJ des données 
+      try{recup.updateArray();}
+      catch(SQLException sql){}
     }
 
     /** Méthode update pour Evaluation
@@ -155,5 +166,10 @@ public class DetailBulletinDAO extends DAO<DetailBulletin>
             {
               ex.printStackTrace();
             }
+        
+        // MAJ des données 
+        RecupBDD recup = new RecupBDD(conn);
+        try{recup.updateArray();}
+        catch(SQLException sql){}
     }
 }

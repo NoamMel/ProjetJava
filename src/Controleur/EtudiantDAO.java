@@ -102,9 +102,10 @@ public class EtudiantDAO extends DAO<Etudiant>
             ex.printStackTrace();
           }
 
-      // Creation d'un etudiant
-      Personne e = new Etudiant(nom,prenom,id);
-      System.out.println(e.getID());
+        // MAJ des données 
+        RecupBDD recup = new RecupBDD(conn);
+        try{recup.updateArray();}
+        catch(SQLException sql){}
     }
 
     /** Méthode qui permet de supprimer une personne dans la BDD
@@ -115,25 +116,34 @@ public class EtudiantDAO extends DAO<Etudiant>
     public void delete(Etudiant e) 
     {
       RecupBDD recup = new RecupBDD(conn);
-      recup.recupInscriptions();
-      ArrayList<Inscription> data = recup.getStockage().getListeInscriptions();
+      try{recup.updateArray();}
+      catch(SQLException sql){}
+      ArrayList<Inscription> data = recup.getStock().getListeInscriptions();
       
       try {
-            for(int i=0; i<data.size(); i++)
+            if(!data.isEmpty())
             {
-              // Supprimer les Inscription qui ont l'id de l'étudiant en clef étrangère
-              if(data.get(i).getEtudiant().getID() == e.getID())
-              {
-                DAO inscriptionDAO = new InscriptionDAO(conn);
-                InscriptionDAO.delete(data.get(i));
-              }   
+                for(int i=0; i<data.size(); i++)
+                {
+                  // Supprimer les Inscription qui ont l'id de l'étudiant en clef étrangère
+                  if(data.get(i).getEtudiant().getID() == e.getID())
+                  {
+                    DAO inscriptionDAO = new InscriptionDAO(conn);
+                    inscriptionDAO.delete(data.get(i));
+                  }   
+                }
             }
+ 
             conn.getStmt().execute("DELETE FROM Personne WHERE ID_Personne = '"+e.getID()+"'");
           } 
       catch (SQLException ex) 
           {
             ex.printStackTrace();
           }
+      
+      // MAJ des données 
+      try{recup.updateArray();}
+      catch(SQLException sql){}
     }
 
     /** Méthode update pour Evaluation
