@@ -1,3 +1,5 @@
+package Vue;
+
 import java.awt.event.*;
 import javax.swing.*;
 import java.io.IOException;
@@ -5,7 +7,8 @@ import javax.imageio.ImageIO;
 import java.io.File;
 import java.awt.*;
 import java.sql.SQLException;
-import Vue.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 
 public class Recherche extends JFrame /*implements MouseListener*/{
@@ -15,7 +18,6 @@ public class Recherche extends JFrame /*implements MouseListener*/{
   private JButton button = new JButton();
   private JList jList1 = new JList<>();
   private JList jList2 = new JList<>();
-
 
 
   @SuppressWarnings("unchecked")
@@ -110,15 +112,53 @@ public class Recherche extends JFrame /*implements MouseListener*/{
  }
 
     // @Override
-    class BoutoncListener implements ActionListener {
+    class BoutoncListener implements ActionListener{
     public void actionPerformed(ActionEvent e) {
         if (e.getActionCommand().equals("Rechercher")) {
             int index = jList1.getSelectedIndex();
             System.out.println("Index Selected: " + index);
             String s = jList1.getSelectedValue().toString();
             System.out.println("Value Selected: " + s);
-            if(s == "Niveaux"){
-                setVisible(false); new NiveauxAffichage();}
+            if(s == "Niveaux"){setVisible(false); try {
+                new NiveauxAffichage();
+                } catch (SQLException ex) {
+                    Logger.getLogger(Recherche.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (ClassNotFoundException ex2) {
+                    Logger.getLogger(Recherche.class.getName()).log(Level.SEVERE, null, ex2);
+                }
+}
+            if(s == "Enseignants"){setVisible(false); try {
+                new ProfesseursAffichage();
+                } catch (SQLException ex) {
+                    Logger.getLogger(Recherche.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (ClassNotFoundException ex2) {
+                    Logger.getLogger(Recherche.class.getName()).log(Level.SEVERE, null, ex2);
+                }
+}
+            if(s == "Classes"){setVisible(false); try {
+                new ClassesAffichage();
+                } catch (SQLException ex) {
+                    Logger.getLogger(Recherche.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (ClassNotFoundException ex2) {
+                    Logger.getLogger(Recherche.class.getName()).log(Level.SEVERE, null, ex2);
+                }
+}
+            if(s == "Eleves"){setVisible(false); try {
+                new ElevesAffichage();
+                } catch (SQLException ex) {
+                    Logger.getLogger(Recherche.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (ClassNotFoundException ex2) {
+                    Logger.getLogger(Recherche.class.getName()).log(Level.SEVERE, null, ex2);
+                }
+}
+            if(s == "Bulletins"){setVisible(false); try {
+                new BulletinsAffichage();
+                } catch (SQLException ex) {
+                    Logger.getLogger(Recherche.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (ClassNotFoundException ex2) {
+                    Logger.getLogger(Recherche.class.getName()).log(Level.SEVERE, null, ex2);
+                }
+}
         }
     }
   }

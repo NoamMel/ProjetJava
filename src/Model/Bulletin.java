@@ -44,4 +44,9 @@ public class Bulletin {
     {
         return id;
     }
+    
+    public String getAppreciation(){
+        return appreciation;
+    }
+
 }

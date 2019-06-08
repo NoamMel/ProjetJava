@@ -335,4 +335,44 @@ public class Connexion {
         // Retourner l'ArrayList
         return liste;
     }
+    
+    public ArrayList<ArrayList<Integer>> remplirInscription(String requete) throws SQLException {
+        // récupération de l'ordre de la requete
+        rset = stmt.executeQuery(requete);
+
+        // récupération du résultat de l'ordre
+        rsetMeta = rset.getMetaData();
+
+        // calcul du nombre de colonnes du resultat
+        int nbColonne = rsetMeta.getColumnCount();
+
+        // creation d'une ArrayList d'arraylist de Int
+        ArrayList<ArrayList<Integer>> liste;
+        liste = new ArrayList();
+
+        // tant qu'il reste une ligne 
+        while (rset.next()) {
+            
+            ArrayList<Integer> l = new ArrayList();
+            
+            int id; 
+            int etudiant;
+            int classe;
+
+            id = rset.getInt(1);
+            etudiant = rset.getInt(2);
+            classe = rset.getInt(3);
+            
+            l.add(id);
+            l.add(etudiant);
+            l.add(classe);
+            
+
+            // ajouter les champs de la ligne dans l'ArrayList
+            liste.add(l);
+        }
+
+        // Retourner l'ArrayList
+        return liste;
+    }
 }

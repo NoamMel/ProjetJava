@@ -70,5 +70,34 @@ public class RecupBDD {
         stock.setProfesseurs(professeurs);
     }
     
+    public void recupInscriptions() throws SQLException{
+        ArrayList<Inscription> inscriptions = new ArrayList();
+        ArrayList<ArrayList<Integer>> infos = new ArrayList();
+        String requete = "SELECT * FROM Inscription";
+        infos = conn.remplirInscription(requete);
+        
+        for(int i=0; i<infos.size(); i++){
+            int id = infos.get(i).get(0);
+            //Chercher etudiant
+            int etudiant = infos.get(i).get(1);
+            Etudiant e = new Etudiant();
+            e = stock.getEtudiant(etudiant);
+            //Chercher classe
+            int classe = infos.get(i).get(2);
+            Classe c = new Classe();
+            c = stock.getClasse(classe);
+            Inscription inscrip = new Inscription(e,c,id);
+            inscriptions.add(inscrip);
+        }        
+        stock.setInscriptions(inscriptions);
+        
+        /*for(int i = 0; i<inscriptions.size(); i++){
+            System.out.println(inscriptions.get(i).getID()+" "+inscriptions.get(i).getEtudiant().getNom()+" "+inscriptions.get(i).getClasse().getNom());
+        }*/
+    }
     
+    public Stockage getStockage()
+    {
+        return stock;
+    }
 }
