@@ -130,6 +130,18 @@ public class MiseAJour extends JFrame /*implements MouseListener*/{
                     Logger.getLogger(MiseAJour.class.getName()).log(Level.SEVERE, null, ex);
                 }
 }            
+            if(s == "Disciplines"){setVisible(false); try {
+                new MAJ_Disciplines();
+                } catch (SQLException | ClassNotFoundException ex) {
+                    Logger.getLogger(MiseAJour.class.getName()).log(Level.SEVERE, null, ex);
+                }
+}            
+            if(s == "Bulletins"){setVisible(false); try {
+                new MAJ_Bulletins();
+                } catch (SQLException | ClassNotFoundException ex) {
+                    Logger.getLogger(MiseAJour.class.getName()).log(Level.SEVERE, null, ex);
+                }
+}            
         }
     }
   }

@@ -14,6 +14,8 @@ import javax.swing.table.*;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import Controleur.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 
 public class EvaluationsAffichage extends JFrame /*implements MouseListener*/{
@@ -71,7 +73,7 @@ public class EvaluationsAffichage extends JFrame /*implements MouseListener*/{
         Connexion conn = new Connexion("ece","root","");
         
         RecupBDD recup = new RecupBDD(conn);
-        recup.recupEvaluations();
+        recup.updateArray();
         ArrayList<Evaluation> data = recup.getStockage().getListeEvaluations();
 
        
@@ -86,7 +88,7 @@ public class EvaluationsAffichage extends JFrame /*implements MouseListener*/{
           model.addRow(new Object[] { String.valueOf(data.get( i).getID()),
               String.valueOf(data.get( i ).getNote()), 
               String.valueOf(data.get( i).getAppreciation()),
-              String.valueOf(data.get( i).getDetailBulletin()), });
+              String.valueOf(data.get( i).getDetailBulletin().getID()), });
                   System.out.print(data.get(i));
         }
         
@@ -144,6 +146,48 @@ public class EvaluationsAffichage extends JFrame /*implements MouseListener*/{
             System.out.println("Index Selected: " + index);
             String s = jList1.getSelectedValue().toString();
             System.out.println("Value Selected: " + s);
+            if(s == "Niveaux"){setVisible(false); try {
+                new NiveauxAffichage();
+                } catch (SQLException | ClassNotFoundException ex) {
+                    Logger.getLogger(Recherche.class.getName()).log(Level.SEVERE, null, ex);
+                }
+}
+            if(s == "Enseignants"){setVisible(false); try {
+                new ProfesseursAffichage();
+                } catch (SQLException | ClassNotFoundException ex) {
+                    Logger.getLogger(Recherche.class.getName()).log(Level.SEVERE, null, ex);
+                }
+}
+            if(s == "Classes"){setVisible(false); try {
+                new ClassesAffichage();
+                } catch (SQLException | ClassNotFoundException ex) {
+                    Logger.getLogger(Recherche.class.getName()).log(Level.SEVERE, null, ex);
+                }
+}
+            if(s == "Eleves"){setVisible(false); try {
+                new ElevesAffichage();
+                } catch (SQLException | ClassNotFoundException ex) {
+                    Logger.getLogger(Recherche.class.getName()).log(Level.SEVERE, null, ex);
+                }
+}
+            if(s == "Bulletins"){setVisible(false); try {
+                new BulletinsAffichage();
+                } catch (SQLException | ClassNotFoundException ex) {
+                    Logger.getLogger(Recherche.class.getName()).log(Level.SEVERE, null, ex);
+                }
+}
+            if(s == "Disciplines"){setVisible(false); try {
+                new DisciplinesAffichage();
+                } catch (SQLException | ClassNotFoundException ex) {
+                    Logger.getLogger(Recherche.class.getName()).log(Level.SEVERE, null, ex);
+                }
+}
+            if(s == "Evaluations"){setVisible(false); try {
+                new EvaluationsAffichage();
+                } catch (SQLException | ClassNotFoundException ex) {
+                    Logger.getLogger(Recherche.class.getName()).log(Level.SEVERE, null, ex);
+                }
+}
         }
     }
   }

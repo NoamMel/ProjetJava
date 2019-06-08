@@ -18,6 +18,8 @@ import javax.swing.event.ListSelectionListener;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import Controleur.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 
 public class ElevesAffichage extends JFrame /*implements MouseListener*/{
@@ -171,16 +173,60 @@ public class ElevesAffichage extends JFrame /*implements MouseListener*/{
     class BoutoncListener implements ActionListener{
     public void actionPerformed(ActionEvent e) {
         if (e.getActionCommand().equals("Rechercher")) {
-//            int index = jList1.getSelectedIndex();
-//            System.out.println("Index Selected: " + index);
-//            String s = jList1.getSelectedValue().toString();
-//            System.out.println("Value Selected: " + s);
+            int index = jList1.getSelectedIndex();
+            System.out.println("Index Selected: " + index);
+            String s = jList1.getSelectedValue().toString();
+            System.out.println("Value Selected: " + s);
+            if(s == "Niveaux"){setVisible(false); try {
+                new NiveauxAffichage();
+                } catch (SQLException | ClassNotFoundException ex) {
+                    Logger.getLogger(Recherche.class.getName()).log(Level.SEVERE, null, ex);
+                }
+}
+            if(s == "Enseignants"){setVisible(false); try {
+                new ProfesseursAffichage();
+                } catch (SQLException | ClassNotFoundException ex) {
+                    Logger.getLogger(Recherche.class.getName()).log(Level.SEVERE, null, ex);
+                }
+}
+            if(s == "Classes"){setVisible(false); try {
+                new ClassesAffichage();
+                } catch (SQLException | ClassNotFoundException ex) {
+                    Logger.getLogger(Recherche.class.getName()).log(Level.SEVERE, null, ex);
+                }
+}
+            if(s == "Eleves"){setVisible(false); try {
+                new ElevesAffichage();
+                } catch (SQLException | ClassNotFoundException ex) {
+                    Logger.getLogger(Recherche.class.getName()).log(Level.SEVERE, null, ex);
+                }
+}
+            if(s == "Bulletins"){setVisible(false); try {
+                new BulletinsAffichage();
+                } catch (SQLException | ClassNotFoundException ex) {
+                    Logger.getLogger(Recherche.class.getName()).log(Level.SEVERE, null, ex);
+                }
+}
+            if(s == "Disciplines"){setVisible(false); try {
+                new DisciplinesAffichage();
+                } catch (SQLException | ClassNotFoundException ex) {
+                    Logger.getLogger(Recherche.class.getName()).log(Level.SEVERE, null, ex);
+                }
+}
+            if(s == "Evaluations"){setVisible(false); try {
+                new EvaluationsAffichage();
+                } catch (SQLException | ClassNotFoundException ex) {
+                    Logger.getLogger(Recherche.class.getName()).log(Level.SEVERE, null, ex);
+                }
+}
         }
+    }
+  }
         
        
         
-    }
-    }
+    
+    
     
 //    public void modif(){
 //    ListSelectionModel cellSelectionModel = jTable1.getSelectionModel();

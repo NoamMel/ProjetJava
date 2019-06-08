@@ -42,7 +42,6 @@ public class MAJ_Evaluations extends JFrame /*implements MouseListener*/{
   JTextField jTextField1 = new javax.swing.JTextField();
   JTextField jTextField2 = new javax.swing.JTextField();
   JTextField jTextField3 = new javax.swing.JTextField();
-  JTextField jTextField4 = new javax.swing.JTextField();
 
 
 
@@ -88,7 +87,7 @@ public class MAJ_Evaluations extends JFrame /*implements MouseListener*/{
 
         jList1.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jList1.setModel(new javax.swing.AbstractListModel<String>() {
-            String[] strings = { "Niveaux", "Disciplines", "Evaluations" };
+            String[] strings = { "Etudiants", "Professeurs", "Disciplines", "Evaluations", "Bulletins" };
             public int getSize() { return strings.length; }
             public String getElementAt(int i) { return strings[i]; }
         });
@@ -97,8 +96,8 @@ public class MAJ_Evaluations extends JFrame /*implements MouseListener*/{
         Connexion conn = new Connexion("ece","root","");
         
         RecupBDD recup = new RecupBDD(conn);
-        recup.recupEvaluations();
-        ArrayList<Evaluation> data = recup.getStockage().getListeEvaluations();
+recup.updateArray();
+ArrayList<Evaluation> data = recup.getStockage().getListeEvaluations();
 
        
         Object col[] = {"ID Evaluation", "Note", "Appreciation", "ID DetailBulletin"};
@@ -139,12 +138,6 @@ public class MAJ_Evaluations extends JFrame /*implements MouseListener*/{
             }
         });
         
-        jTextField4.setText("ID Bulletin");
-        jTextField4.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField1ActionPerformed(evt);
-            }
-        });
 
         jButton3.setText("Ajouter");
 
@@ -165,13 +158,11 @@ public class MAJ_Evaluations extends JFrame /*implements MouseListener*/{
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(100, 100, 100)
-                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(5,5,5)
-                        .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(5,5,5)
-                        .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(5,5,5)
-                        .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(5,5,5)
                         .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addContainerGap(100, Short.MAX_VALUE))
@@ -221,8 +212,7 @@ public class MAJ_Evaluations extends JFrame /*implements MouseListener*/{
                         .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(65, 65, 65))
         );
 
@@ -261,6 +251,36 @@ public class MAJ_Evaluations extends JFrame /*implements MouseListener*/{
             System.out.println("Index Selected: " + index);
             String s = jList1.getSelectedValue().toString();
             System.out.println("Value Selected: " + s);
+            if(s == "Etudiants"){setVisible(false); try {
+                new MAJ_Eleves();
+                } catch (SQLException | ClassNotFoundException ex) {
+                    Logger.getLogger(MiseAJour.class.getName()).log(Level.SEVERE, null, ex);
+                }
+}
+            if(s == "Evaluations"){setVisible(false); try {
+                new MAJ_Evaluations();
+                } catch (SQLException | ClassNotFoundException ex) {
+                    Logger.getLogger(MiseAJour.class.getName()).log(Level.SEVERE, null, ex);
+                }
+}            
+            if(s == "Professeurs"){setVisible(false); try {
+                new MAJ_Professeurs();
+                } catch (SQLException | ClassNotFoundException ex) {
+                    Logger.getLogger(MiseAJour.class.getName()).log(Level.SEVERE, null, ex);
+                }
+}            
+            if(s == "Disciplines"){setVisible(false); try {
+                new MAJ_Disciplines();
+                } catch (SQLException | ClassNotFoundException ex) {
+                    Logger.getLogger(MiseAJour.class.getName()).log(Level.SEVERE, null, ex);
+                }
+}            
+            if(s == "Bulletins"){setVisible(false); try {
+                new MAJ_Bulletins();
+                } catch (SQLException | ClassNotFoundException ex) {
+                    Logger.getLogger(MiseAJour.class.getName()).log(Level.SEVERE, null, ex);
+                }
+}            
         }
     }
   }
@@ -298,7 +318,6 @@ public void actionPerformed(ActionEvent e) {
 //        recup.updateArray();
 // Initialisation des variables dont tu aura besoin
         int id_detail=0;
-//        int id_bulletin=0;
         int note=0;
         String appreciation="";
         DetailBulletin db =new DetailBulletin();
@@ -307,7 +326,6 @@ public void actionPerformed(ActionEvent e) {
         
         // tu récupères les id que l'utilisateur entre
          id_detail = Integer.parseInt(jTextField1.getText());
-//         id_bulletin = Integer.parseInt(jTextField4.getText());
          note = Integer.parseInt(jTextField2.getText());
          appreciation = jTextField3.getText();
         
