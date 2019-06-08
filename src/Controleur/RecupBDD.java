@@ -252,4 +252,9 @@ public class RecupBDD {
         return stock;
     }
     
+    
+    public Stockage getStockage()
+    {
+        return stock;
+    }
 }

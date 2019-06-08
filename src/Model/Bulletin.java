@@ -65,4 +65,5 @@ public class Bulletin {
     public Inscription getInscription(){
         return inscription;
     }
+    
 }

@@ -26,6 +26,7 @@ public class Stockage {
     ArrayList<Evaluation> evaluations;
     ArrayList<String> disciplines;
     
+    
     /*public Stockage(ArrayList<String> niveauxMettre tous les ArrayList){
         this.niveaux = new ArrayList();
         this.niveaux = niveaux;
@@ -170,6 +171,16 @@ public class Stockage {
         for(int i = 0; i<details.size(); i++){
             if(details.get(i).getID()==id){
                 d = details.get(i);
+            }
+        }
+        return d;
+    }
+    
+    public Evaluation getEvaluation(int id){
+        Evaluation d = new Evaluation();
+        for(int i = 0; i<evaluations.size(); i++){
+            if(evaluations.get(i).getID()==id){
+                d = evaluations.get(i);
             }
         }
         return d;
