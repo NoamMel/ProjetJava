@@ -94,8 +94,10 @@ public class EvaluationDAO extends DAO<Evaluation>
             ex.printStackTrace();
           }
 
-      // Creation d'une classe
-      Evaluation e = new Evaluation(note, appreciation, d, id);
+        // MAJ des données 
+        RecupBDD recup = new RecupBDD(conn);
+        try{recup.updateArray();}
+        catch(SQLException sql){}
     }
 
     /** Méthode qui permet de supprimer une evaluation dans la BDD
@@ -113,6 +115,11 @@ public class EvaluationDAO extends DAO<Evaluation>
           {
             ex.printStackTrace();
           }
+      
+      // MAJ des données 
+      RecupBDD recup = new RecupBDD(conn);
+      try{recup.updateArray();}
+      catch(SQLException sql){}
     }
     
     /** Méthode update pour Bulletin et DetailBulletin
@@ -139,5 +146,10 @@ public class EvaluationDAO extends DAO<Evaluation>
           {
             ex.printStackTrace();
           }
+      
+        // MAJ des données 
+        RecupBDD recup = new RecupBDD(conn);
+        try{recup.updateArray();}
+        catch(SQLException sql){}
     }
 }

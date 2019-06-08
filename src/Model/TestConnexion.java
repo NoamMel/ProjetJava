@@ -58,21 +58,36 @@ public class TestConnexion extends JFrame{
 //        inscriptionDAO.delete(i);
 
            RecupBDD recup = new RecupBDD(conn);
-<<<<<<< HEAD
-
            recup.updateArray();
            
-           
-=======
+          
            recup.recupEtudiants();
            recup.recupProfesseurs();
            recup.recupNiveaux();
            recup.recupClasses();
            recup.recupInscriptions();
            
-           new TestConnexion();
-
->>>>>>> Noam
+           
+ 
+//        Etudiant e = new Etudiant("Meloul","Noam",1);
+//        Classe c = new Classe("TD10","ING3",2019,1);
+//        Inscription i = new Inscription(e,c,1);
+//        Trimestre t = new Trimestre(5, 1203, 3028, 2019, 1);
+//        Professeur p = new Professeur("r","r",4);
+//        Trimestre t = new Trimestre(5, 1203, 3028, 2019, 1);
+//        String a = "Coucou";
+//        String d = "anglais";
+//        Bulletin b = new Bulletin(a, t, i, 2);
+//        Enseignement en = new Enseignement(d, c, p, 1);
+//        DetailBulletin db = new DetailBulletin(a,en,b,2);
+//        Evaluation ev = new Evaluation(12,a,db,2);
+//        
+//        DAO classeDAO = new ClasseDAO(conn);
+//        classeDAO.delete(c);
+//       
+//        RecupBDD recup = new RecupBDD(conn);
+//        recup.updateArray();
+                
     }
     
       private JLabel jLabel1 = new JLabel();

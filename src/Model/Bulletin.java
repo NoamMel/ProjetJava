@@ -40,15 +40,23 @@ public class Bulletin {
         this.id = id;
     }  
     
+    /** Getter qui permet de récupérer l'id du Bulletin
+     * 
+     * @return 
+     */
     public int getID()
     {
         return id;
     }
     
+    public ArrayList<DetailBulletin> getDetailBulletins()
+    {
+        return detailBulletins;
+    }
+    
     public String getAppreciation(){
         return appreciation;
     }
-<<<<<<< HEAD
     
     public Trimestre getTrimestre(){
         return trimestre;
@@ -57,7 +65,5 @@ public class Bulletin {
     public Inscription getInscription(){
         return inscription;
     }
-=======
->>>>>>> Noam
-
+    
 }

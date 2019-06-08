@@ -375,7 +375,6 @@ public class Connexion {
         // Retourner l'ArrayList
         return liste;
     }
-<<<<<<< HEAD
     
     public ArrayList<ArrayList<Integer>> remplirTrimestre(String requete) throws SQLException {
         // récupération de l'ordre de la requete
@@ -563,6 +562,4 @@ public class Connexion {
         return liste;
     }
     
-=======
->>>>>>> Noam
 }

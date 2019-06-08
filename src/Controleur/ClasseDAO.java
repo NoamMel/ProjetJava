@@ -8,7 +8,7 @@ import Model.*;
 import java.sql.SQLException;
 import jdbcv2018.*;
 import java.sql.*;
-import java.util.Date;
+import java.util.ArrayList;
 /**
  * Source : https://coderanch.com/t/307373/databases/ID-INSERT-statement?fbclid=IwAR0cQA4Um8o9BLzXEe4nOTWy6Rim2DEbkWOrA9zdLxZcJ9o-BaefVM_hlvk
  * http://www.mysqltutorial.org/mysql-jdbc-insert/?fbclid=IwAR3SXqe3ACcS28iq9irutRPJvLRw3Mj9BYTFAtfMlQCD_42f04KwsA-k-A8
@@ -56,6 +56,25 @@ public class ClasseDAO extends DAO<Classe>
     @Override
     public void create(String appreciation, Enseignement e, Bulletin b){}
     
+    /** Méthode pour Evaluation
+     * @param note
+     * @param appreciation
+     * @param d */
+    @Override
+    public void create(int note, String appreciation, DetailBulletin d){}
+    
+    /** Méthode pour Enseignement
+     * @param discipline
+     * @param c
+     * @param p */
+    @Override
+    public void create(String discipline, Classe c, Professeur p){}
+    
+    /** Méthode qui permet d'ajouter une classe à la BDD
+     * @param nom
+     * @param niveau
+     * @param anneeScolaire 
+     */
     @Override
     public void create(String nom, String niveau, int anneeScolaire) 
     {
@@ -76,33 +95,74 @@ public class ClasseDAO extends DAO<Classe>
             ex.printStackTrace();
           }
 
-      // Creation d'une classe
-      Classe c = new Classe(nom,niveau,anneeScolaire,id);
+        // MAJ des données 
+        RecupBDD recup = new RecupBDD(conn);
+        try{recup.updateArray();}
+        catch(SQLException sql){}
     }
 
+    /** Méthode qui permet de supprimer une classe dans la BDD
+     * @param c 
+     */
     @Override
     public void delete(Classe c) 
     {
-      // Supression dans la BDD
+      RecupBDD recup = new RecupBDD(conn);
+      try{recup.updateArray();}
+      catch(SQLException sql){}
+      ArrayList<Enseignement> data1 = recup.getStock().getListeEnseignements();
+      ArrayList<Inscription> data2 = recup.getStock().getListeInscriptions();
+      
       try {
-              conn.getStmt().execute("DELETE FROM Classe WHERE ID_Classe = '"+c.getID()+"'");
+            if(!data1.isEmpty())
+            {
+                for(int i=0; i<data1.size(); i++)
+                {
+                  // Supprimer les DetailBulletin qui ont l'id du bulletin en clef étrangère
+                  if(data1.get(i).getClasse().getID() == c.getID())
+                  {
+                    DAO enseignementDAO = new EnseignementDAO(conn);
+                    enseignementDAO.delete(data1.get(i));
+                  }   
+                }
+            }
+            
+            if(!data2.isEmpty())
+            {
+                for(int i=0; i<data2.size(); i++)
+                {
+                  // Supprimer les DetailBulletin qui ont l'id du bulletin en clef étrangère
+                  if(data2.get(i).getClasse().getID() == c.getID())
+                  {
+                    DAO inscriptionDAO = new InscriptionDAO(conn);
+                    inscriptionDAO.delete(data2.get(i));
+                  }   
+                }
+            }
+            
+            conn.getStmt().execute("DELETE FROM Classe WHERE ID_Classe = '"+c.getID()+"'");
           } 
       catch (SQLException ex) 
           {
             ex.printStackTrace();
           }
+      
+      // MAJ des données 
+      try{recup.updateArray();}
+      catch(SQLException sql){}
     }
 
+    /** Méthode update pour Evaluation
+     * @param e
+     * @param note 
+     */
     @Override
-    public void update(Classe c) 
-    {
-  //    // Update dans la BDD
-  //    try {
-  //            conn.getStmt().execute("UPDATE FROM Personne WHERE ID_Personne = '"+e.getID()+"'");
-  //        } 
-  //    catch (SQLException ex) 
-  //        {
-  //          ex.printStackTrace();
-  //        }
-    }
+    public void update(Evaluation e, int note){}
+    
+    /** Méthode update pour Bulletin et DetailBulletin
+     * @param c
+     * @param appreciation 
+     */
+    @Override
+    public void update(Classe c, String appreciation){}          
 }

@@ -5,8 +5,6 @@
  */
 package Model;
 
-import java.util.Date;
-
 /**
  *
  * @author Emma
@@ -29,18 +27,24 @@ public class Trimestre {
     /** Constructeur surchargé
      * @param numero
      * @param debut
-     * @param fin */
-
+     * @param fin 
+     * @param anneeScolaire 
+     * @param id 
+     */
     public Trimestre(int numero, int debut, int fin, int anneeScolaire, int id)
     {
         this.anneeScolaire = anneeScolaire;
         this.numero = numero;
         this.debut = debut;
         this.fin = fin;
-        this.anneeScolaire=anneeScolaire;
+        this.anneeScolaire = anneeScolaire;
         this.id =id;
     }
     
+    /** Getter qui permet de récupérer l'id de trimestre
+     * 
+     * @return 
+     */
     public int getID()
     {
         return id;

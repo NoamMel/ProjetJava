@@ -23,7 +23,10 @@ public class Inscription {
     }
     
     /** Constructeur surchargé
-    */
+     * @param etudiant
+     * @param classe
+     * @param id
+     */
     public Inscription(Etudiant etudiant, Classe classe, int id)
     {
         this.etudiant = etudiant;
@@ -31,10 +34,14 @@ public class Inscription {
         this.id = id;
     }
     
+    /** Getter qui permet de récupérer l'id de l'inscription
+     * 
+     * @return 
+     */
     public int getID()
     {
         return id;
-    }
+    }   
     
     public Etudiant getEtudiant(){
         return etudiant;
@@ -43,5 +50,4 @@ public class Inscription {
     public Classe getClasse(){
         return classe;
     }
-    
 }
