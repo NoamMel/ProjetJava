@@ -58,12 +58,31 @@ public class BulletinDAO extends DAO<Bulletin>
     @Override
     public void create(String appreciation, Enseignement e, Bulletin b){}
     
+    /** Méthode pour Evaluation
+     * @param discipline
+     * @param c
+     * @param p */
+    @Override
+    public void create(String discipline, Classe c, Professeur p){}
+    
+    /** Méthode pour Enseignement
+     * @param note
+     * @param appreciation
+     * @param d */
+    @Override
+    public void create(int note, String appreciation, DetailBulletin d){}
+    
+    /** Méthode qui permet d'ajouter un Bulletin à la BDD
+     * @param appreciation
+     * @param t
+     * @param i 
+     */
     @Override
     public void create(String appreciation, Trimestre t, Inscription i) 
     {
       int id = 0;
 
-      String requete = "INSERT INTO Bulletin (Appreciation, ID_Trimestre, ID_Inscription) VALUES ('appreciation',"+t.getID()+"','"+i.getID()+"')";
+      String requete = "INSERT INTO Bulletin (Appreciation, ID_Trimestre, ID_Inscription) VALUES ('"+appreciation+"','"+t.getID()+"','"+i.getID()+"')";
 
       // Ajout dans la BDD
       try {
@@ -77,34 +96,60 @@ public class BulletinDAO extends DAO<Bulletin>
           {
             ex.printStackTrace();
           }
-
-      // Creation d'une classe
-      Bulletin b = new Bulletin(appreciation,t,i,id);
     }
 
+    /** Méthode qui permet de supprimer un bulletin dans la BDD
+     * @param b 
+     */
     @Override
     public void delete(Bulletin b) 
     {
-      // Supression dans la BDD
+      RecupBDD recup = new RecupBDD(conn);
+      recup.recupDetails();
+      ArrayList<DetailBulletin> data = recup.getStockage().getListeDetails();
+      
       try {
-              conn.getStmt().execute("DELETE FROM Bulletin WHERE ID_Bulletin = '"+b.getID()+"'");
+            for(int i=0; i<data.size(); i++)
+            {
+              // Supprimer les DetailBulletin qui ont l'id du bulletin en clef étrangère
+              if(data.get(i).getBulletin().getID() == b.getID())
+              {
+                DAO detailsDAO = new DetailBulletinDAO(conn);
+                detailsDAO.delete(data.get(i));
+              }   
+            }
+            
+            // Supprimer le Bulletin
+            conn.getStmt().execute("DELETE FROM Bulletin WHERE ID_Bulletin = '"+b.getID()+"'");
           } 
+      
       catch (SQLException ex) 
           {
             ex.printStackTrace();
           }
     }
 
+    /** Méthode update pour Evaluation
+     * @param e
+     * @param note 
+     */
     @Override
-    public void update(Bulletin b) 
+    public void update(Evaluation e, int note){}
+    
+    /** Méthode qui permet de modifier l'apprcaitaion d'un bulletin
+     * @param b
+     * @param appreciation 
+     */
+    @Override
+    public void update(Bulletin b, String appreciation) 
     {
-  //    // Update dans la BDD
-  //    try {
-  //            conn.getStmt().execute("UPDATE FROM Personne WHERE ID_Personne = '"+e.getID()+"'");
-  //        } 
-  //    catch (SQLException ex) 
-  //        {
-  //          ex.printStackTrace();
-  //        }
+        // Update dans la BDD
+        try {
+                conn.getStmt().execute("UPDATE Bulletin SET Appreciation = '"+appreciation+"' WHERE ID_Bulletin = '"+b.getID()+"'");
+            } 
+        catch (SQLException ex) 
+            {
+              ex.printStackTrace();
+            }
     }
 }

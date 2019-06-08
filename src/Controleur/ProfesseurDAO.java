@@ -8,7 +8,6 @@ import Model.*;
 import java.sql.SQLException;
 import jdbcv2018.*;
 import java.sql.*;
-import java.util.Date;
 /**
  * Source : https://coderanch.com/t/307373/databases/ID-INSERT-statement?fbclid=IwAR0cQA4Um8o9BLzXEe4nOTWy6Rim2DEbkWOrA9zdLxZcJ9o-BaefVM_hlvk
  * http://www.mysqltutorial.org/mysql-jdbc-insert/?fbclid=IwAR3SXqe3ACcS28iq9irutRPJvLRw3Mj9BYTFAtfMlQCD_42f04KwsA-k-A8
@@ -52,6 +51,20 @@ public class ProfesseurDAO extends DAO<Professeur>
     @Override
     public void create(String appreciation, Enseignement e, Bulletin b){}
     
+    /** Méthode pour Evaluation
+     * @param note
+     * @param appreciation
+     * @param d */
+    @Override
+    public void create(int note, String appreciation, DetailBulletin d){}
+    
+    /** Méthode pour Enseignement
+     * @param discipline
+     * @param c
+     * @param p */
+    @Override
+    public void create(String discipline, Classe c, Professeur p){}
+    
     @Override
     public void create(String nom, String prenom) 
     {
@@ -77,8 +90,20 @@ public class ProfesseurDAO extends DAO<Professeur>
     @Override
     public void delete(Professeur p) 
     {
-      // Supression dans la BDD
+      RecupBDD recup = new RecupBDD(conn);
+      recup.recupEnseignements();
+      ArrayList<Enseignement> data = recup.getStockage().getListeEnseignements();
+      
       try {
+            for(int i=0; i<data.size(); i++)
+            {
+              // Supprimer les DetailBulletin qui ont l'id du bulletin en clef étrangère
+              if(data.get(i).getProfesseur().getID() == b.getID())
+              {
+                DAO enseignementDAO = new EnseignementDAO(conn);
+                enseignementDAO.delete(data.get(i));
+              }   
+            }
               conn.getStmt().execute("DELETE FROM Personne WHERE ID_Personne = '"+p.getID()+"'");
           } 
       catch (SQLException ex) 
@@ -87,16 +112,19 @@ public class ProfesseurDAO extends DAO<Professeur>
           }
     }
 
+    /** Méthode update de Evaluation
+     * 
+     * @param e
+     * @param note 
+     */
     @Override
-    public void update(Professeur p) 
-    {
-  //    // Update dans la BDD
-  //    try {
-  //            conn.getStmt().execute("UPDATE FROM Personne WHERE ID_Personne = '"+e.getID()+"'");
-  //        } 
-  //    catch (SQLException ex) 
-  //        {
-  //          ex.printStackTrace();
-  //        }
-    }
+    public void update(Evaluation e, int note){}
+    
+    /** Méthode update de Bulletin et DetailBulletin
+     * 
+     * @param p
+     * @param appreciation 
+     */
+    @Override
+    public void update(Professeur p, String appreciation){}
 }
