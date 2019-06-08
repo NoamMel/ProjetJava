@@ -45,15 +45,13 @@ public class Evaluation {
         return id;
     }
     
-    public int getNote(){
-        return note;
-    }
-    
-    public String getAppreciation(){
-        return appreciation;
-    }
-    
-    public DetailBulletin getDetailBulletin(){
+    /** Getter qui permet de récupérer l'id de l'évaluation
+     * 
+     * @return 
+     */
+    public DetailBulletin getDetailBulletin()
+    {
         return detailBulletin;
     }
+    
 }

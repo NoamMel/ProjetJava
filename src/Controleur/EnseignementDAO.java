@@ -112,8 +112,20 @@ public class EnseignementDAO extends DAO<Enseignement>
     @Override
     public void delete(Enseignement e) 
     {
-      // Supression dans la BDD
+      RecupBDD recup = new RecupBDD(conn);
+      recup.recupDetails();
+      ArrayList<DetailBulletin> data = recup.getStockage().getListeDetails();
+      
       try {
+            for(int i=0; i<data.size(); i++)
+            {
+              // Supprimer les DetailBulletin qui ont l'id de l'enseignement en clef étrangère
+              if(data.get(i).getEnseignement().getID() == e.getID())
+              {
+                DAO detailsDAO = new DetailBulletinDAO(conn);
+                detailsDAO.delete(data.get(i));
+              }   
+            }
               conn.getStmt().execute("DELETE FROM Enseignement WHERE ID_Enseignement = '"+e.getID()+"'");
           } 
       catch (SQLException ex) 

@@ -27,17 +27,31 @@ public class DetailBulletin {
      * @param appreciation
      * @param enseignement
      * @param bulletin
-     * @param id */
+     * @param id 
+     */
     public DetailBulletin(String appreciation, Enseignement enseignement, Bulletin bulletin, int id)
     {
         this.appreciation = appreciation;
         this.enseignement = enseignement;
-        this.bulletin =  bulletin;
+        this.bulletin = bulletin;
         this.id = id;
     }
     
+    /** Getter qui permet de récupérer l'id du DetailBulletin
+     * 
+     * @return 
+     */
     public int getID()
     {
         return id;
+    }
+    
+    /** Getter qui permet de récupérer le bulletin
+     * 
+     * @return 
+     */
+    public Bulletin getBulletin()
+    {
+        return bulletin;
     }
 }

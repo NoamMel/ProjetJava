@@ -27,8 +27,10 @@ public class Professeur extends Personne {
     {
         super(Nom, Prenom, id);
     }
+    
 //    /** Constructeur surchargé
-//     * @param enseignements */
+//     * @param enseignements 
+//     */
 //    public Professeur(ArrayList<Enseignement> enseignements)
 //    {
 //        this.enseignements = new ArrayList();

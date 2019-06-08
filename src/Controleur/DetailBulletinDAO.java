@@ -8,7 +8,6 @@ import Model.*;
 import java.sql.SQLException;
 import jdbcv2018.*;
 import java.sql.*;
-import Model.*;
 /**
  * Source : https://coderanch.com/t/307373/databases/ID-INSERT-statement?fbclid=IwAR0cQA4Um8o9BLzXEe4nOTWy6Rim2DEbkWOrA9zdLxZcJ9o-BaefVM_hlvk
  * http://www.mysqltutorial.org/mysql-jdbc-insert/?fbclid=IwAR3SXqe3ACcS28iq9irutRPJvLRw3Mj9BYTFAtfMlQCD_42f04KwsA-k-A8
@@ -57,12 +56,32 @@ public class DetailBulletinDAO extends DAO<DetailBulletin>
     @Override
     public void create(String appreciation, Trimestre t, Inscription i){}
     
+    /** Méthode pour Evaluation
+     * @param note
+     * @param appreciation
+     * @param d */
+    @Override
+    public void create(int note, String appreciation, DetailBulletin d){}
+    
+    /** Méthode pour Enseignement
+     * @param discipline
+     * @param c
+     * @param p */
+    @Override
+    public void create(String discipline, Classe c, Professeur p){}
+    
+    /** Méthode qui permet d'ajouter un DetailBulletin à la BDD
+     * 
+     * @param appreciation
+     * @param e
+     * @param b 
+     */
     @Override
     public void create(String appreciation, Enseignement e, Bulletin b) 
     {
       int id = 0;
 
-      String requete = "INSERT INTO DetailBulletin (Appreciation, ID_Endeignement, ID_Bulletin) VALUES ('appreciation',"+e.getID()+"','"+b.getID()+"')";
+      String requete = "INSERT INTO DetailBulletin (Appreciation, ID_Enseignement, ID_Bulletin) VALUES ('"+appreciation+"','"+e.getID()+"','"+b.getID()+"')";
 
       // Ajout dans la BDD
       try {
@@ -81,12 +100,29 @@ public class DetailBulletinDAO extends DAO<DetailBulletin>
       DetailBulletin d = new DetailBulletin(appreciation,e,b,id);
     }
 
+    /** Méthode qui permet de supprimer un DetailBulletin dans la BDD
+     * 
+     * @param d 
+     */
     @Override
     public void delete(DetailBulletin d) 
     {
-      // Supression dans la BDD
+      RecupBDD recup = new RecupBDD(conn);
+      recup.recupEvaluations();
+      ArrayList<Evaluation> data = recup.getStockage().getListeEvaluations();
+      
       try {
-              conn.getStmt().execute("DELETE FROM DetailBulletin WHERE ID_DetailBulletin = '"+d.getID()+"'");
+            for(int i=0; i<data.size(); i++)
+            {
+              // Supprimer les evaluations qui ont l'id du Detailbulletin en clef étrangère
+              if(data.get(i).getDetailBulletin().getID() == d.getID())
+              {
+                DAO evaluationDAO = new EvaluationDAO(conn);
+                evaluationDAO.delete(data.get(i));
+              }   
+            }
+            
+            conn.getStmt().execute("DELETE FROM DetailBulletin WHERE ID_DetailBulletin = '"+d.getID()+"'");
           } 
       catch (SQLException ex) 
           {
@@ -94,16 +130,30 @@ public class DetailBulletinDAO extends DAO<DetailBulletin>
           }
     }
 
+    /** Méthode update pour Evaluation
+     * 
+     * @param e
+     * @param note 
+     */
     @Override
-    public void update(DetailBulletin d) 
+    public void update(Evaluation e, int note){}
+    
+    /** Méthode qui permet de modifier l'appréciation du Detailbulletin
+     * 
+     * @param d
+     * @param appreciation 
+     */
+    @Override
+    public void update(DetailBulletin d, String appreciation)
     {
-  //    // Update dans la BDD
-  //    try {
-  //            conn.getStmt().execute("UPDATE FROM Personne WHERE ID_Personne = '"+e.getID()+"'");
-  //        } 
-  //    catch (SQLException ex) 
-  //        {
-  //          ex.printStackTrace();
-  //        }
+        // Update dans la BDD
+        try {
+                conn.getStmt().execute("UPDATE DetailBulletin SET Appreciation = '"+appreciation+"' WHERE ID_DetailBulletin = '"+d.getID()+"'");
+                System.out.println("Ok3");
+            } 
+        catch (SQLException ex) 
+            {
+              ex.printStackTrace();
+            }
     }
 }
