@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : localhost:8889
--- Généré le :  mar. 04 juin 2019 à 12:31
+-- Généré le :  lun. 03 juin 2019 à 12:59
 -- Version du serveur :  5.7.25
 -- Version de PHP :  7.3.1
 
@@ -13,6 +13,25 @@ SET time_zone = "+00:00";
 --
 -- Base de données :  `ECE`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `AnneeScolaire`
+--
+
+CREATE TABLE `AnneeScolaire` (
+  `ID_AnneeScolaire` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Déchargement des données de la table `AnneeScolaire`
+--
+
+INSERT INTO `AnneeScolaire` (`ID_AnneeScolaire`) VALUES
+(1),
+(2),
+(3);
 
 -- --------------------------------------------------------
 
@@ -44,19 +63,19 @@ INSERT INTO `Bulletin` (`ID_Bulletin`, `Appreciation`, `ID_Trimestre`, `ID_Inscr
 CREATE TABLE `Classe` (
   `ID_Classe` int(11) NOT NULL,
   `Nom` varchar(25) NOT NULL,
-  `Niveau` varchar(25) NOT NULL,
-  `AnneeScolaire` int(11) NOT NULL
+  `ID_Niveau` int(11) NOT NULL,
+  `ID_AnneeScolaire` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Déchargement des données de la table `Classe`
 --
 
-INSERT INTO `Classe` (`ID_Classe`, `Nom`, `Niveau`, `AnneeScolaire`) VALUES
-(1, 'TD1', 'ING2', 2018),
-(2, 'TD2', 'ING2', 2018),
-(3, 'TD1', 'ING3', 2018),
-(4, 'TD1', 'ING2', 2019);
+INSERT INTO `Classe` (`ID_Classe`, `Nom`, `ID_Niveau`, `ID_AnneeScolaire`) VALUES
+(1, 'TD1', 1, 3),
+(2, 'TD2', 1, 3),
+(3, 'TD1', 2, 3),
+(4, 'TD1', 3, 2);
 
 -- --------------------------------------------------------
 
@@ -74,13 +93,36 @@ CREATE TABLE `DetailBulletin` (
 -- --------------------------------------------------------
 
 --
+-- Structure de la table `Discipline`
+--
+
+CREATE TABLE `Discipline` (
+  `ID_Discipline` int(11) NOT NULL,
+  `Nom` varchar(25) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Déchargement des données de la table `Discipline`
+--
+
+INSERT INTO `Discipline` (`ID_Discipline`, `Nom`) VALUES
+(1, 'Java'),
+(2, 'Anglais'),
+(3, 'Probas'),
+(4, 'Thermo'),
+(5, 'C++'),
+(6, 'Semi-conducteur');
+
+-- --------------------------------------------------------
+
+--
 -- Structure de la table `Enseignement`
 --
 
 CREATE TABLE `Enseignement` (
   `ID_Enseignement` int(11) NOT NULL,
-  `Discipline` varchar(25) NOT NULL,
   `ID_Classe` int(11) NOT NULL,
+  `ID_Discipline` int(11) NOT NULL,
   `ID_Personne` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -88,15 +130,15 @@ CREATE TABLE `Enseignement` (
 -- Déchargement des données de la table `Enseignement`
 --
 
-INSERT INTO `Enseignement` (`ID_Enseignement`, `Discipline`, `ID_Classe`, `ID_Personne`) VALUES
-(1, 'Anglais', 1, 4),
-(2, 'Anglais', 2, 4),
-(3, 'Probas', 2, 5),
-(4, 'Electronique', 2, 6),
-(5, 'Java', 1, 7),
-(6, 'Anglais', 3, 4),
-(7, 'Probas', 4, 5),
-(8, 'Thermo', 3, 14);
+INSERT INTO `Enseignement` (`ID_Enseignement`, `ID_Classe`, `ID_Discipline`, `ID_Personne`) VALUES
+(1, 1, 2, 4),
+(2, 2, 2, 4),
+(3, 2, 3, 5),
+(4, 2, 6, 6),
+(5, 1, 1, 7),
+(6, 3, 2, 4),
+(7, 4, 3, 5),
+(8, 3, 4, 14);
 
 -- --------------------------------------------------------
 
@@ -141,6 +183,26 @@ INSERT INTO `Inscription` (`ID_Inscription`, `ID_Personne`, `ID_Classe`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Structure de la table `Niveau`
+--
+
+CREATE TABLE `Niveau` (
+  `ID_Niveau` int(11) NOT NULL,
+  `Nom` varchar(25) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Déchargement des données de la table `Niveau`
+--
+
+INSERT INTO `Niveau` (`ID_Niveau`, `Nom`) VALUES
+(1, 'ING1'),
+(2, 'ING2'),
+(3, 'ING3');
+
+-- --------------------------------------------------------
+
+--
 -- Structure de la table `Personne`
 --
 
@@ -180,24 +242,30 @@ INSERT INTO `Personne` (`ID_Personne`, `Nom`, `Prenom`, `Type`) VALUES
 CREATE TABLE `Trimestre` (
   `ID_Trimestre` int(11) NOT NULL,
   `Numero` int(11) NOT NULL,
-  `Debut` int(11) NOT NULL,
-  `Fin` int(11) NOT NULL,
-  `AnneeScolaire` int(11) NOT NULL
+  `Debut` date NOT NULL,
+  `Fin` date NOT NULL,
+  `ID_AnneeScolaire` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Déchargement des données de la table `Trimestre`
 --
 
-INSERT INTO `Trimestre` (`ID_Trimestre`, `Numero`, `Debut`, `Fin`, `AnneeScolaire`) VALUES
-(1, 1, 20180901, 20181130, 2018),
-(2, 2, 20191201, 20200229, 2019),
-(3, 3, 20190301, 20190531, 2018),
-(4, 1, 20180901, 20191130, 2018);
+INSERT INTO `Trimestre` (`ID_Trimestre`, `Numero`, `Debut`, `Fin`, `ID_AnneeScolaire`) VALUES
+(1, 1, '2018-09-01', '2019-11-30', 3),
+(2, 2, '2019-12-01', '2020-02-29', 3),
+(3, 3, '2019-03-01', '2019-05-31', 3),
+(4, 1, '2018-09-01', '2019-11-30', 2);
 
 --
 -- Index pour les tables déchargées
 --
+
+--
+-- Index pour la table `AnneeScolaire`
+--
+ALTER TABLE `AnneeScolaire`
+  ADD PRIMARY KEY (`ID_AnneeScolaire`);
 
 --
 -- Index pour la table `Bulletin`
@@ -211,7 +279,9 @@ ALTER TABLE `Bulletin`
 -- Index pour la table `Classe`
 --
 ALTER TABLE `Classe`
-  ADD PRIMARY KEY (`ID_Classe`);
+  ADD PRIMARY KEY (`ID_Classe`),
+  ADD KEY `ID_Niveau` (`ID_Niveau`),
+  ADD KEY `ID_AnneeScolaire` (`ID_AnneeScolaire`);
 
 --
 -- Index pour la table `DetailBulletin`
@@ -222,11 +292,18 @@ ALTER TABLE `DetailBulletin`
   ADD KEY `ID_Bulletin` (`ID_Bulletin`) USING BTREE;
 
 --
+-- Index pour la table `Discipline`
+--
+ALTER TABLE `Discipline`
+  ADD PRIMARY KEY (`ID_Discipline`);
+
+--
 -- Index pour la table `Enseignement`
 --
 ALTER TABLE `Enseignement`
   ADD PRIMARY KEY (`ID_Enseignement`),
   ADD KEY `ID_Classe` (`ID_Classe`) USING BTREE,
+  ADD KEY `ID_Discipline` (`ID_Discipline`) USING BTREE,
   ADD KEY `ID_Personne` (`ID_Personne`) USING BTREE;
 
 --
@@ -246,6 +323,12 @@ ALTER TABLE `Inscription`
   ADD KEY `ID_Personne` (`ID_Personne`);
 
 --
+-- Index pour la table `Niveau`
+--
+ALTER TABLE `Niveau`
+  ADD PRIMARY KEY (`ID_Niveau`);
+
+--
 -- Index pour la table `Personne`
 --
 ALTER TABLE `Personne`
@@ -255,11 +338,18 @@ ALTER TABLE `Personne`
 -- Index pour la table `Trimestre`
 --
 ALTER TABLE `Trimestre`
-  ADD PRIMARY KEY (`ID_Trimestre`);
+  ADD PRIMARY KEY (`ID_Trimestre`),
+  ADD KEY `ID_AnneeScolaire` (`ID_AnneeScolaire`);
 
 --
 -- AUTO_INCREMENT pour les tables déchargées
 --
+
+--
+-- AUTO_INCREMENT pour la table `AnneeScolaire`
+--
+ALTER TABLE `AnneeScolaire`
+  MODIFY `ID_AnneeScolaire` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT pour la table `Bulletin`
@@ -280,6 +370,12 @@ ALTER TABLE `DetailBulletin`
   MODIFY `ID_DetailBulletin` int(11) NOT NULL AUTO_INCREMENT;
 
 --
+-- AUTO_INCREMENT pour la table `Discipline`
+--
+ALTER TABLE `Discipline`
+  MODIFY `ID_Discipline` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+
+--
 -- AUTO_INCREMENT pour la table `Enseignement`
 --
 ALTER TABLE `Enseignement`
@@ -296,6 +392,12 @@ ALTER TABLE `Evaluation`
 --
 ALTER TABLE `Inscription`
   MODIFY `ID_Inscription` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+
+--
+-- AUTO_INCREMENT pour la table `Niveau`
+--
+ALTER TABLE `Niveau`
+  MODIFY `ID_Niveau` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT pour la table `Personne`
@@ -321,6 +423,13 @@ ALTER TABLE `Bulletin`
   ADD CONSTRAINT `ID_Trimestre_Bulletin` FOREIGN KEY (`ID_Trimestre`) REFERENCES `Trimestre` (`ID_Trimestre`);
 
 --
+-- Contraintes pour la table `Classe`
+--
+ALTER TABLE `Classe`
+  ADD CONSTRAINT `ID_AnneeScolaire_Classe` FOREIGN KEY (`ID_AnneeScolaire`) REFERENCES `AnneeScolaire` (`ID_AnneeScolaire`),
+  ADD CONSTRAINT `ID_Niveau_Classe` FOREIGN KEY (`ID_Niveau`) REFERENCES `Niveau` (`ID_Niveau`);
+
+--
 -- Contraintes pour la table `DetailBulletin`
 --
 ALTER TABLE `DetailBulletin`
@@ -332,6 +441,7 @@ ALTER TABLE `DetailBulletin`
 --
 ALTER TABLE `Enseignement`
   ADD CONSTRAINT `ID_Classe_Enseignement` FOREIGN KEY (`ID_Classe`) REFERENCES `Classe` (`ID_Classe`),
+  ADD CONSTRAINT `ID_Discipline_Enseignement` FOREIGN KEY (`ID_Discipline`) REFERENCES `Discipline` (`ID_Discipline`),
   ADD CONSTRAINT `ID_Personne_Enseignement` FOREIGN KEY (`ID_Personne`) REFERENCES `Personne` (`ID_Personne`);
 
 --
@@ -346,3 +456,9 @@ ALTER TABLE `Evaluation`
 ALTER TABLE `Inscription`
   ADD CONSTRAINT `ID_Classe_Inscription` FOREIGN KEY (`ID_Classe`) REFERENCES `Classe` (`ID_Classe`),
   ADD CONSTRAINT `ID_Personne_Inscription` FOREIGN KEY (`ID_Personne`) REFERENCES `Personne` (`ID_Personne`);
+
+--
+-- Contraintes pour la table `Trimestre`
+--
+ALTER TABLE `Trimestre`
+  ADD CONSTRAINT `ID_AnneeScolaire_Trimestre` FOREIGN KEY (`ID_AnneeScolaire`) REFERENCES `AnneeScolaire` (`ID_AnneeScolaire`);
