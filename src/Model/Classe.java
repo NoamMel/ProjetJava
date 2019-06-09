@@ -35,7 +35,7 @@ public class Classe {
     
     /** Getter qui permet de récupérer l'id de la classe
      * 
-     * @return 
+     * @return id : entier de l'id
      */
     public int getID()
     {
@@ -44,7 +44,7 @@ public class Classe {
     
     /** Getter qui permet de récupérer le nom de la classe
      * 
-     * @return 
+     * @return nom : chaine de caractères du nom de la classe
      */
     public String getNom(){
         return nom;
@@ -52,7 +52,7 @@ public class Classe {
 
     /** Getter qui permet de récupérer le niveau de la classe
      * 
-     * @return 
+     * @return niveau : chaine de caractère du niveau
      */
     public String getNiveau(){
         return niveau;
@@ -60,7 +60,7 @@ public class Classe {
     
     /** Getter qui permet de récupérer l'annee scolaire de la classe
      * 
-     * @return 
+     * @return anneeScolaire : entier de l'annee scolaire
      */
     public int getAnneeScolaire(){
         return anneeScolaire;

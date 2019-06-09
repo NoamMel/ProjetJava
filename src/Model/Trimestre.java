@@ -43,7 +43,7 @@ public class Trimestre {
     
     /** Getter qui permet de récupérer l'id de trimestre
      * 
-     * @return 
+     * @return id : entier de l'id trimestre
      */
     public int getID()
     {
@@ -52,7 +52,7 @@ public class Trimestre {
     
     /** Getter qui permet de récupérer le numéro
      * 
-     * @return 
+     * @return numero : entier du numero
      */
     public int getNumero(){
         return numero;
@@ -60,7 +60,7 @@ public class Trimestre {
     
     /** Getter qui permet de récupérer le début
      * 
-     * @return 
+     * @return debut : entier de date de debut
      */
     public int getDebut(){
         return debut;
@@ -68,7 +68,7 @@ public class Trimestre {
     
     /** Getter qui permet de récupérer la fin
      * 
-     * @return 
+     * @return fin : entier de date de fin
      */
     public int getFin(){
         return fin;
@@ -76,7 +76,7 @@ public class Trimestre {
     
     /** Getter qui permet de récupérer l'annee scolaire
      * 
-     * @return 
+     * @return anneeScolaire : entier de l'annee scolaire
      */
     public int getAnneeScolaire(){
         return anneeScolaire;

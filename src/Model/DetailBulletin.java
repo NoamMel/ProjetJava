@@ -39,7 +39,7 @@ public class DetailBulletin {
     
     /** Getter qui permet de récupérer l'id du DetailBulletin
      * 
-     * @return 
+     * @return id : entier de l'id
      */
     public int getID()
     {
@@ -48,7 +48,7 @@ public class DetailBulletin {
     
     /** Getter qui permet de récupérer le bulletin
      * 
-     * @return 
+     * @return bulletin : bulletin dans lequel apparait le detail bulletin
      */
     public Bulletin getBulletin()
     {
@@ -57,7 +57,7 @@ public class DetailBulletin {
     
     /** Getter qui permet de récupérer l'enseignement
      * 
-     * @return 
+     * @return Enseignement : enseignement du detail bulletin
      */
     public Enseignement getEnseignement()
     {

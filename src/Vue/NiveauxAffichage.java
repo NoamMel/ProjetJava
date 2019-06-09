@@ -1,8 +1,6 @@
 package Vue;
 
 
-import jdbcv2018.*;
-
 import java.awt.event.*;
 import javax.swing.*;
 import javax.swing.table.*;

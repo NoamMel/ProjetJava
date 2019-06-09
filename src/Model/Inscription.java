@@ -36,7 +36,7 @@ public class Inscription {
     
     /** Getter qui permet de récupérer l'id de l'inscription
      * 
-     * @return 
+     * @return id : entier de l'id
      */
     public int getID()
     {
@@ -45,7 +45,7 @@ public class Inscription {
     
     /** Getter qui pemret de récupérer l'étudiant
      * 
-     * @return 
+     * @return etudiant : etudiant de l'inscription
      */
     public Etudiant getEtudiant(){
         return etudiant;
@@ -53,7 +53,7 @@ public class Inscription {
     
     /** Getter qui permet de récupérer la classe
      * 
-     * @return 
+     * @return classe : classe dans l'etudiant est inscrit
      */
     public Classe getClasse(){
         return classe;

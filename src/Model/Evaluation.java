@@ -38,16 +38,16 @@ public class Evaluation {
     
     /** Getter qui permet de récupérer l'id de l'évaluation
      * 
-     * @return 
+     * @return id : entier de l'id
      */
     public int getID()
     {
         return id;
     }
     
-    /** Getter qui permet de récupérer l'id de l'évaluation
+    /** Getter qui permet de récupérer le detail bulletin de l'evaluation
      * 
-     * @return 
+     * @return detailBulletin : detail bulletin de l'evaluation
      */
     public DetailBulletin getDetailBulletin()
     {
@@ -56,7 +56,7 @@ public class Evaluation {
     
     /** Getter qui permet de récupérer la note
      * 
-     * @return 
+     * @return note : entier de la note
      */
     public int getNote(){
         return note;
@@ -64,7 +64,7 @@ public class Evaluation {
     
     /** Getter qui permet de récupérer l'appréciation
      * 
-     * @return 
+     * @return appreciation : chaine de caractères de l'appréciation
      */
     public String getAppreciation(){
         return appreciation;

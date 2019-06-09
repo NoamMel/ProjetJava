@@ -13,7 +13,7 @@ import javax.swing.event.ListSelectionListener;
 import javax.swing.ListSelectionModel;
 
 import javax.swing.table.DefaultTableModel;
-import jdbcv2018.Connexion;
+
 
 
 public class MAJ_Professeurs extends JFrame {

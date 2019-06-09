@@ -38,7 +38,7 @@ public class Bulletin {
     
     /** Getter qui permet de récupérer l'id du Bulletin
      * 
-     * @return 
+     * @return id : entier de l'id
      */
     public int getID()
     {
@@ -47,7 +47,7 @@ public class Bulletin {
     
     /** Getter qui permet de récupérer l'appréciation
      * 
-     * @return 
+     * @return appreciation : chaine de caractères de l'appreciation
      */
     public String getAppreciation(){
         return appreciation;
@@ -55,7 +55,7 @@ public class Bulletin {
     
     /** Getter qui permet de récupérer le trimestre
      * 
-     * @return 
+     * @return trimestre : trimestre du bulletin
      */
     public Trimestre getTrimestre(){
         return trimestre;
@@ -63,7 +63,7 @@ public class Bulletin {
     
     /** Getter qui permet de récupérer l'inscription
      * 
-     * @return 
+     * @return inscription : inscription pour retrouver l'etudiant du bulletin
      */
     public Inscription getInscription(){
         return inscription;

@@ -14,9 +14,9 @@ import java.util.ArrayList;
 
 /**
  * 
- * Connexion a votre BDD locale ou à distance sur le serveur de l'ECE via le tunnel SSH
+ * Connexion à la BDD et recuperation des donnees de la BDD
  * 
- * @author segado
+ * @author segado & margo
  */
 public class Connexion {
 
@@ -28,18 +28,6 @@ public class Connexion {
     private Statement stmt;
     private ResultSet rset;
     private ResultSetMetaData rsetMeta;
-    /**
-     * ArrayList public pour les tables
-     */
-    public ArrayList<String> tables = new ArrayList<>();
-    /**
-     * ArrayList public pour les requêtes de sélection
-     */
-    public ArrayList<String> requetes = new ArrayList<>();
-    /**
-     * ArrayList public pour les requêtes de MAJ
-     */
-    public ArrayList<String> requetesMaj = new ArrayList<>();
 
     /**
      * Constructeur avec 3 paramètres : nom, login et password de la BDD locale
@@ -55,7 +43,7 @@ public class Connexion {
         Class.forName("com.mysql.jdbc.Driver");
 
         // url de connexion "jdbc:mysql://localhost:3305/usernameECE"
-        String urlDatabase = "jdbc:mysql://localhost:8889/" + nameDatabase;
+        String urlDatabase = "jdbc:mysql://localhost/" + nameDatabase;
 
         //création d'une connexion JDBC à la base 
         conn = DriverManager.getConnection(urlDatabase, loginDatabase, passwordDatabase);
@@ -64,35 +52,6 @@ public class Connexion {
         stmt = conn.createStatement();
         
         System.out.println("Connexion ok");
-    }
-
-    /**
-     * Méthode qui ajoute la table en parametre dans son ArrayList
-     *
-     * @param table
-     */
-    public void ajouterTable(String table) {
-        tables.add(table);
-    }
-
-    /**
-     * Méthode qui ajoute la requete de selection en parametre dans son
-     * ArrayList
-     *
-     * @param requete
-     */
-    public void ajouterRequete(String requete) {
-        requetes.add(requete);
-    }
-
-    /**
-     * Méthode qui ajoute la requete de MAJ en parametre dans son
-     * ArrayList
-     *
-     * @param requete
-     */
-    public void ajouterRequeteMaj(String requete) {
-        requetesMaj.add(requete);
     }
 
     /**
@@ -181,18 +140,31 @@ public class Connexion {
         stmt.executeUpdate(requeteMaj);
     }
     
+    /**
+     * Getter du statement
+     * @return stmt : statement
+     */
     public Statement getStmt()
     {
         return stmt;
     }
     
+    /**
+     * Getter de la connexion
+     * @return conn : connection
+     */
     public Connection getConn()
     {
         return conn;
     }
     
     
-    
+    /**
+     * Methode qui permet de recuperer dans la BDD les infos pour les etudiants
+     * @param requete
+     * @return ArrayList de donnees pour les etudiants
+     * @throws SQLException 
+     */
     public ArrayList remplirEtudiant(String requete) throws SQLException {
         // récupération de l'ordre de la requete
         rset = stmt.executeQuery(requete);
@@ -232,6 +204,12 @@ public class Connexion {
         return liste;
     }
     
+    /**
+     * Methode qui permet de recuperer dans la BDD les infos pour les professeurs
+     * @param requete
+     * @return ArrayList de donnees pour les professeurs
+     * @throws SQLException 
+     */
     public ArrayList remplirProfesseur(String requete) throws SQLException {
         // récupération de l'ordre de la requete
         rset = stmt.executeQuery(requete);
@@ -271,7 +249,12 @@ public class Connexion {
         return liste;
     }
     
-    
+    /**
+     * Methode qui permet de recuperer dans la BDD les infos pour les niveaux
+     * @param requete
+     * @return ArrayList de donnees pour les niveaux
+     * @throws SQLException 
+     */
     public ArrayList remplirNiveaux(String requete) throws SQLException {
         // récupération de l'ordre de la requete
         rset = stmt.executeQuery(requete);
@@ -299,6 +282,12 @@ public class Connexion {
         return liste;
     }
     
+    /**
+     * Methode qui permet de recuperer dans la BDD les infos pour les classes
+     * @param requete
+     * @return ArrayList de donnees pour les classes
+     * @throws SQLException 
+     */
     public ArrayList remplirClasse(String requete) throws SQLException {
         // récupération de l'ordre de la requete
         rset = stmt.executeQuery(requete);
@@ -336,6 +325,12 @@ public class Connexion {
         return liste;
     }
     
+    /**
+     * Methode qui permet de recuperer dans la BDD les infos pour les inscriptions
+     * @param requete
+     * @return ArrayList de donnees pour les inscriptions
+     * @throws SQLException 
+     */
     public ArrayList<ArrayList<Integer>> remplirInscription(String requete) throws SQLException {
         // récupération de l'ordre de la requete
         rset = stmt.executeQuery(requete);
@@ -376,6 +371,12 @@ public class Connexion {
         return liste;
     }
     
+    /**
+     * Methode qui permet de recuperer dans la BDD les infos pour les trimestres
+     * @param requete
+     * @return ArrayList de donnees pour les trimestres
+     * @throws SQLException 
+     */
     public ArrayList<ArrayList<Integer>> remplirTrimestre(String requete) throws SQLException {
         // récupération de l'ordre de la requete
         rset = stmt.executeQuery(requete);
@@ -422,6 +423,12 @@ public class Connexion {
         return liste;
     }
     
+    /**
+     * Methode qui permet de recuperer dans la BDD les infos pour les chaines de caracteres
+     * @param requete
+     * @return ArrayList de donnees pour les chaines de caractères (string)
+     * @throws SQLException 
+     */
     public ArrayList<String> recupString(String requete) throws SQLException{
         // récupération de l'ordre de la requete
         rset = stmt.executeQuery(requete);
@@ -442,6 +449,12 @@ public class Connexion {
         return liste;
     }
     
+    /**
+     * Methode qui permet de recuperer dans la BDD les infos pour les bulletins
+     * @param requete
+     * @return ArrayList de donnees pour les bulletins
+     * @throws SQLException 
+     */
     public ArrayList<ArrayList<Integer>> remplirBulletin(String requete) throws SQLException {
         // récupération de l'ordre de la requete
         rset = stmt.executeQuery(requete);
@@ -482,6 +495,12 @@ public class Connexion {
         return liste;
     }
     
+    /**
+     * Methode qui permet de recuperer dans la BDD les infos pour les enseignements
+     * @param requete
+     * @return ArrayList de donnees pour les enseignements
+     * @throws SQLException 
+     */
     public ArrayList<ArrayList<Integer>> remplirEnseignement(String requete) throws SQLException {
         // récupération de l'ordre de la requete
         rset = stmt.executeQuery(requete);
@@ -522,6 +541,12 @@ public class Connexion {
         return liste;
     }
     
+    /**
+     * Methode qui permet de recuperer dans la BDD les infos pour les evaluations
+     * @param requete
+     * @return ArrayList de donnees pour les evaluations
+     * @throws SQLException 
+     */
     public ArrayList<ArrayList<Integer>> remplirEvaluation(String requete) throws SQLException {
         // récupération de l'ordre de la requete
         rset = stmt.executeQuery(requete);

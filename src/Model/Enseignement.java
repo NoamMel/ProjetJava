@@ -38,7 +38,7 @@ public class Enseignement {
     
     /** Getter qui permet de récupérer l'id de l'enseignement
      * 
-     * @return 
+     * @return id : entier de l'id
      */
     public int getID()
     {
@@ -47,7 +47,7 @@ public class Enseignement {
     
     /** Getter qui permet de récupérer la discipline
      * 
-     * @return 
+     * @return discipline : chaine de caracteres de la discipline
      */
     public String getDiscipline(){
         return discipline;
@@ -55,7 +55,7 @@ public class Enseignement {
     
     /** Getter qui permet de récupérer la classe
      * 
-     * @return 
+     * @return classe : classe de l'enseignement
      */
     public Classe getClasse(){
         return classe;
@@ -63,7 +63,7 @@ public class Enseignement {
     
     /** Getter qui permet de récupérer le professeur
      * 
-     * @return 
+     * @return professeur : professeur de l'enseignement
      */
     public Professeur getProfesseur(){
         return professeur;

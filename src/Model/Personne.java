@@ -34,7 +34,7 @@ public class Personne {
     
     /** Getter qui permet de récupérer l'id d'une personne
      * 
-     * @return 
+     * @return id : entier de l'id
      */
     public int getID()
     {
@@ -43,7 +43,7 @@ public class Personne {
     
     /** Getter qui permet de récupérer le nom d'une personne
      * 
-     * @return 
+     * @return nom : chaine de caractères du nom de la personne
      */
     public String getNom()
     {
@@ -52,7 +52,7 @@ public class Personne {
 
     /** Getter qui permet de récupérer le prenom d'une personne
      * 
-     * @return 
+     * @return prenom : chaine de caractères du prenom de la personne
      */
     public String getPrenom()
     {
