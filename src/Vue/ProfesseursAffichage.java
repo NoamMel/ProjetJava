@@ -2,7 +2,7 @@ package Vue;
 
 
 
-import jdbcv2018.*;
+import Controleur.*;
 import Model.*;
 
 import java.awt.event.*;

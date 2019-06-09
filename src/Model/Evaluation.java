@@ -6,7 +6,7 @@
 package Model;
 
 /**
- *
+ * Classe Evaluation
  * @author Emma
  */
 public class Evaluation {
@@ -54,10 +54,18 @@ public class Evaluation {
         return detailBulletin;
     }
     
+    /** Getter qui permet de récupérer la note
+     * 
+     * @return 
+     */
     public int getNote(){
         return note;
     }
     
+    /** Getter qui permet de récupérer l'appréciation
+     * 
+     * @return 
+     */
     public String getAppreciation(){
         return appreciation;
     }

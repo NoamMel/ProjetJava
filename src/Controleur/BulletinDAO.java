@@ -6,11 +6,11 @@
 package Controleur;
 import Model.*;
 import java.sql.SQLException;
-import jdbcv2018.*;
 import java.sql.*;
 import Model.*;
 import java.util.ArrayList;
 /**
+ * Classe BulletinDAO qui permet de créer, supprimer et update un bulletin, hérite de DAO
  * Source : https://coderanch.com/t/307373/databases/ID-INSERT-statement?fbclid=IwAR0cQA4Um8o9BLzXEe4nOTWy6Rim2DEbkWOrA9zdLxZcJ9o-BaefVM_hlvk
  * http://www.mysqltutorial.org/mysql-jdbc-insert/?fbclid=IwAR3SXqe3ACcS28iq9irutRPJvLRw3Mj9BYTFAtfMlQCD_42f04KwsA-k-A8
  * @author Emma
@@ -19,6 +19,10 @@ import java.util.ArrayList;
 public class BulletinDAO extends DAO<Bulletin> 
 {
   
+    /** Consctructeur
+     * 
+     * @param conn 
+     */
     public BulletinDAO(Connexion conn) 
     {
       super(conn);

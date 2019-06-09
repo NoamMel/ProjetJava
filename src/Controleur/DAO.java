@@ -5,9 +5,10 @@
  */
 package Controleur;
 import Model.*;
-import jdbcv2018.*;
 
 /**
+ * Classe abstract qui permet d'implémenter les fonctions des classes qui héritent de DAO
+ * Cette classe n'est jamais instanciée
  * Source: openclassroom DAO
  * @author Emma
  * @param <T>
@@ -15,15 +16,20 @@ import jdbcv2018.*;
 
 public abstract class DAO<T> 
 {
+    /** Attributs */
     protected Connexion conn = null;
    
+    /** Constructeur
+     * 
+     * @param conn 
+     */
     public DAO(Connexion conn)
     {
         this.conn = conn;
     }
    
   /**
-  * Méthode de création
+  * Méthodes de création de toutes les classes qui héritent de DAO
   */
   public abstract void create(String nom, String prenom);
   public abstract void create(String nom, String niveau, int anneeScolaire);
@@ -35,25 +41,18 @@ public abstract class DAO<T>
   public abstract void create(String discipline, Classe c, Professeur p);
   
   /**
-  * Méthode pour effacer
+  * Méthodes de supression pour toutes les classes qui héritent de DAO
   * @param obj
   * @return boolean 
   */
   public abstract void delete(T obj);
 
   /**
-  * Méthode de mise à jour
+  * Méthode de mise à jour pour toutes les classes qui héritent de DAO
   * @param obj
   * @param note
   * @return boolean
   */
   public abstract void update(Evaluation e, int note);
   public abstract void update(T obj, String appreciation);
-
-  /**
-  * Méthode de recherche des informations
-  * @param id
-  * @return T
-  */
-  //public abstract T find(int id);
 }

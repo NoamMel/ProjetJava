@@ -6,7 +6,7 @@
 package Model;
 
 /**
- *
+ * Classe Personne
  * @author Emma
  */
 public class Personne {
@@ -45,7 +45,8 @@ public class Personne {
      * 
      * @return 
      */
-    public String getNom(){
+    public String getNom()
+    {
         return nom;
     }
 
@@ -53,7 +54,8 @@ public class Personne {
      * 
      * @return 
      */
-    public String getPrenom(){
+    public String getPrenom()
+    {
         return prenom;
     }
 }

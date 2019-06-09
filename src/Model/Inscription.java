@@ -6,7 +6,7 @@
 package Model;
 
 /**
- *
+ * Classe Inscription
  * @author Emma
  */
 public class Inscription {
@@ -43,10 +43,18 @@ public class Inscription {
         return id;
     }   
     
+    /** Getter qui pemret de récupérer l'étudiant
+     * 
+     * @return 
+     */
     public Etudiant getEtudiant(){
         return etudiant;
     }
     
+    /** Getter qui permet de récupérer la classe
+     * 
+     * @return 
+     */
     public Classe getClasse(){
         return classe;
     }

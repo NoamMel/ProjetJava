@@ -6,10 +6,11 @@
 package Controleur;
 import Model.*;
 import java.sql.SQLException;
-import jdbcv2018.*;
 import java.sql.*;
 import java.util.ArrayList;
+
 /**
+ * Classe InscriptionDAO qui permet de créer, supprimer et update un inscription, hérite de DAO
  * Source : https://coderanch.com/t/307373/databases/ID-INSERT-statement?fbclid=IwAR0cQA4Um8o9BLzXEe4nOTWy6Rim2DEbkWOrA9zdLxZcJ9o-BaefVM_hlvk
  * http://www.mysqltutorial.org/mysql-jdbc-insert/?fbclid=IwAR3SXqe3ACcS28iq9irutRPJvLRw3Mj9BYTFAtfMlQCD_42f04KwsA-k-A8
  * @author Emma
@@ -18,6 +19,10 @@ import java.util.ArrayList;
 public class InscriptionDAO extends DAO<Inscription> 
 {
   
+    /** Constructeur
+     * 
+     * @param conn 
+     */
     public InscriptionDAO(Connexion conn) 
     {
       super(conn);

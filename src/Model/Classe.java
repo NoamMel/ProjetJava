@@ -5,11 +5,8 @@
  */
 package Model;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-
 /**
- *
+ * Classe Classe
  * @author Emma
  */
 public class Classe {
@@ -19,7 +16,6 @@ public class Classe {
     private String nom;
     private String niveau;
     private int anneeScolaire;
-    private ArrayList<Etudiant> etudiants;
     
     /** Constructeur par défaut */
     public Classe()
@@ -32,19 +28,9 @@ public class Classe {
     public Classe(String nom, String niveau, int anneeScolaire, int id)
     {
         this.nom = nom;
-        this.etudiants = new ArrayList();
         this.niveau = niveau;
         this.anneeScolaire = anneeScolaire;
         this.id = id;
-    }
-    
-    /** Setter qui permet de modifier la liste d'étudiants de la classe
-     * 
-     * @param etudiants
-     */
-    public void setEtudiants(ArrayList<Etudiant> etudiants)
-    {
-        this.etudiants = etudiants;
     }
     
     /** Getter qui permet de récupérer l'id de la classe

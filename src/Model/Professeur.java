@@ -5,35 +5,25 @@
  */
 package Model;
 
-import java.util.ArrayList;
 
 /**
- *
+ * Classe Professeur qui hérite de la classe Personne
  * @author Emma
  */
-public class Professeur extends Personne {
-    
-//    /** Attributs */
-//    private ArrayList<Enseignement> enseignements; 
-    
+public class Professeur extends Personne 
+{
     /** Constructeur par defaut */
     public Professeur()
     {
         super();
     }
     
-    /** Constructeur par defaut */
+    /** Constructeur surchargé
+     * @param Nom
+     * @param Prenom
+     * @param id */
     public Professeur(String Nom, String Prenom, int id)
     {
         super(Nom, Prenom, id);
     }
-    
-//    /** Constructeur surchargé
-//     * @param enseignements 
-//     */
-//    public Professeur(ArrayList<Enseignement> enseignements)
-//    {
-//        this.enseignements = new ArrayList();
-//        this.enseignements = enseignements;
-//    }
 }

@@ -6,7 +6,7 @@
 package Model;
 
 /**
- *
+ * Classe Enseignement
  * @author Emma
  */
 public class Enseignement {
@@ -45,14 +45,26 @@ public class Enseignement {
         return id;
     }
     
+    /** Getter qui permet de récupérer la discipline
+     * 
+     * @return 
+     */
     public String getDiscipline(){
         return discipline;
     }
     
+    /** Getter qui permet de récupérer la classe
+     * 
+     * @return 
+     */
     public Classe getClasse(){
         return classe;
     }
     
+    /** Getter qui permet de récupérer le professeur
+     * 
+     * @return 
+     */
     public Professeur getProfesseur(){
         return professeur;
     }
