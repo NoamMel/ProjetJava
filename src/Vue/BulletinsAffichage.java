@@ -1,4 +1,3 @@
-/* pas encore de recupBulletin() */
 package Vue;
 
 
@@ -18,7 +17,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 
-public class BulletinsAffichage extends JFrame /*implements MouseListener*/{
+public class BulletinsAffichage extends JFrame{
   private JLabel jLabel1 = new JLabel();
   private JButton jButton1 = new JButton();
   private JButton button = new JButton();
@@ -31,7 +30,10 @@ public class BulletinsAffichage extends JFrame /*implements MouseListener*/{
 
   
   
-  
+  /**Constructeur qui execute la JFrame affichant les bulletins
+   * @throws SQLException Si erreur du serveur mySQL
+   * @throws ClassNotFoundException Si manque de dépendances
+   */
   @SuppressWarnings("unchecked")
   public BulletinsAffichage() throws SQLException, ClassNotFoundException{
    this.setTitle("Campus - Recherche d'informations");
@@ -48,8 +50,6 @@ public class BulletinsAffichage extends JFrame /*implements MouseListener*/{
 
         JSeparator jSeparator1 = new javax.swing.JSeparator();
         JScrollPane jScrollPane1 = new javax.swing.JScrollPane();
-        JScrollPane jScrollPane2 = new javax.swing.JScrollPane();
-
 
         jButton1.addActionListener(new BoutonListener());
 
@@ -69,7 +69,6 @@ public class BulletinsAffichage extends JFrame /*implements MouseListener*/{
         jScrollPane1.setViewportView(jList1);
 
         
-            
         Connexion conn = new Connexion("ece","root","");
         
         RecupBDD recup = new RecupBDD(conn);
@@ -94,9 +93,14 @@ public class BulletinsAffichage extends JFrame /*implements MouseListener*/{
         
         button.setText("Rechercher");
 
+        /**Affichage de tous les éléments sur la page positionnés à l'endroit
+         * indiqué avec la taille indiqué
+         */
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
 
         getContentPane().setLayout(layout);
+        /**Positions et tailles à l'horizontale
+         */
         layout.setHorizontalGroup(
            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
            .addComponent(jSeparator1, javax.swing.GroupLayout.Alignment.TRAILING)
@@ -115,6 +119,8 @@ public class BulletinsAffichage extends JFrame /*implements MouseListener*/{
             .addComponent(scroll, javax.swing.GroupLayout.PREFERRED_SIZE, 400, javax.swing.GroupLayout.PREFERRED_SIZE)
             .addGap(150, 150, 150))
         );
+        /**Positions et tailles à la verticale
+         */
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
@@ -138,8 +144,10 @@ public class BulletinsAffichage extends JFrame /*implements MouseListener*/{
 
  }
 
-    // @Override
-    class BoutoncListener implements ActionListener{
+  /**Methode pour acceder à la page demandée
+   * @param ActionEvent qui détecte l'évènement d'appui
+   */
+  class BoutoncListener implements ActionListener{
     public void actionPerformed(ActionEvent e) {
         if (e.getActionCommand().equals("Rechercher")) {
             int index = jList1.getSelectedIndex();
@@ -191,11 +199,13 @@ public class BulletinsAffichage extends JFrame /*implements MouseListener*/{
         }
     }
   }
+//  
 
 
 
-
-
+  /**Methode pour retrourner au menu
+   * @param ActionEvent detecte l'appui
+   */
   class BoutonListener implements ActionListener{
   public void actionPerformed(ActionEvent e) {
     jButton1.setEnabled(true);

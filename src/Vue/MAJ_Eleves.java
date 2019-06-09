@@ -1,16 +1,9 @@
 package Vue;
 
-import Controleur.DAO;
-import Controleur.EtudiantDAO;
-import Controleur.RecupBDD;
-import Model.Etudiant;
-import Model.Stockage;
+import Controleur.*;
+import Model.*;
 import java.awt.event.*;
 import javax.swing.*;
-import java.io.IOException;
-import javax.imageio.ImageIO;
-import java.io.File;
-import java.awt.*;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.logging.Level;
@@ -23,7 +16,7 @@ import javax.swing.table.DefaultTableModel;
 import jdbcv2018.Connexion;
 
 
-public class MAJ_Eleves extends JFrame /*implements MouseListener*/{
+public class MAJ_Eleves extends JFrame {
   private JLabel jLabel1 = new JLabel();
   private JButton jButton1 = new JButton();
   private JButton button = new JButton();
@@ -43,6 +36,10 @@ public class MAJ_Eleves extends JFrame /*implements MouseListener*/{
 
 
 
+  /**Constructeur qui execute la JFrame affichant les bulletins
+   * @throws SQLException Si erreur du serveur mySQL
+   * @throws ClassNotFoundException Si manque de dépendances
+   */
   @SuppressWarnings("unchecked")
   public MAJ_Eleves() throws SQLException, ClassNotFoundException{
     this.setTitle("Campus - Espace modifications");
@@ -131,8 +128,13 @@ public class MAJ_Eleves extends JFrame /*implements MouseListener*/{
 
         jButton5.setText("Appliquer les modifications");
 
+        /**Affichage de tous les éléments sur la page positionnés à l'endroit
+         * indiqué avec la taille indiqué
+         */
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
+        /**Positions et tailles à l'horizontale
+         */
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jSeparator1, javax.swing.GroupLayout.Alignment.TRAILING)
@@ -168,6 +170,8 @@ public class MAJ_Eleves extends JFrame /*implements MouseListener*/{
                         .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(108, 108, 108))))
         );
+        /**Positions et tailles à la verticale
+         */
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
@@ -199,6 +203,9 @@ public class MAJ_Eleves extends JFrame /*implements MouseListener*/{
                 .addGap(65, 65, 65))
         );
 
+        /**Methode qui agit sur les PREFERRED_SIZE pour affecter les valeurs
+         * correspondantes
+         */
         pack();
         
         
@@ -210,11 +217,7 @@ public class MAJ_Eleves extends JFrame /*implements MouseListener*/{
         int selectedRow = jTable1.getSelectedRow();
         int selectedColumns = jTable1.getSelectedColumn();
         selectedData = (String) jTable1.getValueAt(selectedRow, selectedColumns);
-//        for (int i = 0; i < selectedRow.length; i++) {
-//          for (int j = 0; j < selectedColumns.length; j++) {
-//            selectedData = (int) jTable1.getValueAt(selectedRow[i], selectedColumns[j]);
-//          }
-//        }
+
         System.out.println("Selected: " + selectedData);
     }});
   }
@@ -227,7 +230,10 @@ public class MAJ_Eleves extends JFrame /*implements MouseListener*/{
 
 
     // @Override
-    class BoutoncListener implements ActionListener{
+    /**Methode pour acceder à la page demandée
+   * @param ActionEvent qui détecte l'évènement d'appui
+   */
+  class BoutoncListener implements ActionListener{
     public void actionPerformed(ActionEvent e) {
         if (e.getActionCommand().equals("Modifier")) {
             int index = jList1.getSelectedIndex();
@@ -272,6 +278,9 @@ public class MAJ_Eleves extends JFrame /*implements MouseListener*/{
 
 
 
+  /**Methode pour retrourner au menu
+   * @param ActionEvent detecte l'appui
+   */
   class BoutonListener implements ActionListener{
   public void actionPerformed(ActionEvent e) {
     jButton1.setEnabled(true);
@@ -281,6 +290,9 @@ public class MAJ_Eleves extends JFrame /*implements MouseListener*/{
 }
 
 
+/**Methode pour ajouter un élément à la BDD
+* @param ActionEvent detecte l'appui
+*/
 class BoutonAddListener implements ActionListener{
 public void actionPerformed(ActionEvent e) {
   jButton3.setEnabled(true);
@@ -311,6 +323,9 @@ public void actionPerformed(ActionEvent e) {
     }
 
 
+/**Methode pour retirer un élément de la BDD
+* @param ActionEvent detecte l'appui
+*/
 class BoutonRemoveListener implements ActionListener{
 public void actionPerformed(ActionEvent e) {
   jButton4.setEnabled(true);
@@ -337,6 +352,9 @@ public void actionPerformed(ActionEvent e) {
     
 
 
+/**Methode pour modifier un élément de la BDD
+* @param ActionEvent detecte l'appui
+*/
 class BoutonRefreshListener implements ActionListener{
 public void actionPerformed(ActionEvent e) {
   jButton5.setEnabled(true);

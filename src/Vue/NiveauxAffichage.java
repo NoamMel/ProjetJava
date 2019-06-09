@@ -1,9 +1,7 @@
-/* s'ouvre mais ne ferme pas la page precedente */
 package Vue;
 
 
 import jdbcv2018.*;
-import Model.*;
 
 import java.awt.event.*;
 import javax.swing.*;
@@ -17,7 +15,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 
-public class NiveauxAffichage extends JFrame /*implements MouseListener*/{
+public class NiveauxAffichage extends JFrame {
   private JLabel jLabel1 = new JLabel();
   private JButton jButton1 = new JButton();
   private JButton button = new JButton();
@@ -28,6 +26,10 @@ public class NiveauxAffichage extends JFrame /*implements MouseListener*/{
   JScrollPane scroll;
 
 
+  /**Constructeur qui execute la JFrame affichant les bulletins
+   * @throws SQLException Si erreur du serveur mySQL
+   * @throws ClassNotFoundException Si manque de dépendances
+   */
   @SuppressWarnings("unchecked")
   public NiveauxAffichage() throws SQLException, ClassNotFoundException{
     this.setTitle("Campus - Recherche d'informations");
@@ -93,9 +95,14 @@ public class NiveauxAffichage extends JFrame /*implements MouseListener*/{
 
         button.setText("Rechercher");
 
+        /**Affichage de tous les éléments sur la page positionnés à l'endroit
+         * indiqué avec la taille indiqué
+         */
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
 
         getContentPane().setLayout(layout);
+        /**Positions et tailles à l'horizontale
+         */
         layout.setHorizontalGroup(
            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
            .addComponent(jSeparator1, javax.swing.GroupLayout.Alignment.TRAILING)
@@ -114,6 +121,8 @@ public class NiveauxAffichage extends JFrame /*implements MouseListener*/{
             .addComponent(scroll, javax.swing.GroupLayout.PREFERRED_SIZE, 500, javax.swing.GroupLayout.PREFERRED_SIZE)
             .addGap(100, 100, 100))
         );
+        /**Positions et tailles à la verticale
+         */
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
@@ -132,13 +141,19 @@ public class NiveauxAffichage extends JFrame /*implements MouseListener*/{
                 .addGap(65, 65, 65)));
 
 
+        /**Methode qui agit sur les PREFERRED_SIZE pour affecter les valeurs
+         * correspondantes
+         */
         pack();
 
 
  }
 
     // @Override
-    class BoutoncListener implements ActionListener{
+    /**Methode pour acceder à la page demandée
+   * @param ActionEvent qui détecte l'évènement d'appui
+   */
+  class BoutoncListener implements ActionListener{
     public void actionPerformed(ActionEvent e) {
         if (e.getActionCommand().equals("Rechercher")) {
             int index = jList1.getSelectedIndex();
@@ -195,6 +210,9 @@ public class NiveauxAffichage extends JFrame /*implements MouseListener*/{
 
 
 
+  /**Methode pour retrourner au menu
+   * @param ActionEvent detecte l'appui
+   */
   class BoutonListener implements ActionListener{
   public void actionPerformed(ActionEvent e) {
     jButton1.setEnabled(true);

@@ -1,27 +1,9 @@
 package Vue;
 
-import Controleur.BulletinDAO;
-import Controleur.DAO;
-import Controleur.EnseignementDAO;
-import Controleur.EtudiantDAO;
-import Controleur.EvaluationDAO;
-import Controleur.RecupBDD;
-import Model.Bulletin;
-import Model.Classe;
-import Model.DetailBulletin;
-import Model.Enseignement;
-import Model.Etudiant;
-import Model.Evaluation;
-import Model.Inscription;
-import Model.Professeur;
-import Model.Stockage;
-import Model.Trimestre;
+import Controleur.*;
+import Model.*;
 import java.awt.event.*;
 import javax.swing.*;
-import java.io.IOException;
-import javax.imageio.ImageIO;
-import java.io.File;
-import java.awt.*;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.logging.Level;
@@ -34,7 +16,7 @@ import javax.swing.table.DefaultTableModel;
 import jdbcv2018.Connexion;
 
 
-public class MAJ_Bulletins extends JFrame /*implements MouseListener*/{
+public class MAJ_Bulletins extends JFrame {
   private JLabel jLabel1 = new JLabel();
   private JButton jButton1 = new JButton();
   private JButton button = new JButton();
@@ -47,6 +29,7 @@ public class MAJ_Bulletins extends JFrame /*implements MouseListener*/{
   private DefaultTableModel model = new DefaultTableModel();
   JScrollPane scroll;
   String selectedData = null;
+  String selectedDataID = null;
   JTextField jTextField1 = new javax.swing.JTextField();
   JTextField jTextField2 = new javax.swing.JTextField();
   JTextField jTextField3 = new javax.swing.JTextField();
@@ -55,6 +38,10 @@ public class MAJ_Bulletins extends JFrame /*implements MouseListener*/{
 
 
 
+  /**Constructeur qui execute la JFrame affichant les bulletins
+   * @throws SQLException Si erreur du serveur mySQL
+   * @throws ClassNotFoundException Si manque de dépendances
+   */
   @SuppressWarnings("unchecked")
   public MAJ_Bulletins() throws SQLException, ClassNotFoundException{
     this.setTitle("Campus - Espace modifications");
@@ -153,8 +140,13 @@ public class MAJ_Bulletins extends JFrame /*implements MouseListener*/{
 
         jButton5.setText("Appliquer les modifications");
 
+        /**Affichage de tous les éléments sur la page positionnés à l'endroit
+         * indiqué avec la taille indiqué
+         */
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
+        /**Positions et tailles à l'horizontale
+         */
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jSeparator1, javax.swing.GroupLayout.Alignment.TRAILING)
@@ -192,6 +184,8 @@ public class MAJ_Bulletins extends JFrame /*implements MouseListener*/{
                         .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(108, 108, 108))))
         );
+        /**Positions et tailles à la verticale
+         */
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
@@ -224,6 +218,9 @@ public class MAJ_Bulletins extends JFrame /*implements MouseListener*/{
                 .addGap(65, 65, 65))
         );
 
+        /**Methode qui agit sur les PREFERRED_SIZE pour affecter les valeurs
+         * correspondantes
+         */
         pack();
         
         
@@ -235,11 +232,7 @@ public class MAJ_Bulletins extends JFrame /*implements MouseListener*/{
         int selectedRow = jTable1.getSelectedRow();
         int selectedColumns = jTable1.getSelectedColumn();
         selectedData = (String) jTable1.getValueAt(selectedRow, selectedColumns);
-//        for (int i = 0; i < selectedRow.length; i++) {
-//          for (int j = 0; j < selectedColumns.length; j++) {
-//            selectedData = (int) jTable1.getValueAt(selectedRow[i], selectedColumns[j]);
-//          }
-//        }
+        selectedDataID = (String) jTable1.getValueAt(selectedRow, 0);
         System.out.println("Selected: " + selectedData);
     }});
   }
@@ -251,8 +244,10 @@ public class MAJ_Bulletins extends JFrame /*implements MouseListener*/{
 
 
 
-    // @Override
-    class BoutoncListener implements ActionListener{
+    /**Methode pour acceder à la page demandée
+   * @param ActionEvent qui détecte l'évènement d'appui
+   */
+  class BoutoncListener implements ActionListener{
     public void actionPerformed(ActionEvent e) {
         if (e.getActionCommand().equals("Modifier")) {
             int index = jList1.getSelectedIndex();
@@ -297,6 +292,9 @@ public class MAJ_Bulletins extends JFrame /*implements MouseListener*/{
 
 
 
+  /**Methode pour retrourner au menu
+   * @param ActionEvent detecte l'appui
+   */
   class BoutonListener implements ActionListener{
   public void actionPerformed(ActionEvent e) {
     jButton1.setEnabled(true);
@@ -305,7 +303,9 @@ public class MAJ_Bulletins extends JFrame /*implements MouseListener*/{
   }
 }
 
-
+/**Methode pour ajouter un élément à la BDD
+* @param ActionEvent detecte l'appui
+*/
 class BoutonAddListener implements ActionListener{
 public void actionPerformed(ActionEvent e) {
   jButton3.setEnabled(true);
@@ -321,32 +321,31 @@ public void actionPerformed(ActionEvent e) {
               Logger.getLogger(MAJ_Bulletins.class.getName()).log(Level.SEVERE, null, ex);
           }
     RecupBDD recup = new RecupBDD(conn);
-// Initialisation des variables dont tu aura besoin
+// Initialisation des variables dont on aura besoin
         String appreciation=null;
         int trimestre=0;
         int inscription=0;
-//        DetailBulletin db =new DetailBulletin();
         Trimestre tr = new Trimestre();
         Inscription in = new Inscription();
         DAO bulletinDAO = new BulletinDAO(conn);
 
         
-        // tu récupères les id que l'utilisateur entre
+        // on récupère les id que l'utilisateur entre
          appreciation = jTextField1.getText();
          trimestre = Integer.parseInt(jTextField2.getText());
          inscription = Integer.parseInt(jTextField3.getText());
         
-       // tu récupères les données
+       // on récupère les données
        recup.updateArray(); 
        ArrayList<Trimestre> listeDB1 = recup.getStock().getListeTrimestres();
        ArrayList<Inscription> listeDB2 = recup.getStock().getListeInscriptions();
        
-       // tu parcours l a liste pour retrouver le detail bulletin choisi
+       // on parcourt l a liste pour retrouver le detail bulletin choisi
         for(int i=0; i <listeDB1.size(); i++)
        {
            if(listeDB1.get(i).getID() == trimestre)
            {
-               // tu récupères l'objet
+               // on récupère l'objet
                tr = listeDB1.get(i);
            }
        }
@@ -354,12 +353,12 @@ public void actionPerformed(ActionEvent e) {
        {
            if(listeDB2.get(i).getID() == inscription)
            {
-               // tu récupères l'objet
+               // on récupère l'objet
                in = listeDB2.get(i);
            }
        }
         
-       // tu créé le nouvel objet
+       // on créé le nouvel objet
        bulletinDAO.create(appreciation, tr, in);
     
         new MAJ_Bulletins();
@@ -371,7 +370,9 @@ public void actionPerformed(ActionEvent e) {
 }
     }
 
-
+/**Methode pour retirer un élément de la BDD
+* @param ActionEvent detecte l'appui
+*/
 class BoutonRemoveListener implements ActionListener{
 public void actionPerformed(ActionEvent e) {
   jButton4.setEnabled(true);
@@ -398,17 +399,30 @@ public void actionPerformed(ActionEvent e) {
     
 
 
+/**Methode pour modifier un élément de la BDD
+* @param ActionEvent detecte l'appui
+*/
 class BoutonRefreshListener implements ActionListener{
 public void actionPerformed(ActionEvent e) {
   jButton5.setEnabled(true);
   setVisible(false);
     try {
-        // rafraichir/modifier l'element dans la BDD
+        // modifier l'element dans la BDD
+        Connexion conn = null;
+          try {
+              conn = new Connexion("ece", "root", "");
+          } catch (SQLException | ClassNotFoundException ex) {
+              Logger.getLogger(MAJ_Evaluations.class.getName()).log(Level.SEVERE, null, ex);
+          }
+    DAO bulletinDAO = new BulletinDAO(conn);
+    RecupBDD recup = new RecupBDD(conn);
+    recup.updateArray();
+    bulletinDAO.update(recup.getStockage().getBulletin(Integer.parseInt(selectedDataID)), selectedData);
+
+        
         new MAJ_Bulletins();
-    } catch (SQLException ex) {
-        Logger.getLogger(MAJ_Bulletins.class.getName()).log(Level.SEVERE, null, ex);
-    } catch (ClassNotFoundException ex) {
-        Logger.getLogger(MAJ_Bulletins.class.getName()).log(Level.SEVERE, null, ex);
+    } catch (SQLException | ClassNotFoundException ex) {
+        Logger.getLogger(MAJ_Evaluations.class.getName()).log(Level.SEVERE, null, ex);
     }
 }
     }

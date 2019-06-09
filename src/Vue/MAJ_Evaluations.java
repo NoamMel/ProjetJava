@@ -1,21 +1,12 @@
 package Vue;
 
-import Controleur.DAO;
-import Controleur.EtudiantDAO;
-import Controleur.EvaluationDAO;
-import Controleur.RecupBDD;
-import Model.DetailBulletin;
-import Model.Etudiant;
-import Model.Evaluation;
-import Model.Stockage;
+import Controleur.*;
+import Model.*;
 import java.awt.event.*;
 import javax.swing.*;
-import java.io.IOException;
-import javax.imageio.ImageIO;
-import java.io.File;
-import java.awt.*;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.event.ListSelectionEvent;
@@ -26,7 +17,7 @@ import javax.swing.table.DefaultTableModel;
 import jdbcv2018.Connexion;
 
 
-public class MAJ_Evaluations extends JFrame /*implements MouseListener*/{
+public class MAJ_Evaluations extends JFrame {
   private JLabel jLabel1 = new JLabel();
   private JButton jButton1 = new JButton();
   private JButton button = new JButton();
@@ -39,6 +30,7 @@ public class MAJ_Evaluations extends JFrame /*implements MouseListener*/{
   private DefaultTableModel model = new DefaultTableModel();
   JScrollPane scroll;
   String selectedData = null;
+  String selectedDataID = null;
   JTextField jTextField1 = new javax.swing.JTextField();
   JTextField jTextField2 = new javax.swing.JTextField();
   JTextField jTextField3 = new javax.swing.JTextField();
@@ -47,6 +39,10 @@ public class MAJ_Evaluations extends JFrame /*implements MouseListener*/{
 
 
 
+  /**Constructeur qui execute la JFrame affichant les bulletins
+   * @throws SQLException Si erreur du serveur mySQL
+   * @throws ClassNotFoundException Si manque de dépendances
+   */
   @SuppressWarnings("unchecked")
   public MAJ_Evaluations() throws SQLException, ClassNotFoundException{
     this.setTitle("Campus - Espace modifications");
@@ -145,8 +141,13 @@ ArrayList<Evaluation> data = recup.getStockage().getListeEvaluations();
 
         jButton5.setText("Appliquer les modifications");
 
+        /**Affichage de tous les éléments sur la page positionnés à l'endroit
+         * indiqué avec la taille indiqué
+         */
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
+        /**Positions et tailles à l'horizontale
+         */
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jSeparator1, javax.swing.GroupLayout.Alignment.TRAILING)
@@ -184,6 +185,8 @@ ArrayList<Evaluation> data = recup.getStockage().getListeEvaluations();
                         .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(108, 108, 108))))
         );
+        /**Positions et tailles à la verticale
+         */
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
@@ -216,6 +219,9 @@ ArrayList<Evaluation> data = recup.getStockage().getListeEvaluations();
                 .addGap(65, 65, 65))
         );
 
+        /**Methode qui agit sur les PREFERRED_SIZE pour affecter les valeurs
+         * correspondantes
+         */
         pack();
         
         
@@ -224,15 +230,18 @@ ArrayList<Evaluation> data = recup.getStockage().getListeEvaluations();
         cellSelectionModel.addListSelectionListener(new ListSelectionListener() {
       public void valueChanged(ListSelectionEvent e) {
 
-        int selectedRow = jTable1.getSelectedRow();
-        int selectedColumns = jTable1.getSelectedColumn();
-        selectedData = (String) jTable1.getValueAt(selectedRow, selectedColumns);
-//        for (int i = 0; i < selectedRow.length; i++) {
-//          for (int j = 0; j < selectedColumns.length; j++) {
-//            selectedData = (int) jTable1.getValueAt(selectedRow[i], selectedColumns[j]);
-//          }
-//        }
+        int[] selectedRow = jTable1.getSelectedRows();
+        int[] selectedColumns = jTable1.getSelectedColumns();
+        
+        for (int i = 0; i < selectedRow.length; i++) {
+          for (int j = 0; j < selectedColumns.length; j++) {
+            selectedData = (String) jTable1.getValueAt(selectedRow[i], selectedColumns[j]);
+
+          }
+        }
+            selectedDataID = (String) jTable1.getValueAt(selectedRow[0], 0);
         System.out.println("Selected: " + selectedData);
+        System.out.println("SelectedID: " + selectedDataID);
     }});
   }
 
@@ -244,7 +253,10 @@ ArrayList<Evaluation> data = recup.getStockage().getListeEvaluations();
 
 
     // @Override
-    class BoutoncListener implements ActionListener{
+    /**Methode pour acceder à la page demandée
+   * @param ActionEvent qui détecte l'évènement d'appui
+   */
+  class BoutoncListener implements ActionListener{
     public void actionPerformed(ActionEvent e) {
         if (e.getActionCommand().equals("Modifier")) {
             int index = jList1.getSelectedIndex();
@@ -289,6 +301,9 @@ ArrayList<Evaluation> data = recup.getStockage().getListeEvaluations();
 
 
 
+  /**Methode pour retrourner au menu
+   * @param ActionEvent detecte l'appui
+   */
   class BoutonListener implements ActionListener{
   public void actionPerformed(ActionEvent e) {
     jButton1.setEnabled(true);
@@ -298,6 +313,9 @@ ArrayList<Evaluation> data = recup.getStockage().getListeEvaluations();
 }
 
 
+/**Methode pour ajouter un élément à la BDD
+* @param ActionEvent detecte l'appui
+*/
 class BoutonAddListener implements ActionListener{
 public void actionPerformed(ActionEvent e) {
   jButton3.setEnabled(true);
@@ -312,10 +330,7 @@ public void actionPerformed(ActionEvent e) {
           } catch (SQLException | ClassNotFoundException ex) {
               Logger.getLogger(MAJ_Evaluations.class.getName()).log(Level.SEVERE, null, ex);
           }
-//    DAO etudiantDAO = new EtudiantDAO(conn);
     RecupBDD recup = new RecupBDD(conn);
-//    etudiantDAO.create(jTextField1.getText(), jTextField2.getText());
-//        recup.updateArray();
 // Initialisation des variables dont tu aura besoin
         int id_detail=0;
         int note=0;
@@ -356,6 +371,9 @@ public void actionPerformed(ActionEvent e) {
     }
 
 
+/**Methode pour retirer un élément de la BDD
+* @param ActionEvent detecte l'appui
+*/
 class BoutonRemoveListener implements ActionListener{
 public void actionPerformed(ActionEvent e) {
   jButton4.setEnabled(true);
@@ -382,16 +400,35 @@ public void actionPerformed(ActionEvent e) {
     
 
 
+/**Methode pour modifier un élément de la BDD
+* @param ActionEvent detecte l'appui
+*/
 class BoutonRefreshListener implements ActionListener{
 public void actionPerformed(ActionEvent e) {
   jButton5.setEnabled(true);
   setVisible(false);
     try {
-        // rafraichir/modifier l'element dans la BDD
+        // modifier l'element dans la BDD
+        Connexion conn = null;
+          try {
+              conn = new Connexion("ece", "root", "");
+          } catch (SQLException | ClassNotFoundException ex) {
+              Logger.getLogger(MAJ_Evaluations.class.getName()).log(Level.SEVERE, null, ex);
+          }
+    DAO evaluationDAO = new EvaluationDAO(conn);
+    RecupBDD recup = new RecupBDD(conn);
+    recup.updateArray();
+    String[] arr = {"0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20"};
+    int a = Arrays.binarySearch(arr, selectedData);
+    if(a>0){
+        evaluationDAO.update(recup.getStockage().getEvaluation(Integer.parseInt(selectedDataID)), Integer.parseInt(selectedData));
+    }else{
+        evaluationDAO.update(recup.getStockage().getEvaluation(Integer.parseInt(selectedDataID)), selectedData);
+    }
+
+        
         new MAJ_Evaluations();
-    } catch (SQLException ex) {
-        Logger.getLogger(MAJ_Evaluations.class.getName()).log(Level.SEVERE, null, ex);
-    } catch (ClassNotFoundException ex) {
+    } catch (SQLException | ClassNotFoundException ex) {
         Logger.getLogger(MAJ_Evaluations.class.getName()).log(Level.SEVERE, null, ex);
     }
 }
