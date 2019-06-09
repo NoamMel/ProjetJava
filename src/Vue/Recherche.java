@@ -2,16 +2,12 @@ package Vue;
 
 import java.awt.event.*;
 import javax.swing.*;
-import java.io.IOException;
-import javax.imageio.ImageIO;
-import java.io.File;
-import java.awt.*;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 
-public class Recherche extends JFrame /*implements MouseListener*/{
+public class Recherche extends JFrame {
 
   private JLabel jLabel1 = new JLabel();
   private JButton jButton1 = new JButton();
@@ -67,9 +63,14 @@ public class Recherche extends JFrame /*implements MouseListener*/{
 
         button.setText("Rechercher");
 
+        /**Affichage de tous les éléments sur la page positionnés à l'endroit
+         * indiqué avec la taille indiqué
+         */
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
 
         getContentPane().setLayout(layout);
+        /**Positions et tailles à l'horizontale
+         */
         layout.setHorizontalGroup(
            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
            .addComponent(jSeparator1, javax.swing.GroupLayout.Alignment.TRAILING)
@@ -88,6 +89,8 @@ public class Recherche extends JFrame /*implements MouseListener*/{
             // .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
             .addGap(261, 261, 261))
         );
+        /**Positions et tailles à la verticale
+         */
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
@@ -105,14 +108,22 @@ public class Recherche extends JFrame /*implements MouseListener*/{
                 .addComponent(button, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(65, 65, 65)));
 
-
+        /**Methode qui agit sur les PREFERRED_SIZE pour affecter les valeurs
+         * correspondantes
+         */
+        /**Methode qui agit sur les PREFERRED_SIZE pour affecter les valeurs
+         * correspondantes
+         */
         pack();
 
 
  }
 
     // @Override
-    class BoutoncListener implements ActionListener{
+    /**Methode pour acceder à la page demandée
+   * @param ActionEvent qui détecte l'évènement d'appui
+   */
+  class BoutoncListener implements ActionListener{
     public void actionPerformed(ActionEvent e) {
         if (e.getActionCommand().equals("Rechercher")) {
             int index = jList1.getSelectedIndex();
@@ -166,6 +177,9 @@ public class Recherche extends JFrame /*implements MouseListener*/{
   }
 
 
+  /**Methode pour retrourner au menu
+   * @param ActionEvent detecte l'appui
+   */
   class BoutonListener implements ActionListener{
   public void actionPerformed(ActionEvent e) {
     jButton1.setEnabled(true);

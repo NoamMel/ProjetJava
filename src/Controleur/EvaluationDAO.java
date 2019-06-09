@@ -128,7 +128,22 @@ public class EvaluationDAO extends DAO<Evaluation>
      * @param appreciation 
      */
     @Override
-    public void update(Evaluation e, String appreciation){}
+    public void update(Evaluation e, String appreciation)
+    {
+        // Update dans la BDD
+      try {
+              conn.getStmt().execute("UPDATE Evaluation SET Appreciation = '"+appreciation+"' WHERE ID_Evaluation = '"+e.getID()+"'");
+          } 
+      catch (SQLException ex) 
+          {
+            ex.printStackTrace();
+          }
+      
+        // MAJ des données 
+        RecupBDD recup = new RecupBDD(conn);
+        try{recup.updateArray();}
+        catch(SQLException sql){}
+    }
     
     /** Méthode updtade pour Evaluation
      * 

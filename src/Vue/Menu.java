@@ -2,13 +2,10 @@ package Vue;
 
 import java.awt.event.*;
 import javax.swing.*;
-import java.io.IOException;
-import javax.imageio.ImageIO;
-import java.io.File;
 import java.awt.*;
 
 
-public class Menu extends JFrame /*implements MouseListener*/{
+public class Menu extends JFrame{
   private JButton bouton = new JButton("Retourner au menu");
   private JButton boutoni = new JButton("Recherche d'informations");
   private JButton boutonm = new JButton("Mise \u00e0 jour des donn\u00e9es");
@@ -33,25 +30,6 @@ public class Menu extends JFrame /*implements MouseListener*/{
     this.setResizable(false);
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        // JLabel jLabel1 = new javax.swing.JLabel();
-        // JButton jButton1 = new javax.swing.JButton();
-        // JButton jButton2 = new javax.swing.JButton();
-        // JButton jButton3 = new javax.swing.JButton();
-
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setBackground(Color.WHITE);
 
@@ -70,8 +48,13 @@ public class Menu extends JFrame /*implements MouseListener*/{
         boutonr.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         boutonr.setText("Reporting");
 
+        /**Affichage de tous les éléments sur la page positionnés à l'endroit
+         * indiqué avec la taille indiqué
+         */
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
+        /**Positions et tailles à l'horizontale
+         */
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
@@ -83,6 +66,8 @@ public class Menu extends JFrame /*implements MouseListener*/{
                     .addComponent(boutonr))
                 .addContainerGap(getWidth()/2 - 102, Short.MAX_VALUE))
         );
+        /**Positions et tailles à la verticale
+         */
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
@@ -97,62 +82,16 @@ public class Menu extends JFrame /*implements MouseListener*/{
                 .addContainerGap(234, Short.MAX_VALUE))
         );
 
+        /**Methode qui agit sur les PREFERRED_SIZE pour affecter les valeurs
+         * correspondantes
+         */
         pack();
     }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-  // public void paint(Graphics g){
-  //   g.setColor(Color.red);
-  //   g.fillRect(80, 100, 150, 75);
-  // }
-
-  public void NextPage(){
-    this.setTitle("Campus - Page suivante");
-    this.setSize(800, 600);
-    this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-    this.setLocationRelativeTo(null);
-    container2.setBackground(Color.WHITE);
-    container2.setLayout(new BorderLayout());
-    JPanel top2 = new JPanel();
-    JPanel retour = new JPanel();
-    JLabel label2 = new JLabel("affichage...");
-    top2.add(label2);
-    top2.setBackground(Color.WHITE);
-    retour.setBackground(Color.WHITE);
-
-    bouton.addActionListener(new BoutonListener());
-    retour.add(bouton);
-
-    container2.add(top2, BorderLayout.CENTER);
-    container2.add(retour, BorderLayout.EAST);
-    this.setContentPane(container2);
-    this.setVisible(true);
-
-    // if(jr1.isSelected()){
-    //   System.out.println("11111111");
-    // }
-    // if(jr2.isSelected()){
-    //   System.out.println("222222");
-    // }
-    // if(jr3.isSelected()){
-    //   System.out.println("3333333");
-    // }
-
-  }
-
+  /**Methode pour retrourner au menu
+   * @param ActionEvent detecte l'appui
+   */
   class BoutonListener implements ActionListener{
   public void actionPerformed(ActionEvent e) {
     bouton.setEnabled(true);
@@ -185,69 +124,6 @@ public void actionPerformed(ActionEvent e) {
 }
 }
 
-  class StateListener implements ActionListener{
-    public void actionPerformed(ActionEvent e) {
-      // System.out.println("source : " + jr1.getText() + " - état : " + jr1.isSelected());
-      // System.out.println("source : " + jr2.getText() + " - état : " + jr2.isSelected());
-      // System.out.println("source : " + jr3.getText() + " - état : " + jr3.isSelected());
-      // if(jr1.isSelected() || jr2.isSelected() || jr3.isSelected()){
-      //   NextPage();
-      // }
-  }
-}
-
-// public void mouseClicked(MouseEvent event) {
-//    //Inutile d'utiliser cette méthode ici
-//  }
-//
-//  public void mouseEntered(MouseEvent event) {
-//    //Nous changeons le fond de notre image pour le jaune lors du survol, avec le fichier fondBoutonHover.png
-//    try {
-//      img = ImageIO.read(new File("fondBoutonHover.png"));
-//    } catch (IOException e) {
-//      e.printStackTrace();
-//    }
-//  }
-//
-//  public void mouseExited(MouseEvent event) {
-//  //Nous changeons le fond de notre image pour le vert lorsque nous quittons le bouton, avec le fichier fondBouton.png
-//    try {
-//      img = ImageIO.read(new File("fondBouton.png"));
-//    } catch (IOException e) {
-//      e.printStackTrace();
-//    }
-//  }
-//
-//  public void mousePressed(MouseEvent event) {
-//    //Nous changeons le fond de notre image pour le jaune lors du clic gauche, avec le fichier fondBoutonClic.png
-//    try {
-//      img = ImageIO.read(new File("fondBoutonClic.png"));
-//    } catch (IOException e) {
-//      e.printStackTrace();
-//    }
-//  }
-//
-//  public void mouseReleased(MouseEvent event) {
-//    //Nous changeons le fond de notre image pour le orange lorsque nous relâchons le clic, avec le fichier fondBoutonHover.png
-//    try {
-//      img = ImageIO.read(new File("fondBoutonHover.png"));
-//    } catch (IOException e) {
-//      e.printStackTrace();
-//    }
-//  }
-
-// public static void setBestLookAndFeelAvailable(){
-//    String system_lf = UIManager.getSystemLookAndFeelClassName().toLowerCase();
-//    if(system_lf.contains("metal")){
-//        try {
-//            UIManager.setLookAndFeel("com.sun.java.swing.plaf.nimbus.NimbusLookAndFeel");
-//        }catch (Exception e) {}
-//    }else{
-//        try {
-//            UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
-//        }catch (Exception e) {}
-//    }
-//  }
 
   public static void main(String[] args) {
 
