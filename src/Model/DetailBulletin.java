@@ -6,7 +6,7 @@
 package Model;
 
 /**
- *
+ * Classe DetailBulletin
  * @author Emma
  */
 public class DetailBulletin {

@@ -5,19 +5,23 @@
  */
 package Controleur;
 
+import Vue.*;
+import java.sql.SQLException;
+
 /**
  *
- * @author Emma
+ * @author margo
  */
-public class Main {
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String[] args) {
-        // TODO code application logic here
+public class Main
+{
+    public static void main(String args[]) throws SQLException, ClassNotFoundException
+    {
+        // Connexion
+        Connexion conn = new Connexion("ece","root","root");
+        RecupBDD recup = new RecupBDD(conn);
+        recup.updateArray();
         
-        
+        // Menu
+        Menu menu = new Menu();     
     }
-    
-    
 }

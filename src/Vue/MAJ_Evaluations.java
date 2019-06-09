@@ -14,7 +14,7 @@ import javax.swing.event.ListSelectionListener;
 import javax.swing.ListSelectionModel;
 
 import javax.swing.table.DefaultTableModel;
-import jdbcv2018.Connexion;
+import Controleur.Connexion;
 
 
 public class MAJ_Evaluations extends JFrame {

@@ -6,7 +6,7 @@
 package Model;
 
 /**
- *
+ * Classe Trimestre
  * @author Emma
  */
 public class Trimestre {
@@ -50,18 +50,34 @@ public class Trimestre {
         return id;
     }
     
+    /** Getter qui permet de récupérer le numéro
+     * 
+     * @return 
+     */
     public int getNumero(){
         return numero;
     }
     
+    /** Getter qui permet de récupérer le début
+     * 
+     * @return 
+     */
     public int getDebut(){
         return debut;
     }
     
+    /** Getter qui permet de récupérer la fin
+     * 
+     * @return 
+     */
     public int getFin(){
         return fin;
     }
     
+    /** Getter qui permet de récupérer l'annee scolaire
+     * 
+     * @return 
+     */
     public int getAnneeScolaire(){
         return anneeScolaire;
     }

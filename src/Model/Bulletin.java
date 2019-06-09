@@ -5,10 +5,8 @@
  */
 package Model;
 
-import java.util.ArrayList;
-
 /**
- *
+ * Classe Bulletin 
  * @author Emma
  */
 public class Bulletin {
@@ -16,7 +14,6 @@ public class Bulletin {
     /** Attributs */
     private int id;
     private String appreciation;
-    private ArrayList<DetailBulletin> detailBulletins;
     private Trimestre trimestre;
     private Inscription inscription;
     
@@ -33,7 +30,6 @@ public class Bulletin {
      * @param id */
     public Bulletin(String appreciation, Trimestre trimestre, Inscription inscription, int id)
     {
-        this.detailBulletins = new ArrayList();
         this.appreciation = appreciation;
         this.trimestre = trimestre;
         this.inscription = inscription;
@@ -49,19 +45,26 @@ public class Bulletin {
         return id;
     }
     
-    public ArrayList<DetailBulletin> getDetailBulletins()
-    {
-        return detailBulletins;
-    }
-    
+    /** Getter qui permet de récupérer l'appréciation
+     * 
+     * @return 
+     */
     public String getAppreciation(){
         return appreciation;
     }
     
+    /** Getter qui permet de récupérer le trimestre
+     * 
+     * @return 
+     */
     public Trimestre getTrimestre(){
         return trimestre;
     }
     
+    /** Getter qui permet de récupérer l'inscription
+     * 
+     * @return 
+     */
     public Inscription getInscription(){
         return inscription;
     }
